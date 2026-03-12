@@ -7,14 +7,34 @@ from email.mime.text import MIMEText
 
 warnings.simplefilter("ignore")
 
-# Load NSE stocks
+portfolio_size = 100000
+
+print("Loading asset universe...")
+
+# NSE STOCKS
 url = "https://archives.nseindia.com/content/equities/EQUITY_L.csv"
 symbols = pd.read_csv(url)["SYMBOL"].tolist()
-stocks = [s + ".NS" for s in symbols]
+nse_stocks = [s + ".NS" for s in symbols]
+
+# GLOBAL ETFS
+global_etfs = [
+    "SPY","QQQ","VTI","VGK","EWJ","MCHI","KWEB","KSA","UAE"
+]
+
+# COMMODITIES
+commodities = [
+    "GLD","SLV","USO","CPER"
+]
+
+# CRYPTO
+crypto_assets = [
+    "BTC-USD","ETH-USD"
+]
+
+stocks = nse_stocks + global_etfs + commodities + crypto_assets
 
 print("Downloading market data...")
 
-# Batch download stock data
 data = yf.download(
     tickers=stocks,
     period="3mo",
@@ -24,13 +44,19 @@ data = yf.download(
     progress=True
 )
 
-# Download NIFTY index
-nifty = yf.download("^NSEI", period="3mo", interval="1d", progress=False)
-nifty_close = nifty["Close"]
+# BENCHMARKS
 
+nifty = yf.download("^NSEI", period="3mo", progress=False)
+nifty_close = nifty["Close"]
 nifty_return = (nifty_close.iloc[-1] - nifty_close.iloc[0]) / nifty_close.iloc[0]
 
+sp500 = yf.download("^GSPC", period="3mo", progress=False)
+sp500_close = sp500["Close"]
+sp500_return = (sp500_close.iloc[-1] - sp500_close.iloc[0]) / sp500_close.iloc[0]
+
 opportunities = []
+
+print("Scanning assets...")
 
 for stock in stocks:
 
@@ -41,49 +67,55 @@ for stock in stocks:
 
         df = data[stock].dropna()
 
-        if df.empty or len(df) < 30:
+        if len(df) < 30:
             continue
 
         close = df["Close"]
         volume = df["Volume"]
 
-        current_price = float(close.iloc[-1])
-        today_volume = float(volume.iloc[-1])
+        price = float(close.iloc[-1])
         avg_volume = float(volume.tail(20).mean())
 
-        # Stock return
+        if stock.endswith(".NS"):
+
+            if price < 50:
+                continue
+
+            if avg_volume < 200000:
+                continue
+
         stock_return = (close.iloc[-1] - close.iloc[0]) / close.iloc[0]
 
-        # Relative strength vs NIFTY
-        relative_strength = stock_return - nifty_return
+        if stock.endswith(".NS"):
+            relative_strength = stock_return - nifty_return
+            asset_class = "india"
+        elif stock in global_etfs:
+            relative_strength = stock_return - sp500_return
+            asset_class = "etf"
+        elif stock in commodities:
+            relative_strength = stock_return - sp500_return
+            asset_class = "commodity"
+        elif stock in crypto_assets:
+            relative_strength = stock_return - sp500_return
+            asset_class = "crypto"
+        else:
+            asset_class = "flex"
 
-        if current_price < 50:
-            continue
-
-        if avg_volume < 200000:
-            continue
-
-        # Skip stocks weaker than NIFTY
         if relative_strength < 0:
             continue
 
-        ma200_series = close.rolling(200).mean()
+        ma200 = close.rolling(200).mean()
 
-        if ma200_series.dropna().empty:
+        if ma200.dropna().empty:
             continue
 
-        ma200 = float(ma200_series.iloc[-1])
-
-        if current_price < ma200:
+        if price < float(ma200.iloc[-1]):
             continue
-
-        volume_spike = today_volume > (1.5 * avg_volume)
 
         recent_high = float(close.max())
-        dip = (recent_high - current_price) / recent_high * 100
+        dip = (recent_high - price) / recent_high * 100
 
         delta = close.diff()
-
         gain = delta.clip(lower=0)
         loss = -delta.clip(upper=0)
 
@@ -92,75 +124,85 @@ for stock in stocks:
 
         rs = avg_gain / avg_loss
         rsi = 100 - (100 / (1 + rs))
-
-        current_rsi = float(rsi.iloc[-1])
+        rsi_val = float(rsi.iloc[-1])
 
         if dip >= 3:
 
-            score = dip + (40 - current_rsi) + (relative_strength * 100)
-
-            if volume_spike:
-                score += 5
+            score = dip + (40 - rsi_val) + (relative_strength * 100)
 
             opportunities.append({
-                "stock": stock,
+                "asset": stock,
+                "class": asset_class,
                 "dip": round(dip,2),
-                "rsi": round(current_rsi,2),
-                "rs": round(relative_strength*100,2),
-                "volume_spike": volume_spike,
-                "score": round(score,2)
+                "score": score
             })
 
     except:
         continue
 
 
-print("\nTOP OPPORTUNITIES TODAY\n")
-
 opportunities = sorted(opportunities, key=lambda x: x["score"], reverse=True)
-top10 = opportunities[:10]
 
-for i, s in enumerate(top10):
+allocations = {
+    "india":0.30,
+    "etf":0.30,
+    "commodity":0.20,
+    "crypto":0.10,
+    "flex":0.10
+}
 
-    print(
-        i+1,
-        s["stock"],
-        "Dip:", s["dip"], "%",
-        "RSI:", s["rsi"],
-        "RS:", s["rs"], "%",
-        "Volume Spike:", s["volume_spike"],
-        "Score:", s["score"]
-    )
+final_allocations = []
 
-# Email results
-message = "Top Dip Buying Opportunities\n\n"
+for asset_class, weight in allocations.items():
 
-if len(top10) == 0:
+    budget = portfolio_size * weight
 
-    message += "No qualifying opportunities today.\n"
+    class_assets = [x for x in opportunities if x["class"] == asset_class]
 
-else:
+    if len(class_assets) == 0:
+        continue
 
-    for i, s in enumerate(top10):
+    per_asset = budget / min(len(class_assets),3)
 
-        message += f"{i+1}. {s['stock']} | Dip {s['dip']}% | RSI {s['rsi']} | RS {s['rs']}%\n"
+    for asset in class_assets[:3]:
+
+        final_allocations.append({
+            "asset":asset["asset"],
+            "amount":round(per_asset,0),
+            "dip":asset["dip"]
+        })
+
+
+print("\nPORTFOLIO ALLOCATION\n")
+
+for i,a in enumerate(final_allocations):
+
+    print(i+1,"BUY ₹",int(a["amount"]),"of",a["asset"],"(Dip",a["dip"],"%)")
+
+
+message = "Daily Diversified Investment Plan\n\n"
+
+for i,a in enumerate(final_allocations):
+
+    message += f"{i+1}. BUY ₹{int(a['amount'])} of {a['asset']} (Dip {a['dip']}%)\n"
 
 
 msg = MIMEText(message)
 
-msg["Subject"] = "Daily Dip Buying Opportunities"
-msg["From"] = "munalsaini26@gmail.com"
-msg["To"] = "munalsaini26@gmail.com"
-
-server = smtplib.SMTP("smtp.gmail.com", 587)
-server.starttls()
-
 email = os.getenv("EMAIL_ADDRESS")
 password = os.getenv("EMAIL_PASSWORD")
 
-server.login(email, password)
+msg["Subject"] = "Daily Global Investment Allocation"
+msg["From"] = email
+msg["To"] = email
+
+server = smtplib.SMTP("smtp.gmail.com",587)
+server.starttls()
+
+server.login(email,password)
 
 server.send_message(msg)
+
 server.quit()
 
-print("\nEmail sent successfully!")
+print("\nEmail sent successfully")
