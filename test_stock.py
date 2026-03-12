@@ -182,9 +182,23 @@ for i,a in enumerate(final_allocations):
 
 message = "Daily Diversified Investment Plan\n\n"
 
-for i,a in enumerate(final_allocations):
+if len(final_allocations) == 0:
 
-    message += f"{i+1}. BUY ₹{int(a['amount'])} of {a['asset']} (Dip {a['dip']}%)\n"
+    message += "No qualifying opportunities found today based on the dip, RSI, and relative strength filters.\n\n"
+
+    message += "Market Scan Completed Across:\n"
+    message += "- Indian stocks vs \n"
+    message += "- Global ETFs\n"
+    message += "- Commodities\n"
+    message += "- Crypto assets\n"
+
+else:
+
+    message += "Recommended Allocations:\n\n"
+
+    for i,a in enumerate(final_allocations):
+
+        message += f"{i+1}. BUY ₹{int(a['amount'])} of {a['asset']} (Dip {a['dip']}%)\n"
 
 
 msg = MIMEText(message)
