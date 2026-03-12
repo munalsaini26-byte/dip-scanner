@@ -2,6 +2,7 @@ import yfinance as yf
 import pandas as pd
 import warnings
 import smtplib
+import os
 from email.mime.text import MIMEText
 
 warnings.simplefilter("ignore")
@@ -154,10 +155,12 @@ msg["To"] = "munalsaini26@gmail.com"
 server = smtplib.SMTP("smtp.gmail.com", 587)
 server.starttls()
 
-server.login("munalsaini26@gmail.com", "zzdo vdat ccxx eawv")
+email = os.getenv("EMAIL_ADDRESS")
+password = os.getenv("EMAIL_PASSWORD")
+
+server.login(email, password)
 
 server.send_message(msg)
-
 server.quit()
 
 print("\nEmail sent successfully!")
