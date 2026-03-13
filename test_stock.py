@@ -151,6 +151,15 @@ allocations = {
     "flex":0.10
 }
 
+# DOUBLED CAP
+max_assets = {
+    "india":6,
+    "etf":6,
+    "commodity":6,
+    "crypto":4,
+    "flex":2
+}
+
 final_allocations = []
 
 for asset_class, weight in allocations.items():
@@ -162,9 +171,11 @@ for asset_class, weight in allocations.items():
     if len(class_assets) == 0:
         continue
 
-    per_asset = budget / min(len(class_assets),3)
+    cap = max_assets[asset_class]
 
-    for asset in class_assets[:3]:
+    per_asset = budget / min(len(class_assets),cap)
+
+    for asset in class_assets[:cap]:
 
         final_allocations.append({
             "asset":asset["asset"],
@@ -184,17 +195,9 @@ message = "Daily Diversified Investment Plan\n\n"
 
 if len(final_allocations) == 0:
 
-    message += "No qualifying opportunities found today based on the dip, RSI, and relative strength filters.\n\n"
-
-    message += "Market Scan Completed Across:\n"
-    message += "- Indian stocks vs \n"
-    message += "- Global ETFs\n"
-    message += "- Commodities\n"
-    message += "- Crypto assets\n"
+    message += "No qualifying opportunities found today.\n"
 
 else:
-
-    message += "Recommended Allocations:\n\n"
 
     for i,a in enumerate(final_allocations):
 
