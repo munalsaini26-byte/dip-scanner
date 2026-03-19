@@ -45,14 +45,11 @@ data = yf.download(
 )
 
 # BENCHMARKS
-
 nifty = yf.download("^NSEI", period="3mo", progress=False)
-nifty_close = nifty["Close"]
-nifty_return = (nifty_close.iloc[-1] - nifty_close.iloc[0]) / nifty_close.iloc[0]
+nifty_return = (nifty["Close"].iloc[-1] - nifty["Close"].iloc[0]) / nifty["Close"].iloc[0]
 
 sp500 = yf.download("^GSPC", period="3mo", progress=False)
-sp500_close = sp500["Close"]
-sp500_return = (sp500_close.iloc[-1] - sp500_close.iloc[0]) / sp500_close.iloc[0]
+sp500_return = (sp500["Close"].iloc[-1] - sp500["Close"].iloc[0]) / sp500["Close"].iloc[0]
 
 opportunities = []
 
@@ -61,7 +58,6 @@ print("Scanning assets...")
 for stock in stocks:
 
     try:
-
         if stock not in data.columns.levels[0]:
             continue
 
@@ -76,16 +72,14 @@ for stock in stocks:
         price = float(close.iloc[-1])
         avg_volume = float(volume.tail(20).mean())
 
+        # NSE liquidity filter
         if stock.endswith(".NS"):
-
-            if price < 50:
-                continue
-
-            if avg_volume < 200000:
+            if price < 50 or avg_volume < 200000:
                 continue
 
         stock_return = (close.iloc[-1] - close.iloc[0]) / close.iloc[0]
 
+        # Benchmark logic
         if stock.endswith(".NS"):
             relative_strength = stock_return - nifty_return
             asset_class = "india"
@@ -101,20 +95,23 @@ for stock in stocks:
         else:
             asset_class = "flex"
 
-        if relative_strength < 0:
+        # 🔧 FIX 1: Relax RS
+        if relative_strength < -0.05:
             continue
 
+        # 🔧 FIX 2: Relax 200DMA
         ma200 = close.rolling(200).mean()
-
         if ma200.dropna().empty:
             continue
 
-        if price < float(ma200.iloc[-1]):
+        if price < 0.97 * float(ma200.iloc[-1]):
             continue
 
+        # Dip calculation
         recent_high = float(close.max())
         dip = (recent_high - price) / recent_high * 100
 
+        # RSI
         delta = close.diff()
         gain = delta.clip(lower=0)
         loss = -delta.clip(upper=0)
@@ -126,7 +123,8 @@ for stock in stocks:
         rsi = 100 - (100 / (1 + rs))
         rsi_val = float(rsi.iloc[-1])
 
-        if dip >= 3:
+        # 🔧 FIX 3: Relax dip threshold
+        if dip >= 2:
 
             score = dip + (40 - rsi_val) + (relative_strength * 100)
 
@@ -140,9 +138,10 @@ for stock in stocks:
     except:
         continue
 
-
+# SORT
 opportunities = sorted(opportunities, key=lambda x: x["score"], reverse=True)
 
+# ALLOCATION LOGIC
 allocations = {
     "india":0.30,
     "etf":0.30,
@@ -151,7 +150,6 @@ allocations = {
     "flex":0.10
 }
 
-# DOUBLED CAP
 max_assets = {
     "india":6,
     "etf":6,
@@ -165,14 +163,12 @@ final_allocations = []
 for asset_class, weight in allocations.items():
 
     budget = portfolio_size * weight
-
     class_assets = [x for x in opportunities if x["class"] == asset_class]
 
     if len(class_assets) == 0:
         continue
 
     cap = max_assets[asset_class]
-
     per_asset = budget / min(len(class_assets),cap)
 
     for asset in class_assets[:cap]:
@@ -183,26 +179,25 @@ for asset_class, weight in allocations.items():
             "dip":asset["dip"]
         })
 
+# 🔧 FIX 4: Fallback allocation
+if len(final_allocations) == 0:
+
+    final_allocations = [
+        {"asset":"SPY","amount":portfolio_size*0.5,"dip":0},
+        {"asset":"GLD","amount":portfolio_size*0.3,"dip":0},
+        {"asset":"BTC-USD","amount":portfolio_size*0.2,"dip":0}
+    ]
 
 print("\nPORTFOLIO ALLOCATION\n")
 
 for i,a in enumerate(final_allocations):
-
     print(i+1,"BUY ₹",int(a["amount"]),"of",a["asset"],"(Dip",a["dip"],"%)")
 
-
+# EMAIL
 message = "Daily Diversified Investment Plan\n\n"
 
-if len(final_allocations) == 0:
-
-    message += "No qualifying opportunities found today.\n"
-
-else:
-
-    for i,a in enumerate(final_allocations):
-
-        message += f"{i+1}. BUY ₹{int(a['amount'])} of {a['asset']} (Dip {a['dip']}%)\n"
-
+for i,a in enumerate(final_allocations):
+    message += f"{i+1}. BUY ₹{int(a['amount'])} of {a['asset']} (Dip {a['dip']}%)\n"
 
 msg = MIMEText(message)
 
@@ -217,9 +212,7 @@ server = smtplib.SMTP("smtp.gmail.com",587)
 server.starttls()
 
 server.login(email,password)
-
 server.send_message(msg)
-
 server.quit()
 
 print("\nEmail sent successfully")
