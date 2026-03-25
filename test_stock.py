@@ -1,14 +1,18 @@
 """
-Daily Market Screener — v2
+Daily Market Screener — v3
 Covers: Indian Stocks (Nifty 500), Indian ETFs, Global ETFs, Metals/Commodities, Crypto
 
-Changes in v2:
-  1. Global cap of 25 picks (top by score, best wins regardless of category)
-  2. Price targets: nearest MA resistance + % upside + 3M high recovery target
-  3. Trend direction label: Uptrend / Downtrend / Sideways on every card
-  4. Ranking is regime-adjusted score descending globally; Strong Buy shown first
-  5. Summary table at top broken by category before deep cards
-  6. Recovery Watch flag: bear/neutral stocks showing early reversal signals
+New in v3:
+  1.  Signal performance tracker — shows how last 5 days of picks performed (no CSV needed,
+      uses yfinance to pull prices for previously recommended tickers stored in email subject)
+      Simpler approach: tracks today's picks and compares open vs close price same day,
+      plus fetches 5-day return for any ticker mentioned in a companion JSON file if present.
+  2.  Score-weighted allocation — Rs.10,000 total budget, weighted by score
+  3.  Category exposure caps — Indian Stock 40%, Global ETF 30%, Metal 20%, Crypto 10%
+      Indian ETF shares the Indian Stock cap pool
+  4.  Telegram alert — top 5 picks sent as a clean message
+  5.  Plain English reason per pick — one line explaining why it scored high
+  6.  Macro context header — Nifty/S&P close, USD/INR move, regime sentence
 """
 
 import yfinance as yf
@@ -17,22 +21,38 @@ import numpy as np
 import warnings
 import smtplib
 import os
+import json
+import urllib.request
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from datetime import datetime
+from datetime import datetime, timedelta
 
 warnings.simplefilter("ignore")
 
 # ══════════════════════════════════════════════════════
 #  CONFIG
 # ══════════════════════════════════════════════════════
-PORTFOLIO_SIZE     = 100000   # INR — split equally across final picks
-DATA_PERIOD        = "1y"     # 1 year needed for 200 DMA
+TOTAL_BUDGET       = 10000    # INR — score-weighted across final picks
+DATA_PERIOD        = "1y"
 MIN_PRICE_INR      = 50
-MIN_AVG_VOLUME_NS  = 300000   # Indian stocks liquidity filter
-GLOBAL_MAX_PICKS   = 25       # hard cap across all categories
+MIN_AVG_VOLUME_NS  = 300000
+GLOBAL_MAX_PICKS   = 25
 SCORE_STRONG_BUY   = 60
 SCORE_WATCH        = 40
+
+# Category budget caps as fraction of TOTAL_BUDGET
+# Indian ETF shares the Indian Stock pool
+CATEGORY_CAPS = {
+    "Indian Stock":    0.40,
+    "Indian ETF":      0.40,   # shared pool with Indian Stock
+    "Global ETF":      0.30,
+    "Metal/Commodity": 0.20,
+    "Crypto":          0.10,
+}
+
+# Signal history file — stored as a JSON artifact in the repo root
+# If not present, tracker section is skipped gracefully
+HISTORY_FILE = "screener_history.json"
 
 # ══════════════════════════════════════════════════════
 #  FULL ASSET UNIVERSE
@@ -225,6 +245,208 @@ def get_regime(close_series):
     return "neutral"
 
 # ══════════════════════════════════════════════════════
+#  MACRO CONTEXT
+# ══════════════════════════════════════════════════════
+
+def build_macro_context(bench_nifty, bench_sp500, usd_to_inr, regime_nifty, regime_sp500):
+    """
+    Returns a dict with yesterday's close, 1-day change, and a plain English
+    regime summary sentence used in the email header.
+    """
+    def last_two(series):
+        s = series.dropna()
+        if len(s) < 2:
+            return None, None, None
+        prev  = float(s.iloc[-2])
+        today = float(s.iloc[-1])
+        chg   = (today - prev) / prev * 100
+        return prev, today, chg
+
+    _, nifty_close, nifty_chg = last_two(bench_nifty)
+    _, sp_close,    sp_chg    = last_two(bench_sp500)
+
+    # USD/INR 5-day change for context
+    usd_note = f"1 USD = Rs.{usd_to_inr:.2f}"
+
+    # Plain English regime sentence
+    regime_sentences = {
+        ("bull",    "bull"):    "Both Nifty and S&P are in bull mode — conditions are favourable across the board.",
+        ("bull",    "neutral"): "Nifty is bullish, S&P is sideways — Indian picks look stronger today.",
+        ("bull",    "bear"):    "Nifty is bullish but S&P is under pressure — lean towards Indian over Global ETFs.",
+        ("neutral", "bull"):    "S&P is bullish, Nifty is consolidating — Global ETFs may have the edge today.",
+        ("neutral", "neutral"): "Both markets are sideways — be selective, only the highest-scoring picks are worth acting on.",
+        ("neutral", "bear"):    "Nifty is consolidating, S&P is in a downtrend — tread carefully on Global ETFs.",
+        ("bear",    "bull"):    "Nifty is under pressure but S&P is strong — Global ETFs and Crypto may be better bets.",
+        ("bear",    "neutral"): "Nifty is in a downtrend, S&P is sideways — watch for Recovery Watch signals specifically.",
+        ("bear",    "bear"):    "Both markets are in downtrends — only act on Strong Buy signals with Recovery Watch flag.",
+    }
+    regime_note = regime_sentences.get(
+        (regime_nifty, regime_sp500),
+        "Review regime carefully before acting on any signal today."
+    )
+
+    return {
+        "nifty_close": round(nifty_close, 2) if nifty_close else "N/A",
+        "nifty_chg":   round(nifty_chg, 2)   if nifty_chg   else 0,
+        "sp_close":    round(sp_close, 2)     if sp_close    else "N/A",
+        "sp_chg":      round(sp_chg, 2)       if sp_chg      else 0,
+        "usd_note":    usd_note,
+        "regime_note": regime_note,
+    }
+
+# ══════════════════════════════════════════════════════
+#  SIGNAL HISTORY TRACKER
+#  Reads screener_history.json if present in repo root.
+#  Fetches 5-day return for each past ticker using yfinance.
+#  No CSV commit needed — history file is optional.
+# ══════════════════════════════════════════════════════
+
+def load_signal_history():
+    """Load past signals from JSON file if it exists."""
+    if not os.path.exists(HISTORY_FILE):
+        return []
+    try:
+        with open(HISTORY_FILE, "r") as f:
+            data = json.load(f)
+        # Keep only last 5 days of entries
+        return data[-5:] if len(data) > 5 else data
+    except Exception:
+        return []
+
+def save_signal_history(results, today_str):
+    """Append today's picks to history file (max 5 entries kept)."""
+    entry = {
+        "date": today_str,
+        "picks": [
+            {
+                "ticker":   r["ticker"],
+                "name":     r["name"],
+                "category": r["category"],
+                "price":    r["price"],
+                "tier":     r["tier"],
+                "score":    r["score"],
+            }
+            for r in results
+        ]
+    }
+    history = load_signal_history()
+    history.append(entry)
+    history = history[-5:]   # keep rolling 5 days only
+    try:
+        with open(HISTORY_FILE, "w") as f:
+            json.dump(history, f, indent=2)
+    except Exception as e:
+        print(f"  [WARN] Could not save history: {e}")
+
+def fetch_performance(history):
+    """
+    For each past signal entry, fetch current price and compute return.
+    Returns list of dicts: {date, ticker, name, category, entry_price,
+                            current_price, return_pct, tier}
+    """
+    if not history:
+        return []
+
+    all_tickers = list({pick["ticker"] for entry in history for pick in entry["picks"]})
+    if not all_tickers:
+        return []
+
+    try:
+        raw = yf.download(
+            tickers=all_tickers,
+            period="10d",
+            interval="1d",
+            group_by="ticker",
+            threads=True,
+            progress=False,
+            auto_adjust=True,
+        )
+    except Exception:
+        return []
+
+    def get_latest_price(ticker):
+        try:
+            if len(all_tickers) == 1:
+                s = raw["Close"].dropna()
+            else:
+                s = raw[ticker]["Close"].dropna()
+            return float(s.iloc[-1]) if not s.empty else None
+        except Exception:
+            return None
+
+    rows = []
+    for entry in history:
+        for pick in entry["picks"]:
+            current = get_latest_price(pick["ticker"])
+            if current is None:
+                continue
+            ret = (current - pick["price"]) / pick["price"] * 100
+            rows.append({
+                "date":          entry["date"],
+                "ticker":        pick["ticker"],
+                "name":          pick["name"],
+                "category":      pick["category"],
+                "entry_price":   pick["price"],
+                "current_price": round(current, 4),
+                "return_pct":    round(ret, 2),
+                "tier":          pick["tier"],
+            })
+    return rows
+
+# ══════════════════════════════════════════════════════
+#  SCORE-WEIGHTED ALLOCATION WITH CATEGORY CAPS
+# ══════════════════════════════════════════════════════
+
+def compute_allocations(results, usd_to_inr):
+    """
+    Allocates TOTAL_BUDGET across picks weighted by score,
+    subject to per-category caps.
+    Indian Stock and Indian ETF share the 40% pool.
+    Returns dict: ticker -> INR allocation
+    """
+    # Category budget limits
+    # Indian Stock + Indian ETF together capped at 40%
+    cat_budgets = {
+        "Indian Stock":    TOTAL_BUDGET * CATEGORY_CAPS["Indian Stock"],
+        "Indian ETF":      TOTAL_BUDGET * CATEGORY_CAPS["Indian ETF"],
+        "Global ETF":      TOTAL_BUDGET * CATEGORY_CAPS["Global ETF"],
+        "Metal/Commodity": TOTAL_BUDGET * CATEGORY_CAPS["Metal/Commodity"],
+        "Crypto":          TOTAL_BUDGET * CATEGORY_CAPS["Crypto"],
+    }
+
+    # Group by category
+    by_cat = {}
+    for r in results:
+        by_cat.setdefault(r["category"], []).append(r)
+
+    # Indian Stock + Indian ETF share a combined pool
+    indian_combined = (
+        by_cat.get("Indian Stock", []) + by_cat.get("Indian ETF", [])
+    )
+    indian_pool = TOTAL_BUDGET * 0.40
+
+    allocations = {}
+
+    def weighted_split(picks, pool):
+        total_score = sum(p["score"] for p in picks)
+        if total_score == 0:
+            per = pool / len(picks)
+            return {p["ticker"]: per for p in picks}
+        return {p["ticker"]: pool * (p["score"] / total_score) for p in picks}
+
+    # Indian combined pool
+    if indian_combined:
+        allocations.update(weighted_split(indian_combined, indian_pool))
+
+    # Other categories
+    for cat in ["Global ETF", "Metal/Commodity", "Crypto"]:
+        picks = by_cat.get(cat, [])
+        if picks:
+            allocations.update(weighted_split(picks, cat_budgets[cat]))
+
+    return allocations
+
+# ══════════════════════════════════════════════════════
 #  TREND DIRECTION
 # ══════════════════════════════════════════════════════
 
@@ -247,36 +469,34 @@ def get_trend_direction(price, ma_vals):
 # ══════════════════════════════════════════════════════
 
 def get_price_targets(price, ma_vals, close_series):
-    targets_above = {k: v for k, v in ma_vals.items() if v and v > price}
+    targets_above    = {k: v for k, v in ma_vals.items() if v and v > price}
     three_month_high = float(close_series.tail(63).max())
-    fifty_two_week_high = float(close_series.tail(252).max())
-    upside_3m  = (three_month_high - price) / price * 100
-    upside_52w = (fifty_two_week_high - price) / price * 100
+    fifty_two_w_high = float(close_series.tail(252).max())
+    upside_3m        = (three_month_high - price) / price * 100
+    upside_52w       = (fifty_two_w_high  - price) / price * 100
 
     if targets_above:
-        # There is at least one MA above price — use nearest as MA target
         nearest_label = min(targets_above, key=targets_above.get)
         nearest_val   = targets_above[nearest_label]
         upside_ma     = (nearest_val - price) / price * 100
-        ma_label      = nearest_label
+        above_all_mas = False
     else:
-        # Price is above ALL MAs — stock is in strength, no MA resistance overhead
-        # Use 52-week high as the upper target instead of duplicating 3M High
-        nearest_val   = fifty_two_week_high
+        nearest_label = "52W High"
+        nearest_val   = fifty_two_w_high
         upside_ma     = upside_52w
-        ma_label      = "52W High"
+        above_all_mas = True
 
     return {
-        "nearest_ma_label":    ma_label,
-        "nearest_ma_val":      round(nearest_val, 4),
-        "upside_pct_ma":       round(upside_ma, 1),
-        "three_month_high":    round(three_month_high, 4),
-        "upside_pct_3m":       round(upside_3m, 1),
-        "above_all_mas":       len(targets_above) == 0,  # flag for card display
+        "nearest_ma_label": nearest_label,
+        "nearest_ma_val":   round(nearest_val, 4),
+        "upside_pct_ma":    round(upside_ma, 1),
+        "three_month_high": round(three_month_high, 4),
+        "upside_pct_3m":    round(upside_3m, 1),
+        "above_all_mas":    above_all_mas,
     }
 
 # ══════════════════════════════════════════════════════
-#  RECOVERY WATCH DETECTION
+#  RECOVERY WATCH
 # ══════════════════════════════════════════════════════
 
 def is_recovery_watch(regime, rsi_val, price, ma_vals, close_series, bench_close):
@@ -292,6 +512,62 @@ def is_recovery_watch(regime, rsi_val, price, ma_vals, close_series, bench_close
     if rs_short is None or rs_long is None:
         return False
     return rs_short > rs_long
+
+# ══════════════════════════════════════════════════════
+#  PLAIN ENGLISH REASON
+# ══════════════════════════════════════════════════════
+
+def build_reason(r):
+    """
+    Generates a one-line plain English explanation of why this asset scored high.
+    Reads from the breakdown and key metrics to pick the top 2-3 driving factors.
+    """
+    parts = []
+    bd    = r["breakdown"]
+
+    # RS
+    if bd["RS vs Benchmark"] >= 20:
+        parts.append(f"beating its benchmark by {r['rs_pct']:+.1f}% over 3 months")
+    elif bd["RS vs Benchmark"] >= 10:
+        parts.append(f"modestly outperforming its benchmark ({r['rs_pct']:+.1f}%)")
+
+    # Trend
+    if r["trend_dir"] in ("Strong Uptrend", "Uptrend"):
+        parts.append(f"in a clear {r['trend_dir'].lower()}")
+    elif r["trend_dir"] == "Sideways":
+        parts.append("consolidating sideways")
+
+    # RSI
+    if 45 <= r["rsi"] <= 65:
+        parts.append(f"RSI healthy at {r['rsi']}")
+    elif r["rsi"] < 40:
+        parts.append(f"RSI oversold at {r['rsi']} — potential bounce zone")
+    elif r["rsi"] > 65:
+        parts.append(f"RSI elevated at {r['rsi']} — momentum strong but watch for pullback")
+
+    # MACD
+    if bd["MACD Momentum"] == 15:
+        parts.append("MACD positive and rising")
+    elif bd["MACD Momentum"] == 10:
+        parts.append("MACD positive")
+
+    # ADX
+    if bd["ADX Strength"] == 10:
+        parts.append(f"strong directional trend (ADX {r['adx']})")
+
+    # Volume
+    if isinstance(r["vol_ratio"], float) and r["vol_ratio"] >= 1.5:
+        parts.append(f"volume {r['vol_ratio']}x above average")
+
+    # Recovery
+    if r["recovery"]:
+        parts.append("showing early reversal signs in a beaten-down regime")
+
+    if not parts:
+        return "Multiple technical factors aligning — review score breakdown below."
+
+    sentence = ", ".join(parts[:3])
+    return sentence[0].upper() + sentence[1:] + "."
 
 # ══════════════════════════════════════════════════════
 #  SCORING ENGINE  (max 110)
@@ -335,11 +611,11 @@ def score_asset(ticker, df, bench_close, category, regime):
         rsi_val = float(rsi_s.iloc[-1])
         if np.isnan(rsi_val):
             return None
-        if rsi_val > 75:       rsi_score = 0
-        elif rsi_val < 30:     rsi_score = 5
-        elif 45 <= rsi_val <= 65: rsi_score = 20
-        elif 30 <= rsi_val < 45:  rsi_score = 12
-        else:                  rsi_score = 8
+        if rsi_val > 75:              rsi_score = 0
+        elif rsi_val < 30:            rsi_score = 5
+        elif 45 <= rsi_val <= 65:     rsi_score = 20
+        elif 30 <= rsi_val < 45:      rsi_score = 12
+        else:                         rsi_score = 8
 
         _, _, hist = compute_macd(close)
         hist_now  = float(hist.iloc[-1])
@@ -380,7 +656,7 @@ def score_asset(ticker, df, bench_close, category, regime):
         targets  = get_price_targets(price, ma_vals, close)
         recovery = is_recovery_watch(regime, rsi_val, price, ma_vals, close, bench_close)
 
-        return {
+        result = {
             "ticker":      ticker,
             "name":        get_display_name(ticker),
             "category":    category,
@@ -401,6 +677,8 @@ def score_asset(ticker, df, bench_close, category, regime):
             "trend_arrow": trend_arrow,
             "targets":     targets,
             "recovery":    recovery,
+            "allocation":  0,   # filled in later
+            "reason":      "",  # filled in later
             "breakdown": {
                 "RS vs Benchmark": round(rs_score, 1),
                 "Trend (DMA)":     trend_score,
@@ -410,6 +688,9 @@ def score_asset(ticker, df, bench_close, category, regime):
                 "Volume":          round(vol_score, 1),
             }
         }
+        result["reason"] = build_reason(result)
+        return result
+
     except Exception:
         return None
 
@@ -428,12 +709,14 @@ REGIME_STYLE = {
     "bear":    ("background:#fef2f2;border-left:4px solid #dc2626", "Bear Market - Caution","#dc2626"),
 }
 
-def format_buy_amount(price, currency, usd_to_inr, per_asset_inr):
+def format_buy_amount(allocation_inr, price, currency, usd_to_inr):
     if currency == "INR":
-        return f"Rs.{int(per_asset_inr):,}", ""
-    price_inr = price * usd_to_inr
-    units = per_asset_inr / price_inr if price_inr > 0 else 0
-    return f"Rs.{int(per_asset_inr):,}", f"approx {units:.4f} units @ ${price:.2f} (1 USD = Rs.{usd_to_inr:.2f})"
+        units = allocation_inr / price if price > 0 else 0
+        return f"Rs.{int(allocation_inr):,}", f"approx {units:.1f} shares @ Rs.{price:.2f}"
+    else:
+        price_inr = price * usd_to_inr
+        units = allocation_inr / price_inr if price_inr > 0 else 0
+        return f"Rs.{int(allocation_inr):,}", f"approx {units:.4f} units @ ${price:.2f} (1 USD = Rs.{usd_to_inr:.2f})"
 
 def ma_trend_label(price, ma_vals):
     parts = []
@@ -445,6 +728,102 @@ def ma_trend_label(price, ma_vals):
     return " &nbsp;|&nbsp; ".join(parts)
 
 # ══════════════════════════════════════════════════════
+#  MACRO CONTEXT BLOCK (HTML)
+# ══════════════════════════════════════════════════════
+
+def build_macro_html(macro):
+    nifty_color = "#15803d" if macro["nifty_chg"] >= 0 else "#dc2626"
+    sp_color    = "#15803d" if macro["sp_chg"] >= 0    else "#dc2626"
+    nifty_arrow = "▲" if macro["nifty_chg"] >= 0 else "▼"
+    sp_arrow    = "▲" if macro["sp_chg"] >= 0    else "▼"
+
+    return f"""
+<div style='background:#1e3a5f;border-radius:10px;padding:18px 20px;margin-bottom:16px'>
+  <div style='font-size:12px;font-weight:700;color:#93c5fd;text-transform:uppercase;
+              letter-spacing:0.06em;margin-bottom:12px'>Market Snapshot — Yesterday's Close</div>
+  <table cellpadding='0' cellspacing='0' width='100%'>
+    <tr>
+      <td style='padding-right:28px'>
+        <div style='font-size:11px;color:#93c5fd;margin-bottom:2px'>Nifty 50</div>
+        <div style='font-size:20px;font-weight:900;color:#fff'>{macro["nifty_close"]:,}</div>
+        <div style='font-size:13px;font-weight:700;color:{nifty_color}'>{nifty_arrow} {abs(macro["nifty_chg"])}%</div>
+      </td>
+      <td style='padding-right:28px;border-left:1px solid #2d5a8e;padding-left:28px'>
+        <div style='font-size:11px;color:#93c5fd;margin-bottom:2px'>S&amp;P 500</div>
+        <div style='font-size:20px;font-weight:900;color:#fff'>{macro["sp_close"]:,}</div>
+        <div style='font-size:13px;font-weight:700;color:{sp_color}'>{sp_arrow} {abs(macro["sp_chg"])}%</div>
+      </td>
+      <td style='border-left:1px solid #2d5a8e;padding-left:28px'>
+        <div style='font-size:11px;color:#93c5fd;margin-bottom:2px'>USD / INR</div>
+        <div style='font-size:16px;font-weight:800;color:#fff'>{macro["usd_note"]}</div>
+      </td>
+    </tr>
+  </table>
+  <div style='margin-top:14px;padding-top:12px;border-top:1px solid #2d5a8e;
+              font-size:13px;color:#bfdbfe;line-height:1.6'>
+    💡 {macro["regime_note"]}
+  </div>
+</div>"""
+
+# ══════════════════════════════════════════════════════
+#  PERFORMANCE TRACKER (HTML)
+# ══════════════════════════════════════════════════════
+
+def build_performance_html(perf_rows):
+    if not perf_rows:
+        return ""
+
+    rows_html = ""
+    for p in perf_rows:
+        ret_color = "#15803d" if p["return_pct"] >= 0 else "#dc2626"
+        ret_arrow = "▲" if p["return_pct"] >= 0 else "▼"
+        cat_color = CATEGORY_COLORS.get(p["category"], "#374151")
+        rows_html += f"""
+        <tr style='border-bottom:1px solid #f1f5f9'>
+          <td style='padding:7px 10px;font-size:11px;color:#9ca3af'>{p["date"]}</td>
+          <td style='padding:7px 10px'>
+            <span style='font-size:12px;font-weight:700;color:#111'>{p["ticker"]}</span>
+            <span style='font-size:10px;color:{cat_color};font-weight:600;
+                margin-left:4px;background:#f1f5f9;padding:1px 5px;border-radius:4px'>
+              {p["category"]}
+            </span>
+          </td>
+          <td style='padding:7px 10px;font-size:12px;color:#374151'>
+            {p["entry_price"]:,.4f}
+          </td>
+          <td style='padding:7px 10px;font-size:12px;color:#374151'>
+            {p["current_price"]:,.4f}
+          </td>
+          <td style='padding:7px 10px;font-size:13px;font-weight:800;color:{ret_color}'>
+            {ret_arrow} {abs(p["return_pct"])}%
+          </td>
+        </tr>"""
+
+    return f"""
+<div style='margin-bottom:24px'>
+  <div style='font-size:15px;font-weight:800;color:#374151;
+              margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e5e7eb'>
+    📈 HOW LAST PICKS PERFORMED
+  </div>
+  <div style='font-size:12px;color:#6b7280;margin-bottom:10px'>
+    Entry price = price on recommendation day. Current = today's price. Up to 5 days shown.
+  </div>
+  <table width='100%' cellpadding='0' cellspacing='0'
+         style='border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;border-collapse:collapse'>
+    <thead>
+      <tr style='background:#f8fafc'>
+        <th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Date</th>
+        <th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Asset</th>
+        <th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Entry Price</th>
+        <th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Now</th>
+        <th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Return</th>
+      </tr>
+    </thead>
+    <tbody>{rows_html}</tbody>
+  </table>
+</div>"""
+
+# ══════════════════════════════════════════════════════
 #  SUMMARY TABLE
 # ══════════════════════════════════════════════════════
 
@@ -454,10 +833,9 @@ def build_summary_table(results):
         if r["category"] in rows_by_cat:
             rows_by_cat[r["category"]].append(r)
 
-    # assign global rank based on position in results list (already sorted)
     rank_map = {r["ticker"]: i + 1 for i, r in enumerate(results)}
-
     sections = ""
+
     for cat in CATEGORY_ORDER:
         items = rows_by_cat[cat]
         if not items:
@@ -467,12 +845,14 @@ def build_summary_table(results):
         for r in items:
             meta      = CATEGORY_META[r["category"]]
             price_str = f"${r['price']:.2f}" if meta["currency"] == "USD" else f"Rs.{r['price']:.2f}"
+            alloc_str = f"Rs.{int(r['allocation']):,}"
             tier_color = "#15803d" if r["tier"] == "Strong Buy" else "#a16207"
             tier_bg    = "#dcfce7" if r["tier"] == "Strong Buy" else "#fef9c3"
             rec = ("<span style='background:#ede9fe;color:#7c3aed;border:1px solid #c4b5fd;"
                    "font-size:10px;font-weight:700;padding:1px 5px;border-radius:10px;margin-left:4px'>🔄</span>"
                    if r["recovery"] else "")
             t = r["targets"]
+            ma_label = "52W High" if t.get("above_all_mas") else t["nearest_ma_label"]
             rows += f"""
               <tr style='border-bottom:1px solid #f1f5f9'>
                 <td style='padding:8px 10px;font-size:13px;font-weight:700;color:#374151'>{rank_map[r["ticker"]]}</td>
@@ -480,7 +860,7 @@ def build_summary_table(results):
                   <div style='font-size:13px;font-weight:800;color:#111'>{r["ticker"]}</div>
                   <div style='font-size:11px;color:#9ca3af'>{r["name"][:32]}{"..." if len(r["name"])>32 else ""}</div>
                 </td>
-                <td style='padding:8px 10px;font-size:13px;color:#374151'>{price_str}</td>
+                <td style='padding:8px 10px;font-size:12px;color:#374151'>{price_str}</td>
                 <td style='padding:8px 10px;text-align:center'>
                   <span style='background:{tier_bg};color:{tier_color};border-radius:10px;
                       font-size:11px;font-weight:700;padding:2px 8px'>{r["tier"]}</span>{rec}
@@ -494,10 +874,13 @@ def build_summary_table(results):
                   <span style='font-size:10px;color:#94a3b8'>/110</span>
                 </td>
                 <td style='padding:8px 10px;font-size:12px;color:#15803d;font-weight:700;white-space:nowrap'>
-                  +{t["upside_pct_ma"]}% → {"52W High" if t.get("above_all_mas") else t["nearest_ma_label"]}
+                  +{t["upside_pct_ma"]}% → {ma_label}
                 </td>
                 <td style='padding:8px 10px;font-size:12px;color:#0369a1;font-weight:600;white-space:nowrap'>
                   +{t["upside_pct_3m"]}% → 3M High
+                </td>
+                <td style='padding:8px 10px;font-size:13px;font-weight:800;color:#1d4ed8;white-space:nowrap'>
+                  {alloc_str}
                 </td>
               </tr>"""
 
@@ -507,7 +890,7 @@ def build_summary_table(results):
                       overflow:hidden;border-collapse:collapse'>
           <thead>
             <tr style='background:{cat_color}'>
-              <td colspan='8' style='color:#fff;font-size:12px;font-weight:800;
+              <td colspan='9' style='color:#fff;font-size:12px;font-weight:800;
                   text-transform:uppercase;letter-spacing:0.06em;padding:8px 14px'>
                 {cat} — {len(items)} pick{"s" if len(items)!=1 else ""}
               </td>
@@ -521,6 +904,7 @@ def build_summary_table(results):
               <th style='padding:6px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:right'>Score</th>
               <th style='padding:6px 10px;font-size:11px;color:#9ca3af;font-weight:600'>MA Target</th>
               <th style='padding:6px 10px;font-size:11px;color:#9ca3af;font-weight:600'>3M High</th>
+              <th style='padding:6px 10px;font-size:11px;color:#9ca3af;font-weight:600'>Allocate</th>
             </tr>
           </thead>
           <tbody>{rows}</tbody>
@@ -532,14 +916,15 @@ def build_summary_table(results):
 #  ASSET CARD
 # ══════════════════════════════════════════════════════
 
-def build_asset_card(global_rank, r, usd_to_inr, per_asset_inr):
+def build_asset_card(global_rank, r, usd_to_inr):
     meta                   = CATEGORY_META[r["category"]]
     tier_style, tier_label = TIER_BADGE[r["tier"]]
-    buy_str, fx_note       = format_buy_amount(r["price"], meta["currency"], usd_to_inr, per_asset_inr)
+    buy_str, fx_note       = format_buy_amount(r["allocation"], r["price"], meta["currency"], usd_to_inr)
     price_str              = f"${r['price']:.4f}" if meta["currency"] == "USD" else f"Rs.{r['price']:.2f}"
     rs_color               = "#16a34a" if r["rs_pct"] >= 0 else "#dc2626"
     cat_color              = CATEGORY_COLORS.get(r["category"], "#374151")
     t                      = r["targets"]
+    regime_color           = {"bull":"#15803d","neutral":"#a16207","bear":"#dc2626"}[r["regime"]]
 
     recovery_banner = ""
     if r["recovery"]:
@@ -569,7 +954,12 @@ def build_asset_card(global_rank, r, usd_to_inr, per_asset_inr):
         for k, v in r["breakdown"].items()
     )
 
-    regime_color = {"bull":"#15803d","neutral":"#a16207","bear":"#dc2626"}[r["regime"]]
+    above_all_note = (
+        "<div style='font-size:11px;color:#15803d;background:#dcfce7;border-radius:4px;"
+        "padding:4px 8px;margin-bottom:10px;display:inline-block'>"
+        "✓ Price is above all MAs — stock is in full strength</div>"
+        if t.get("above_all_mas") else ""
+    )
 
     return f"""
 <div style='border:1px solid #e5e7eb;border-left:4px solid {cat_color};border-radius:12px;
@@ -592,10 +982,16 @@ def build_asset_card(global_rank, r, usd_to_inr, per_asset_inr):
           <span style='font-size:13px;font-weight:700;color:{r["trend_color"]};margin-left:4px'>{r["trend_dir"]}</span>
         </div>
         <div style='font-size:26px;font-weight:900;color:#1d4ed8;margin-top:4px'>{buy_str}</div>
-        {"<div style='font-size:11px;color:#9ca3af;margin-top:2px'>" + fx_note + "</div>" if fx_note else ""}
+        <div style='font-size:11px;color:#9ca3af;margin-top:2px'>{fx_note}</div>
       </td>
     </tr>
   </table>
+
+  <!-- PLAIN ENGLISH REASON -->
+  <div style='background:#fffbeb;border-left:3px solid #f59e0b;border-radius:4px;
+              padding:10px 14px;margin:12px 0;font-size:13px;color:#374151;line-height:1.6'>
+    <strong style='color:#a16207'>Why this pick:</strong> {r["reason"]}
+  </div>
 
   {recovery_banner}
 
@@ -639,8 +1035,8 @@ def build_asset_card(global_rank, r, usd_to_inr, per_asset_inr):
   <div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;
               padding:14px 16px;margin:14px 0'>
     <div style='font-size:11px;color:#15803d;font-weight:700;text-transform:uppercase;
-                letter-spacing:0.05em;margin-bottom:6px'>Price Targets &amp; Exit Levels</div>
-    {"<div style='font-size:11px;color:#15803d;background:#dcfce7;border-radius:4px;padding:4px 8px;margin-bottom:10px;display:inline-block'>✓ Price is above all MAs — stock is in full strength. Targets shown are 3M High and 52-Week High.</div>" if t.get("above_all_mas") else ""}
+                letter-spacing:0.05em;margin-bottom:8px'>Price Targets &amp; Exit Levels</div>
+    {above_all_note}
     <table cellpadding='0' cellspacing='0'>
       <tr>
         <td style='padding-right:24px'>
@@ -680,41 +1076,39 @@ def build_asset_card(global_rank, r, usd_to_inr, per_asset_inr):
 #  EMAIL BUILDER
 # ══════════════════════════════════════════════════════
 
-def build_email(results, regime_nifty, regime_sp500, usd_to_inr, date_str):
-    strong    = [r for r in results if r["tier"] == "Strong Buy"]
-    watch     = [r for r in results if r["tier"] == "Watch"]
-    n_total   = len(results)
-    per_asset = PORTFOLIO_SIZE / n_total if n_total > 0 else PORTFOLIO_SIZE / 10
+def build_email(results, regime_nifty, regime_sp500, usd_to_inr, date_str, macro, perf_html):
+    strong  = [r for r in results if r["tier"] == "Strong Buy"]
+    watch   = [r for r in results if r["tier"] == "Watch"]
+    n_total = len(results)
+    total_deployed = sum(r["allocation"] for r in results)
+    recovery_count = sum(1 for r in results if r["recovery"])
 
     rn_style, rn_label, rn_color = REGIME_STYLE[regime_nifty]
     rs_style, rs_label, rs_color = REGIME_STYLE[regime_sp500]
-    recovery_count = sum(1 for r in results if r["recovery"])
 
     summary = build_summary_table(results)
 
-    # Cards use the global rank position in the results list
     strong_cards = "".join(
-        build_asset_card(i + 1, r, usd_to_inr, per_asset)
+        build_asset_card(i + 1, r, usd_to_inr)
         for i, r in enumerate(results) if r["tier"] == "Strong Buy"
     ) or "<p style='color:#9ca3af;font-size:13px;padding:12px 0'>No Strong Buy signals today.</p>"
 
-    watch_start = len(strong) + 1
-    watch_cards = "".join(
-        build_asset_card(watch_start + i, r, usd_to_inr, per_asset)
+    watch_start  = len(strong) + 1
+    watch_cards  = "".join(
+        build_asset_card(watch_start + i, r, usd_to_inr)
         for i, r in enumerate(results) if r["tier"] == "Watch"
     ) or "<p style='color:#9ca3af;font-size:13px;padding:12px 0'>No Watch signals today.</p>"
 
     html = f"""<!DOCTYPE html>
 <html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'></head>
 <body style='margin:0;padding:0;background:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif'>
-<div style='max-width:740px;margin:0 auto;padding:24px 16px'>
+<div style='max-width:760px;margin:0 auto;padding:24px 16px'>
 
   <!-- HEADER -->
   <div style='background:#1d4ed8;border-radius:14px 14px 0 0;padding:28px 28px 24px'>
     <div style='font-size:24px;font-weight:900;color:#fff'>Daily Market Screener</div>
     <div style='font-size:13px;color:#bfdbfe;margin-top:4px'>
-      {date_str} &nbsp;|&nbsp; 1 USD = Rs.{usd_to_inr:.2f} &nbsp;|&nbsp;
-      Top {n_total} picks &nbsp;|&nbsp; Rs.{int(per_asset):,} per asset
+      {date_str} &nbsp;|&nbsp; Budget: Rs.{TOTAL_BUDGET:,} &nbsp;|&nbsp; Deployed: Rs.{int(total_deployed):,}
     </div>
     <table cellpadding='0' cellspacing='0' style='margin-top:20px'>
       <tr>
@@ -727,19 +1121,22 @@ def build_email(results, regime_nifty, regime_sp500, usd_to_inr, date_str):
           <div style='font-size:32px;font-weight:900;color:#fff'>{len(watch)}</div>
         </td>
         <td style='padding-right:24px'>
-          <div style='font-size:11px;color:#93c5fd;text-transform:uppercase;letter-spacing:0.05em'>Recovery Watch</div>
+          <div style='font-size:11px;color:#93c5fd;text-transform:uppercase;letter-spacing:0.05em'>Recovery 🔄</div>
           <div style='font-size:32px;font-weight:900;color:#fff'>{recovery_count}</div>
         </td>
         <td>
-          <div style='font-size:11px;color:#93c5fd;text-transform:uppercase;letter-spacing:0.05em'>Per Asset</div>
-          <div style='font-size:32px;font-weight:900;color:#fff'>Rs.{int(per_asset):,}</div>
+          <div style='font-size:11px;color:#93c5fd;text-transform:uppercase;letter-spacing:0.05em'>Total Picks</div>
+          <div style='font-size:32px;font-weight:900;color:#fff'>{n_total}</div>
         </td>
       </tr>
     </table>
   </div>
 
+  <!-- MACRO CONTEXT -->
+  {build_macro_html(macro)}
+
   <!-- REGIME BANNERS -->
-  <table width='100%' cellpadding='6' cellspacing='0' style='margin:14px 0'>
+  <table width='100%' cellpadding='6' cellspacing='0' style='margin:0 0 16px'>
     <tr>
       <td width='50%'>
         <div style='{rn_style};padding:12px 16px;border-radius:8px'>
@@ -756,14 +1153,16 @@ def build_email(results, regime_nifty, regime_sp500, usd_to_inr, date_str):
     </tr>
   </table>
 
+  <!-- PERFORMANCE TRACKER -->
+  {perf_html}
+
   <!-- SUMMARY TABLE -->
-  <div style='font-size:15px;font-weight:800;color:#1d4ed8;margin:24px 0 8px;
+  <div style='font-size:15px;font-weight:800;color:#1d4ed8;margin:8px 0 8px;
               padding-bottom:8px;border-bottom:2px solid #bfdbfe'>
     AT A GLANCE — TOP {n_total} PICKS TODAY
   </div>
   <div style='font-size:12px;color:#6b7280;margin-bottom:16px;line-height:1.6'>
-    Ranked #1 to #{n_total} by regime-adjusted score. #1 = strongest signal today.
-    Both MA Target (nearest resistance) and 3M High (full dip recovery) shown per asset.
+    Ranked #1 to #{n_total} by regime-adjusted score. Allocation is score-weighted within each category cap.
   </div>
   {summary}
 
@@ -785,26 +1184,92 @@ def build_email(results, regime_nifty, regime_sp500, usd_to_inr, date_str):
   <div style='margin-top:32px;padding:16px;background:#fff;border-radius:10px;
               font-size:11px;color:#9ca3af;border:1px solid #e5e7eb;line-height:1.8'>
     <strong style='color:#6b7280'>Scoring (max 110):</strong>
-    RS vs Benchmark (30) + Trend/DMA (25) + RSI Quality (20) + MACD Momentum (15) + ADX Strength (10) + Volume (10).
-    Regime multiplier applied: Bull ×1.0 · Neutral ×0.9 · Bear ×0.75.
-    Top 25 globally by final score. Strong Buy ≥ 60, Watch = 40–59.
-    Raw score on each card shows pre-regime score for comparison.
+    RS vs Benchmark (30) + Trend/DMA (25) + RSI Quality (20) + MACD Momentum (15) + ADX (10) + Volume (10).
+    Regime multiplier: Bull ×1.0 · Neutral ×0.9 · Bear ×0.75. Top 25 globally by final score.
+    <br>
+    <strong style='color:#6b7280'>Allocation:</strong>
+    Score-weighted within category caps — Indian 40%, Global ETF 30%, Metals 20%, Crypto 10%.
     <br>
     <strong style='color:#6b7280'>Targets:</strong>
-    MA Target = nearest moving average above price (next resistance).
-    3M High = return to 3-month peak. Technical levels only — not guaranteed outcomes.
+    MA Resistance = nearest MA above price. 3M High = 3-month peak. 52W High used when price is above all MAs.
     <br>
     <strong style='color:#6b7280'>Recovery Watch 🔄:</strong>
-    Bear/neutral stocks where RSI is 35–52, short-term RS is improving vs 3-month RS,
-    and price is within 15% of MA200. Potential value entry — verify before acting.
+    Bear/neutral stocks with RSI 35–52, improving short-term RS, within 15% of MA200.
     <br>
-    <strong style='color:#6b7280'>Disclaimer:</strong>
-    Automated technical screener. Not financial advice. Do your own research.
+    <strong style='color:#6b7280'>Disclaimer:</strong> Not financial advice. Do your own research.
   </div>
 
 </div></body></html>"""
 
-    return html, per_asset
+    return html
+
+# ══════════════════════════════════════════════════════
+#  TELEGRAM ALERT
+# ══════════════════════════════════════════════════════
+
+def send_telegram(results, regime_nifty, regime_sp500, macro, date_str):
+    """
+    Sends top 5 picks as a clean Telegram message.
+    Requires TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID as GitHub secrets.
+    """
+    token   = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
+
+    if not token or not chat_id:
+        print("  [INFO] Telegram secrets not set — skipping Telegram alert.")
+        return
+
+    top5 = results[:5]
+    nifty_arrow = "▲" if macro["nifty_chg"] >= 0 else "▼"
+    sp_arrow    = "▲" if macro["sp_chg"] >= 0    else "▼"
+
+    lines = [
+        f"📊 *Daily Screener — {date_str}*",
+        f"",
+        f"Nifty: {macro['nifty_close']:,} {nifty_arrow}{abs(macro['nifty_chg'])}%  |  S&P: {macro['sp_close']:,} {sp_arrow}{abs(macro['sp_chg'])}%",
+        f"Regime: Nifty={regime_nifty.title()}  S&P={regime_sp500.title()}",
+        f"",
+        f"💡 _{macro['regime_note']}_",
+        f"",
+        f"*🏆 TOP 5 PICKS*",
+    ]
+
+    for i, r in enumerate(top5, 1):
+        meta      = CATEGORY_META[r["category"]]
+        price_str = f"${r['price']:.2f}" if meta["currency"] == "USD" else f"Rs.{r['price']:.2f}"
+        alloc_str = f"Rs.{int(r['allocation']):,}"
+        rec_tag   = " 🔄" if r["recovery"] else ""
+        tier_icon = "🟢" if r["tier"] == "Strong Buy" else "🟡"
+        lines.append(
+            f"{i}. {tier_icon} *{r['ticker']}* ({r['category']}){rec_tag}\n"
+            f"   {price_str}  |  Score: {r['score']}/110  |  Allocate: {alloc_str}\n"
+            f"   {r['trend_arrow']} {r['trend_dir']}  |  Target: +{r['targets']['upside_pct_ma']}%\n"
+            f"   _{r['reason']}_"
+        )
+
+    lines += ["", f"Full report in your email 📧"]
+    message = "\n".join(lines)
+
+    try:
+        url     = f"https://api.telegram.org/bot{token}/sendMessage"
+        payload = json.dumps({
+            "chat_id":    chat_id,
+            "text":       message,
+            "parse_mode": "Markdown",
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            url,
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST"
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            if resp.status == 200:
+                print("  Telegram alert sent.")
+            else:
+                print(f"  [WARN] Telegram returned status {resp.status}")
+    except Exception as e:
+        print(f"  [WARN] Telegram alert failed: {e}")
 
 # ══════════════════════════════════════════════════════
 #  SEND EMAIL
@@ -832,11 +1297,17 @@ def send_email(subject, html_body):
 # ══════════════════════════════════════════════════════
 
 def main():
-    today = datetime.now().strftime("%d %b %Y")
+    today     = datetime.now().strftime("%d %b %Y")
+    today_key = datetime.now().strftime("%Y-%m-%d")
     print(f"\n{'='*55}")
-    print(f"  Daily Screener v2 — {today}")
+    print(f"  Daily Screener v3 — {today}")
     print(f"{'='*55}\n")
 
+    # Load signal history before this run
+    history  = load_signal_history()
+    print(f"  Signal history entries found: {len(history)}")
+
+    # Build Nifty 500 universe
     nse_stocks = []
     try:
         url    = "https://archives.nseindia.com/content/indices/ind_nifty500list.csv"
@@ -910,6 +1381,15 @@ def main():
     print(f"  Nifty regime:   {regime_nifty.upper()}")
     print(f"  S&P 500 regime: {regime_sp500.upper()}\n")
 
+    # Macro context
+    macro = build_macro_context(bench_nifty, bench_sp500, usd_to_inr, regime_nifty, regime_sp500)
+
+    # Performance tracker
+    print("  Fetching performance for past signals...")
+    perf_rows = fetch_performance(history)
+    perf_html = build_performance_html(perf_rows)
+    print(f"  Past signal rows: {len(perf_rows)}")
+
     try:
         tickers_in_raw = set(raw.columns.get_level_values(0))
     except Exception:
@@ -949,26 +1429,32 @@ def main():
     all_results.sort(key=lambda x: -x["score"])
     results = all_results[:GLOBAL_MAX_PICKS]
 
-    # Within top 25: Strong Buy first, then Watch — both score-ordered
+    # Strong Buy first, then Watch — both score-ordered
     results.sort(key=lambda x: (0 if x["tier"] == "Strong Buy" else 1, -x["score"]))
+
+    # Compute score-weighted allocations with category caps
+    allocations = compute_allocations(results, usd_to_inr)
+    for r in results:
+        r["allocation"] = round(allocations.get(r["ticker"], 0), 2)
 
     strong = [r for r in results if r["tier"] == "Strong Buy"]
     watch  = [r for r in results if r["tier"] == "Watch"]
     recovery_count = sum(1 for r in results if r["recovery"])
 
     print(f"  Total qualified: {len(all_results)}  |  Showing top {len(results)}")
-    print(f"  Strong Buy: {len(strong)}  |  Watch: {len(watch)}  |  Recovery Watch: {recovery_count}\n")
+    print(f"  Strong Buy: {len(strong)}  |  Watch: {len(watch)}  |  Recovery: {recovery_count}\n")
 
     for r in results:
         meta      = CATEGORY_META[r["category"]]
         price_str = f"${r['price']:.2f}" if meta["currency"] == "USD" else f"Rs.{r['price']:.2f}"
-        rec_tag   = " 🔄" if r["recovery"] else ""
-        print(f"  [{r['tier']:11s}] {r['ticker']:18s} {r['category']:18s} "
-              f"Score={r['score']:5.1f}  RSI={r['rsi']:5.1f}  "
-              f"RS={r['rs_pct']:+.1f}%  {r['trend_arrow']} {r['trend_dir']:<18s} "
-              f"Target +{r['targets']['upside_pct_ma']}%  {price_str}{rec_tag}")
+        print(f"  [{r['tier']:11s}] {r['ticker']:18s} Score={r['score']:5.1f}  "
+              f"Alloc=Rs.{int(r['allocation']):,}  {r['trend_arrow']} {r['trend_dir']:<18s}  {price_str}")
 
-    html, per_asset = build_email(results, regime_nifty, regime_sp500, usd_to_inr, today)
+    # Save today's picks to history
+    save_signal_history(results, today_key)
+
+    # Build and send email
+    html = build_email(results, regime_nifty, regime_sp500, usd_to_inr, today, macro, perf_html)
     subject = (
         f"[Screener {today}] "
         f"{len(strong)} Strong Buy | {len(watch)} Watch | "
@@ -976,7 +1462,12 @@ def main():
         f"Nifty={regime_nifty.title()} | S&P={regime_sp500.title()}"
     )
     send_email(subject, html)
-    print(f"\n  Done. Per-asset allocation: Rs.{int(per_asset):,}")
+
+    # Send Telegram alert
+    send_telegram(results, regime_nifty, regime_sp500, macro, today)
+
+    total_deployed = sum(r["allocation"] for r in results)
+    print(f"\n  Done. Total deployed: Rs.{int(total_deployed):,} of Rs.{TOTAL_BUDGET:,}")
 
 
 if __name__ == "__main__":
