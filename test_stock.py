@@ -249,23 +249,30 @@ def get_trend_direction(price, ma_vals):
 def get_price_targets(price, ma_vals, close_series):
     targets_above = {k: v for k, v in ma_vals.items() if v and v > price}
     three_month_high = float(close_series.tail(63).max())
-    upside_3m = (three_month_high - price) / price * 100
+    fifty_two_week_high = float(close_series.tail(252).max())
+    upside_3m  = (three_month_high - price) / price * 100
+    upside_52w = (fifty_two_week_high - price) / price * 100
 
     if targets_above:
+        # There is at least one MA above price — use nearest as MA target
         nearest_label = min(targets_above, key=targets_above.get)
         nearest_val   = targets_above[nearest_label]
         upside_ma     = (nearest_val - price) / price * 100
+        ma_label      = nearest_label
     else:
-        nearest_label = "3M High"
-        nearest_val   = three_month_high
-        upside_ma     = upside_3m
+        # Price is above ALL MAs — stock is in strength, no MA resistance overhead
+        # Use 52-week high as the upper target instead of duplicating 3M High
+        nearest_val   = fifty_two_week_high
+        upside_ma     = upside_52w
+        ma_label      = "52W High"
 
     return {
-        "nearest_ma_label": nearest_label,
-        "nearest_ma_val":   round(nearest_val, 4),
-        "upside_pct_ma":    round(upside_ma, 1),
-        "three_month_high": round(three_month_high, 4),
-        "upside_pct_3m":    round(upside_3m, 1),
+        "nearest_ma_label":    ma_label,
+        "nearest_ma_val":      round(nearest_val, 4),
+        "upside_pct_ma":       round(upside_ma, 1),
+        "three_month_high":    round(three_month_high, 4),
+        "upside_pct_3m":       round(upside_3m, 1),
+        "above_all_mas":       len(targets_above) == 0,  # flag for card display
     }
 
 # ══════════════════════════════════════════════════════
@@ -487,7 +494,7 @@ def build_summary_table(results):
                   <span style='font-size:10px;color:#94a3b8'>/110</span>
                 </td>
                 <td style='padding:8px 10px;font-size:12px;color:#15803d;font-weight:700;white-space:nowrap'>
-                  +{t["upside_pct_ma"]}% → {t["nearest_ma_label"]}
+                  +{t["upside_pct_ma"]}% → {"52W High" if t.get("above_all_mas") else t["nearest_ma_label"]}
                 </td>
                 <td style='padding:8px 10px;font-size:12px;color:#0369a1;font-weight:600;white-space:nowrap'>
                   +{t["upside_pct_3m"]}% → 3M High
@@ -632,11 +639,12 @@ def build_asset_card(global_rank, r, usd_to_inr, per_asset_inr):
   <div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;
               padding:14px 16px;margin:14px 0'>
     <div style='font-size:11px;color:#15803d;font-weight:700;text-transform:uppercase;
-                letter-spacing:0.05em;margin-bottom:10px'>Price Targets &amp; Exit Levels</div>
+                letter-spacing:0.05em;margin-bottom:6px'>Price Targets &amp; Exit Levels</div>
+    {"<div style='font-size:11px;color:#15803d;background:#dcfce7;border-radius:4px;padding:4px 8px;margin-bottom:10px;display:inline-block'>✓ Price is above all MAs — stock is in full strength. Targets shown are 3M High and 52-Week High.</div>" if t.get("above_all_mas") else ""}
     <table cellpadding='0' cellspacing='0'>
       <tr>
         <td style='padding-right:24px'>
-          <div style='font-size:11px;color:#6b7280;margin-bottom:2px'>Nearest MA Resistance</div>
+          <div style='font-size:11px;color:#6b7280;margin-bottom:2px'>{"52-Week High" if t.get("above_all_mas") else "Nearest MA Resistance"}</div>
           <div style='font-size:18px;font-weight:800;color:#15803d'>+{t["upside_pct_ma"]}%</div>
           <div style='font-size:11px;color:#374151'>{t["nearest_ma_label"]} @ {t["nearest_ma_val"]:,.4f}</div>
         </td>
