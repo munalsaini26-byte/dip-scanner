@@ -1,10 +1,3 @@
-"""
-Daily Market Screener
-Covers: Indian Stocks (Nifty 500), Indian ETFs, Global ETFs, Metals/Commodities, Crypto
-Sends a rich HTML email every weekday at 11:00 AM IST with full score breakdown.
-GitHub Secrets required: EMAIL_ADDRESS, EMAIL_PASSWORD
-"""
-
 import yfinance as yf
 import pandas as pd
 import numpy as np
