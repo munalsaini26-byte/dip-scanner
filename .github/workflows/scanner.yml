@@ -3,7 +3,7 @@ name: Daily Market Screener
 on:
   schedule:
     # Runs at 11:00 AM IST (05:30 UTC) every weekday
-    - cron: "30 05 * * 1-5"
+    - cron: "00 04 * * 1-5"
   workflow_dispatch:
 
 jobs:
