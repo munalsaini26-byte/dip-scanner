@@ -42,12 +42,20 @@ DATA_PERIOD       = "1y"
 MIN_PRICE_INR     = 50
 MIN_AVG_VOL_NS    = 300000
 GLOBAL_MAX_PICKS  = 25
-INDIAN_PICK_CAP   = 0.25       # max 25% of picks = ~6 Indian
 SCORE_STRONG_BUY  = 60
 SCORE_WATCH       = 40
 HISTORY_FILE      = "screener_history.json"
 
+# Budget allocation by pool
 CATEGORY_CAPS = {"indian": 0.25, "global": 0.40, "metal": 0.20, "crypto": 0.15}
+
+# Guaranteed min/max picks per category — ensures crypto/metals always appear
+PICK_LIMITS = {
+    "indian":  {"min": 2, "max": 5},
+    "global":  {"min": 2, "max": 12},
+    "metal":   {"min": 1, "max": 4},
+    "crypto":  {"min": 1, "max": 4},
+}
 
 # ══════════════════════════════════════════════════════
 #  ASSET UNIVERSE
@@ -95,7 +103,7 @@ CRYPTO = {
     "BTC-USD":"Bitcoin","ETH-USD":"Ethereum","SOL-USD":"Solana",
     "BNB-USD":"BNB","XRP-USD":"XRP","ADA-USD":"Cardano",
     "AVAX-USD":"Avalanche","DOT-USD":"Polkadot","LINK-USD":"Chainlink",
-    "MATIC-USD":"Polygon","DOGE-USD":"Dogecoin",
+    "POL-USD":"Polygon (POL)","DOGE-USD":"Dogecoin",
     "TON11419-USD":"Toncoin","SUI20947-USD":"Sui",
 }
 
@@ -496,15 +504,60 @@ def score_momentum(ticker, df, bench_close, btc_close, category, market_regime):
 #  ALLOCATION + INDIAN CAP
 # ══════════════════════════════════════════════════════
 
-def apply_indian_pick_cap(results):
-    max_indian=int(GLOBAL_MAX_PICKS*INDIAN_PICK_CAP)
-    indian=[r for r in results if r["category"] in ("Indian Stock","Indian ETF")]
-    non_indian=[r for r in results if r["category"] not in ("Indian Stock","Indian ETF")]
-    if len(indian)<=max_indian: return results
-    kept=sorted(indian,key=lambda x:-x["score"])[:max_indian]
-    print(f"  Indian cap: kept {max_indian}, dropped {len(indian)-max_indian}")
-    combined=kept+non_indian; combined.sort(key=lambda x:-x["score"])
-    return combined[:GLOBAL_MAX_PICKS]
+def apply_category_limits(all_results):
+    """
+    Enforce min/max picks per category pool.
+    Strategy:
+      1. Sort all results by score descending
+      2. Fill each pool up to its max, but guarantee each pool gets its min
+      3. Total capped at GLOBAL_MAX_PICKS
+    """
+    # Group all qualified results by pool, sorted by score
+    by_pool = {}
+    for r in all_results:
+        p = cat_pool(r["category"])
+        by_pool.setdefault(p, []).append(r)
+    for p in by_pool:
+        by_pool[p].sort(key=lambda x: -x["score"])
+
+    pools = ["indian", "global", "metal", "crypto"]
+    selected = {p: [] for p in pools}
+
+    # Step 1: guarantee minimums first
+    for p in pools:
+        lim = PICK_LIMITS[p]
+        available = by_pool.get(p, [])
+        take = min(lim["min"], len(available))
+        selected[p] = available[:take]
+
+    # Step 2: fill remaining slots by best score across all pools (up to max)
+    used = sum(len(v) for v in selected.values())
+    remaining = GLOBAL_MAX_PICKS - used
+
+    # Build a sorted list of remaining candidates (not yet selected) respecting max
+    candidates = []
+    for p in pools:
+        lim = PICK_LIMITS[p]
+        already = len(selected[p])
+        available = by_pool.get(p, [])
+        # Can still add up to (max - already) more from this pool
+        extras = available[already: lim["max"]]
+        for r in extras:
+            candidates.append((p, r))
+    candidates.sort(key=lambda x: -x[1]["score"])
+
+    for p, r in candidates[:remaining]:
+        selected[p].append(r)
+
+    # Flatten and sort Strong Buy first, then Watch, both by score
+    flat = [r for p in pools for r in selected[p]]
+    flat.sort(key=lambda x: (0 if x["tier"] == "Strong Buy" else 1, -x["score"]))
+
+    # Log what we got
+    for p in pools:
+        print(f"  {p:8s}: {len(selected[p])} picks (min={PICK_LIMITS[p]['min']}, max={PICK_LIMITS[p]['max']})")
+
+    return flat
 
 def compute_allocations(results):
     pools={k:TOTAL_BUDGET_SGD*v for k,v in CATEGORY_CAPS.items()}
@@ -865,8 +918,7 @@ def main():
 
     all_results.sort(key=lambda x:-x["score"])
     results=all_results[:GLOBAL_MAX_PICKS]
-    results=apply_indian_pick_cap(results)
-    results.sort(key=lambda x:(0 if x["tier"]=="Strong Buy" else 1,-x["score"]))
+    results=apply_category_limits(all_results)
 
     allocs=compute_allocations(results)
     for r in results: r["allocation_sgd"]=round(allocs.get(r["ticker"],0),2)
