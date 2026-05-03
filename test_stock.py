@@ -917,7 +917,17 @@ def main():
         except: continue
 
     all_results.sort(key=lambda x:-x["score"])
-    results=all_results[:GLOBAL_MAX_PICKS]
+
+    # Debug: show all crypto scores so we can see if they qualified
+    crypto_results = [r for r in all_results if r["category"] == "Crypto"]
+    if crypto_results:
+        print(f"  Crypto qualified: {len(crypto_results)}")
+        for r in crypto_results:
+            print(f"    {r['ticker']:12s} Score={r['score']:5.1f}  RSI={r['rsi']:5.1f}  3M={r['rs_pct']:+.1f}%  Regime={r['regime']}")
+    else:
+        print("  Crypto qualified: 0 — all filtered out during scoring")
+
+    # Pass FULL scored list — apply_category_limits handles min/max per category
     results=apply_category_limits(all_results)
 
     allocs=compute_allocations(results)
