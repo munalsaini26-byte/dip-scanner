@@ -35,6 +35,341 @@ from datetime import datetime
 warnings.simplefilter("ignore")
 
 # ══════════════════════════════════════════════════════
+#  CRYPTO MODULE — CoinGecko + Fear & Greed
+#  Completely separate from yfinance
+# ══════════════════════════════════════════════════════
+
+CRYPTO_COINS = [
+    {"id":"bitcoin",        "symbol":"BTC",  "name":"Bitcoin"},
+    {"id":"ethereum",       "symbol":"ETH",  "name":"Ethereum"},
+    {"id":"solana",         "symbol":"SOL",  "name":"Solana"},
+    {"id":"binancecoin",    "symbol":"BNB",  "name":"BNB"},
+    {"id":"ripple",         "symbol":"XRP",  "name":"XRP"},
+    {"id":"cardano",        "symbol":"ADA",  "name":"Cardano"},
+    {"id":"avalanche-2",    "symbol":"AVAX", "name":"Avalanche"},
+    {"id":"polkadot",       "symbol":"DOT",  "name":"Polkadot"},
+    {"id":"chainlink",      "symbol":"LINK", "name":"Chainlink"},
+    {"id":"dogecoin",       "symbol":"DOGE", "name":"Dogecoin"},
+    {"id":"the-open-network","symbol":"TON", "name":"Toncoin"},
+    {"id":"sui",            "symbol":"SUI",  "name":"Sui"},
+]
+
+def fetch_fear_greed():
+    """Fear & Greed Index from alternative.me — free, no key needed."""
+    try:
+        req = urllib.request.Request(
+            "https://api.alternative.me/fng/?limit=1",
+            headers={"User-Agent": "Mozilla/5.0"}
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read())
+        value = int(data["data"][0]["value"])
+        label = data["data"][0]["value_classification"]
+        return value, label
+    except Exception as e:
+        print(f"  [WARN] Fear & Greed fetch failed: {e}")
+        return 50, "Neutral"
+
+def fetch_coingecko_data():
+    """
+    Fetch price, market cap, volume, and % changes for all CRYPTO_COINS.
+    Uses CoinGecko free API — no key required.
+    Returns list of dicts or empty list on failure.
+    """
+    ids = ",".join(c["id"] for c in CRYPTO_COINS)
+    url = (
+        f"https://api.coingecko.com/api/v3/coins/markets"
+        f"?vs_currency=usd&ids={ids}"
+        f"&order=market_cap_desc&per_page=50&page=1"
+        f"&sparkline=false&price_change_percentage=7d,30d"
+    )
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read())
+    except Exception as e:
+        print(f"  [WARN] CoinGecko fetch failed: {e}")
+        return []
+
+def score_crypto_coingecko(coin_data, fg_value):
+    """
+    Score a single coin from CoinGecko data.
+    Max score = 100
+
+    Factors:
+      30-day return    0-30  (momentum over investment horizon)
+      7-day return     0-25  (recent acceleration)
+      Volume ratio     0-20  (24h volume vs market cap — proxy for interest)
+      Market cap rank  0-15  (quality filter — top ranked = safer)
+      Fear & Greed     0-10  (macro crypto sentiment)
+    """
+    try:
+        change_30d = coin_data.get("price_change_percentage_30d_in_currency", 0) or 0
+        change_7d  = coin_data.get("price_change_percentage_7d_in_currency", 0) or 0
+        price      = coin_data.get("current_price", 0) or 0
+        mcap       = coin_data.get("market_cap", 0) or 0
+        vol_24h    = coin_data.get("total_volume", 0) or 0
+        mcap_rank  = coin_data.get("market_cap_rank", 99) or 99
+
+        if price <= 0 or mcap <= 0:
+            return None
+
+        # 30-day momentum score
+        if change_30d >= 40:    m30 = 30
+        elif change_30d >= 20:  m30 = 24
+        elif change_30d >= 10:  m30 = 18
+        elif change_30d >= 0:   m30 = 10
+        elif change_30d >= -10: m30 = 4
+        else:                   m30 = 0   # >10% down in 30d — skip
+
+        # 7-day momentum score
+        if change_7d >= 15:     m7 = 25
+        elif change_7d >= 8:    m7 = 20
+        elif change_7d >= 3:    m7 = 14
+        elif change_7d >= 0:    m7 = 7
+        elif change_7d >= -5:   m7 = 2
+        else:                   m7 = 0
+
+        # Volume ratio (24h vol / market cap — higher = more active interest)
+        vol_ratio = vol_24h / mcap if mcap > 0 else 0
+        if vol_ratio >= 0.15:   vol_score = 20
+        elif vol_ratio >= 0.08: vol_score = 16
+        elif vol_ratio >= 0.04: vol_score = 11
+        elif vol_ratio >= 0.02: vol_score = 6
+        else:                   vol_score = 2
+
+        # Market cap rank (lower rank = higher quality)
+        if mcap_rank <= 3:      rank_score = 15
+        elif mcap_rank <= 7:    rank_score = 12
+        elif mcap_rank <= 15:   rank_score = 8
+        elif mcap_rank <= 30:   rank_score = 4
+        else:                   rank_score = 1
+
+        # Fear & Greed regime
+        # Extreme Fear (0-25): good buying opportunity
+        # Fear (26-45): decent entry
+        # Neutral (46-55): hold
+        # Greed (56-75): momentum still going
+        # Extreme Greed (76-100): caution, may be overextended
+        if fg_value <= 25:      fg_score = 10   # extreme fear = contrarian buy
+        elif fg_value <= 45:    fg_score = 8
+        elif fg_value <= 55:    fg_score = 6
+        elif fg_value <= 75:    fg_score = 7    # greed = momentum still valid
+        else:                   fg_score = 3    # extreme greed = caution
+
+        raw = m30 + m7 + vol_score + rank_score + fg_score
+
+        # Hard filter: if both 30d and 7d negative, skip entirely
+        if change_30d < 0 and change_7d < -5:
+            return None
+
+        if raw >= 55:   tier = "Strong Buy"
+        elif raw >= 38: tier = "Watch"
+        else:           return None
+
+        # Trend label based on 7d and 30d
+        if change_30d > 10 and change_7d > 3:
+            trend_dir = "Strong Uptrend"; trend_color = "#15803d"; trend_arrow = "↑↑"
+        elif change_30d > 0 or change_7d > 0:
+            trend_dir = "Uptrend"; trend_color = "#16a34a"; trend_arrow = "↑"
+        elif change_30d < -10:
+            trend_dir = "Downtrend"; trend_color = "#dc2626"; trend_arrow = "↓"
+        else:
+            trend_dir = "Sideways"; trend_color = "#d97706"; trend_arrow = "→"
+
+        return {
+            "symbol":      coin_data.get("symbol","").upper(),
+            "name":        coin_data.get("name",""),
+            "price_usd":   round(price, 6),
+            "change_7d":   round(change_7d, 2),
+            "change_30d":  round(change_30d, 2),
+            "vol_ratio":   round(vol_ratio * 100, 2),
+            "mcap_rank":   mcap_rank,
+            "mcap_bn":     round(mcap / 1e9, 1),
+            "score":       raw,
+            "tier":        tier,
+            "trend_dir":   trend_dir,
+            "trend_color": trend_color,
+            "trend_arrow": trend_arrow,
+            "fg_value":    fg_value,
+            "breakdown": {
+                "30D Momentum":   m30,
+                "7D Acceleration": m7,
+                "Volume Activity": vol_score,
+                "Market Cap Rank": rank_score,
+                "Fear & Greed":   fg_score,
+            }
+        }
+    except Exception as e:
+        return None
+
+def run_crypto_screener(sgd_to_usd, sgd_to_inr):
+    """
+    Main crypto screening function.
+    Returns (crypto_results, fg_value, fg_label, crypto_html)
+    """
+    print("  Fetching Fear & Greed Index...")
+    fg_value, fg_label = fetch_fear_greed()
+    print(f"  Fear & Greed: {fg_value} ({fg_label})")
+
+    print("  Fetching CoinGecko data...")
+    cg_data = fetch_coingecko_data()
+    if not cg_data:
+        print("  [WARN] CoinGecko returned no data — crypto section skipped")
+        return [], fg_value, fg_label, ""
+
+    print(f"  CoinGecko returned {len(cg_data)} coins")
+
+    results = []
+    for coin in cg_data:
+        scored = score_crypto_coingecko(coin, fg_value)
+        if scored:
+            results.append(scored)
+
+    results.sort(key=lambda x: -x["score"])
+    results = results[:4]   # max 4 crypto picks
+
+    print(f"  Crypto qualified: {len(results)}")
+    for r in results:
+        print(f"    {r['symbol']:6s} Score={r['score']:4d}  7D={r['change_7d']:+.1f}%  30D={r['change_30d']:+.1f}%  {r['trend_arrow']} {r['trend_dir']}")
+
+    crypto_html = build_crypto_section_html(results, fg_value, fg_label, sgd_to_usd, sgd_to_inr)
+    return results, fg_value, fg_label, crypto_html
+
+def build_crypto_section_html(results, fg_value, fg_label, sgd_to_usd, sgd_to_inr):
+    if not results:
+        return ""
+
+    # Fear & Greed color
+    if fg_value <= 25:   fg_color = "#15803d"; fg_bg = "#dcfce7"; fg_note = "Extreme Fear — historically strong buying opportunity"
+    elif fg_value <= 45: fg_color = "#16a34a"; fg_bg = "#f0fdf4"; fg_note = "Fear — market cautious, good entry zone"
+    elif fg_value <= 55: fg_color = "#d97706"; fg_bg = "#fffbeb"; fg_note = "Neutral — no strong directional bias"
+    elif fg_value <= 75: fg_color = "#ea580c"; fg_bg = "#fff7ed"; fg_note = "Greed — momentum strong, watch for overextension"
+    else:                fg_color = "#dc2626"; fg_bg = "#fef2f2"; fg_note = "Extreme Greed — market overheated, manage position sizes"
+
+    # Crypto budget: SGD 600 (15% of 4000), split by score
+    crypto_budget_sgd = 4000 * 0.15
+    total_score = sum(r["score"] for r in results)
+
+    cards = ""
+    for r in results:
+        alloc_sgd = round(crypto_budget_sgd * r["score"] / total_score) if total_score > 0 else round(crypto_budget_sgd / len(results))
+        alloc_usd = round(alloc_sgd * sgd_to_usd, 0)
+        units = alloc_usd / r["price_usd"] if r["price_usd"] > 0 else 0
+
+        tier_style = "background:#dcfce7;color:#15803d;border:1px solid #86efac" if r["tier"] == "Strong Buy" else "background:#fef9c3;color:#a16207;border:1px solid #fde047"
+        tier_label = "STRONG BUY" if r["tier"] == "Strong Buy" else "WATCH"
+
+        mx = {"30D Momentum":30,"7D Acceleration":25,"Volume Activity":20,"Market Cap Rank":15,"Fear & Greed":10}
+        bd_rows = "".join(
+            f"<tr><td style='padding:3px 12px 3px 0;color:#6b7280;font-size:12px;white-space:nowrap'>{k}</td>"
+            f"<td><div style='height:10px;width:{min(int(v*220/mx.get(k,20)),220)}px;"
+            f"background:#0f766e;border-radius:4px;display:inline-block;vertical-align:middle'></div></td>"
+            f"<td style='padding:3px 0 3px 8px;font-size:12px;font-weight:700;color:#0f766e'>{v}/{mx.get(k,'?')}</td></tr>"
+            for k, v in r["breakdown"].items()
+        )
+
+        c7_color = "#15803d" if r["change_7d"] >= 0 else "#dc2626"
+        c30_color = "#15803d" if r["change_30d"] >= 0 else "#dc2626"
+
+        cards += f"""
+<div style='border:1px solid #e5e7eb;border-left:4px solid #0f766e;border-radius:12px;
+            padding:20px;margin-bottom:16px;background:#fff;
+            font-family:-apple-system,BlinkMacSystemFont,sans-serif'>
+  <table width='100%' cellpadding='0' cellspacing='0'><tr>
+    <td valign='top'>
+      <div style='font-size:11px;color:#0f766e;font-weight:700;text-transform:uppercase;
+                  letter-spacing:0.05em'>Crypto · Rank #{r["mcap_rank"]} · MCap ${r["mcap_bn"]}B</div>
+      <div style='font-size:18px;font-weight:800;color:#111;margin:4px 0 2px'>{r["name"]}</div>
+      <div style='font-size:13px;color:#9ca3af'>{r["symbol"]} &nbsp;|&nbsp; ${r["price_usd"]:,.4f}</div>
+    </td>
+    <td valign='top' align='right' style='white-space:nowrap;padding-left:12px'>
+      <div style='display:inline-block;padding:4px 14px;border-radius:20px;
+                  font-size:12px;font-weight:800;{tier_style}'>{tier_label}</div>
+      <div style='margin-top:4px'>
+        <span style='font-size:18px;font-weight:900;color:{r["trend_color"]}'>{r["trend_arrow"]}</span>
+        <span style='font-size:13px;font-weight:700;color:{r["trend_color"]};margin-left:4px'>{r["trend_dir"]}</span>
+      </div>
+      <div style='font-size:24px;font-weight:900;color:#1d4ed8;margin-top:4px'>SGD {alloc_sgd:,}</div>
+      <div style='font-size:11px;color:#9ca3af;margin-top:2px'>≈ ${alloc_usd:,.0f} | ~{units:.5f} {r["symbol"]}</div>
+    </td>
+  </tr></table>
+  <div style='background:#fffbeb;border-left:3px solid #f59e0b;border-radius:4px;
+              padding:10px 14px;margin:12px 0;font-size:13px;color:#374151;line-height:1.6'>
+    <strong style='color:#a16207'>Why:</strong>
+    {r["symbol"]} is {"up" if r["change_30d"]>=0 else "down"} {abs(r["change_30d"]):.1f}% over 30 days
+    {"and accelerating" if r["change_7d"] > 3 else "with recent 7-day move of " + f"{r['change_7d']:+.1f}%"}.
+    Market cap rank #{r["mcap_rank"]} — {"blue chip crypto" if r["mcap_rank"]<=5 else "established asset"}.
+    Volume activity at {r["vol_ratio"]:.1f}% of market cap suggests {"strong" if r["vol_ratio"]>8 else "moderate"} trading interest.
+    Score: {r["score"]}/100.
+  </div>
+  <div style='overflow-x:auto;margin:14px 0 4px'><table cellpadding='0' cellspacing='6' style='white-space:nowrap'><tr>
+    <td style='background:#f0fdfa;border-radius:8px;padding:8px 12px;text-align:center'>
+      <div style='font-size:10px;color:#94a3b8;margin-bottom:2px'>Score</div>
+      <div style='font-size:18px;font-weight:900;color:#0f766e'>{r["score"]}<span style='font-size:10px;color:#94a3b8'>/100</span></div>
+    </td>
+    <td style='background:#f0fdfa;border-radius:8px;padding:8px 12px;text-align:center'>
+      <div style='font-size:10px;color:#94a3b8;margin-bottom:2px'>7-Day</div>
+      <div style='font-size:16px;font-weight:800;color:{c7_color}'>{r["change_7d"]:+.1f}%</div>
+    </td>
+    <td style='background:#f0fdfa;border-radius:8px;padding:8px 12px;text-align:center'>
+      <div style='font-size:10px;color:#94a3b8;margin-bottom:2px'>30-Day</div>
+      <div style='font-size:16px;font-weight:800;color:{c30_color}'>{r["change_30d"]:+.1f}%</div>
+    </td>
+    <td style='background:#f0fdfa;border-radius:8px;padding:8px 12px;text-align:center'>
+      <div style='font-size:10px;color:#94a3b8;margin-bottom:2px'>Vol/MCap</div>
+      <div style='font-size:16px;font-weight:800;color:#374151'>{r["vol_ratio"]:.1f}%</div>
+    </td>
+    <td style='background:#f0fdfa;border-radius:8px;padding:8px 12px;text-align:center'>
+      <div style='font-size:10px;color:#94a3b8;margin-bottom:2px'>MCap Rank</div>
+      <div style='font-size:16px;font-weight:800;color:#374151'>#{r["mcap_rank"]}</div>
+    </td>
+  </tr></table></div>
+  <div style='border-top:1px solid #f1f5f9;padding-top:12px;margin-top:12px'>
+    <div style='font-size:11px;color:#9ca3af;font-weight:700;text-transform:uppercase;
+                letter-spacing:0.05em;margin-bottom:8px'>Score Breakdown (CoinGecko Mode)</div>
+    <table cellpadding='0' cellspacing='0'>{bd_rows}</table>
+  </div>
+</div>"""
+
+    return f"""
+<div style='margin-top:32px'>
+  <div style='font-size:15px;font-weight:800;color:#0f766e;margin-bottom:8px;
+              padding-bottom:8px;border-bottom:2px solid #99f6e4'>
+    ₿ CRYPTO RECOMMENDATIONS (CoinGecko · Live Data)
+  </div>
+
+  <!-- Fear & Greed Banner -->
+  <div style='background:{fg_bg};border:1px solid {fg_color}40;border-radius:10px;
+              padding:14px 18px;margin-bottom:16px'>
+    <table cellpadding='0' cellspacing='0' width='100%'><tr>
+      <td>
+        <div style='font-size:11px;color:{fg_color};font-weight:700;text-transform:uppercase;
+                    letter-spacing:0.05em;margin-bottom:4px'>Crypto Fear &amp; Greed Index</div>
+        <div style='font-size:28px;font-weight:900;color:{fg_color}'>{fg_value} <span style='font-size:16px'>{fg_label}</span></div>
+      </td>
+      <td style='padding-left:20px;border-left:1px solid {fg_color}30'>
+        <div style='font-size:12px;color:#374151;line-height:1.6'>{fg_note}</div>
+        <div style='font-size:11px;color:#9ca3af;margin-top:4px'>Source: alternative.me · Updated daily</div>
+      </td>
+    </tr></table>
+    <!-- Visual gauge bar -->
+    <div style='margin-top:12px;background:#e5e7eb;border-radius:6px;height:8px;position:relative'>
+      <div style='background:{fg_color};width:{fg_value}%;height:8px;border-radius:6px'></div>
+    </div>
+    <div style='display:flex;justify-content:space-between;font-size:10px;color:#9ca3af;margin-top:4px'>
+      <span>Extreme Fear</span><span>Fear</span><span>Neutral</span><span>Greed</span><span>Extreme Greed</span>
+    </div>
+  </div>
+
+  <div style='font-size:12px;color:#6b7280;margin-bottom:14px;line-height:1.6'>
+    Scored using 30-day &amp; 7-day momentum, volume activity, market cap rank, and Fear &amp; Greed regime.
+    Data source: CoinGecko (live). Budget: SGD {int(crypto_budget_sgd):,} split by score across picks.
+  </div>
+  {cards}
+</div>"""
+
+# ══════════════════════════════════════════════════════
 #  CONFIG
 # ══════════════════════════════════════════════════════
 TOTAL_BUDGET_SGD  = 4000
@@ -774,7 +1109,7 @@ def asset_card(rank, r, usd_to_inr, sgd_to_inr, sgd_to_usd):
 #  EMAIL BUILDER
 # ══════════════════════════════════════════════════════
 
-def build_email(results, rn, rs_, usd_to_inr, sgd_to_inr, sgd_to_usd, date_str, macro, pf):
+def build_email(results, rn, rs_, usd_to_inr, sgd_to_inr, sgd_to_usd, date_str, macro, pf, crypto_html=""):
     strong=[r for r in results if r["tier"]=="Strong Buy"]; watch=[r for r in results if r["tier"]=="Watch"]
     rec_count=sum(1 for r in results if r.get("recovery")); brk_count=sum(1 for r in results if r.get("breakout"))
     total_sgd=sum(r["allocation_sgd"] for r in results)
@@ -812,6 +1147,7 @@ def build_email(results, rn, rs_, usd_to_inr, sgd_to_inr, sgd_to_usd, date_str, 
   {strong_cards}
   <div style='font-size:15px;font-weight:800;color:#a16207;margin:28px 0 14px;padding-bottom:8px;border-bottom:2px solid #fde68a'>WATCH LIST ({len(watch)})</div>
   {watch_cards}
+  {crypto_html}
   {mf_html(sgd_to_inr)}
   <div style='margin-top:32px;padding:16px;background:#fff;border-radius:10px;font-size:11px;color:#9ca3af;border:1px solid #e5e7eb;line-height:1.8'>
     <strong style='color:#6b7280'>Dual Scoring:</strong> Momentum mode (Global ETF/Crypto): 3M Return + 1M Momentum + Trend + RSI Momentum + MACD + Breakout + Volume = 110 max. Dip Buy mode (Indian/Metals): RS vs Benchmark + Trend + RSI + MACD + ADX + Volume = 110 max.<br>
@@ -826,7 +1162,7 @@ def build_email(results, rn, rs_, usd_to_inr, sgd_to_inr, sgd_to_usd, date_str, 
 #  TELEGRAM
 # ══════════════════════════════════════════════════════
 
-def send_telegram(results, rn, rs_, macro, date_str):
+def send_telegram(results, rn, rs_, macro, date_str, crypto_results=None):
     token=os.environ.get("TELEGRAM_BOT_TOKEN",""); chat_id=os.environ.get("TELEGRAM_CHAT_ID","")
     if not token or not chat_id: print("  [INFO] Telegram not configured."); return
     na="▲" if macro["nifty_chg"]>=0 else "▼"; sa="▲" if macro["sp_chg"]>=0 else "▼"
@@ -836,6 +1172,12 @@ def send_telegram(results, rn, rs_, macro, date_str):
         extras=(" 🚀" if r.get("breakout") else "")+(" 🔄" if r.get("recovery") else "")
         ar=f" | +{r['abs_return_3m']*100:.1f}% (3M)" if r.get("abs_return_3m") else ""
         lines.append(f"{i}. {icon}{mode} *{r['ticker']}* [{r['category']}]{extras}\n   SGD {r['allocation_sgd']:,.0f}  |  Score: {r['score']}/110{ar}\n   {r['trend_arrow']} {r['trend_dir']}  |  Target: +{r['targets']['upside_pct_ma']}%\n   _{r['reason']}_")
+    if crypto_results:
+        lines.append("")
+        lines.append("*₿ TOP CRYPTO PICKS*")
+        for r in crypto_results[:2]:
+            c_alloc = int(4000 * 0.15 / max(len(crypto_results),1))
+            lines.append(f"• *{r['symbol']}* {r['trend_arrow']} | 7D: {r['change_7d']:+.1f}% | 30D: {r['change_30d']:+.1f}% | Score: {r['score']}/100 | SGD ~{c_alloc:,}")
     lines.append("\nFull breakdown in your email 📧")
     try:
         url=f"https://api.telegram.org/bot{token}/sendMessage"
@@ -872,7 +1214,8 @@ def main():
         print(f"  [WARN] Nifty 500 failed ({e}). Fallback.")
         nse_stocks=[s+".NS" for s in ["RELIANCE","TCS","HDFCBANK","INFY","ICICIBANK","HINDUNILVR","SBIN","BHARTIARTL","ITC","KOTAKBANK","LT","AXISBANK","ASIANPAINT","MARUTI","TITAN","SUNPHARMA","BAJFINANCE","WIPRO","HCLTECH","ADANIENT","ADANIPORTS","BAJAJFINSV","BRITANNIA","CIPLA","COALINDIA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HEROMOTOCO","HINDALCO","INDUSINDBK","JSWSTEEL","M&M","NESTLEIND","NTPC","ONGC","POWERGRID","SBILIFE","TATAMOTORS","TATACONSUM","TATASTEEL","TECHM","ULTRACEMCO","UPL","VEDL"]]
 
-    all_tickers=nse_stocks+list(INDIAN_ETFS.keys())+list(GLOBAL_ETFS.keys())+list(METALS_COMMODITIES.keys())+list(CRYPTO.keys())
+    all_tickers=nse_stocks+list(INDIAN_ETFS.keys())+list(GLOBAL_ETFS.keys())+list(METALS_COMMODITIES.keys())
+    # Crypto handled via CoinGecko — not yfinance
     dl_list=list(dict.fromkeys(all_tickers+["^NSEI","^GSPC","BTC-USD","USDINR=X","SGDUSD=X"]))
     print(f"  Downloading {len(dl_list)} tickers...\n")
 
@@ -892,6 +1235,9 @@ def main():
 
     macro=build_macro(bn,bs,usd_to_inr,sgd_to_usd,rn,rs_)
     print("  Fetching past performance..."); pf_rows=fetch_performance(history); pf=perf_html(pf_rows)
+
+    # Run crypto screener via CoinGecko
+    crypto_results, fg_value, fg_label, crypto_html = run_crypto_screener(sgd_to_usd, sgd_to_inr)
 
     try: tickers_in_raw=set(raw.columns.get_level_values(0))
     except: tickers_in_raw=set()
@@ -943,11 +1289,11 @@ def main():
         print(f"  {mode_tag} [{r['tier']:11s}] {r['ticker']:16s} {r['category']:18s} Score={r['score']:5.1f}  SGD={r['allocation_sgd']:,.0f}  {r['trend_arrow']} {brk}{rec}  {ps}")
 
     save_history(results,today_key)
-    html=build_email(results,rn,rs_,usd_to_inr,sgd_to_inr,sgd_to_usd,today,macro,pf)
+    html=build_email(results,rn,rs_,usd_to_inr,sgd_to_inr,sgd_to_usd,today,macro,pf,crypto_html)
     breakout_str=f" | {brk_count} Breakouts 🚀" if brk_count>0 else ""
     subject=f"[Screener {today}] {len(strong)} Strong Buy | {len(watch)} Watch{breakout_str} | {rec_count} Recovery 🔄 | SGD {TOTAL_BUDGET_SGD:,} | Nifty={rn.title()} · S&P={rs_.title()}"
     send_email(subject,html)
-    send_telegram(results,rn,rs_,macro,today)
+    send_telegram(results,rn,rs_,macro,today,crypto_results)
     print(f"\n  Done. SGD deployed: {sum(r['allocation_sgd'] for r in results):,.0f}")
 
 if __name__=="__main__":
