@@ -915,31 +915,207 @@ def load_history():
         return data[-5:] if len(data)>5 else data
     except: return []
 
-def save_history(results, today):
-    history=load_history()
-    history.append({"date":today,"picks":[{"ticker":r["ticker"],"name":r["name"],"category":r["category"],"price":r["price"],"tier":r["tier"],"score":r["score"]} for r in results]})
-    history=history[-5:]
+# Max hold days and stop loss % per pool
+EXIT_RULES = {
+    "indian":  {"stop_pct": -8,  "max_days": 60,  "label": "Dip Buy"},
+    "global":  {"stop_pct": -7,  "max_days": 180, "label": "Momentum"},
+    "metal":   {"stop_pct": -6,  "max_days": 90,  "label": "Commodity"},
+    "crypto":  {"stop_pct": -12, "max_days": 120, "label": "Crypto"},
+}
+
+def get_exit_target(r):
+    """Return target price and stop loss price for a pick."""
+    price = r["price"]
+    pool  = cat_pool(r["category"])
+    t     = r.get("targets", {})
+    mode  = r.get("scoring_mode", "dip")
+
+    # Target price: nearest MA for dip, 3M high for momentum, +25% for crypto
+    if pool == "crypto":
+        target = round(price * 1.25, 6)
+    elif mode == "momentum":
+        # Use 3M high as target, fallback to +15%
+        target = t.get("three_month_high") or round(price * 1.15, 4)
+    else:
+        target = t.get("nearest_ma_val") or t.get("three_month_high") or round(price * 1.10, 4)
+
+    stop = round(price * (1 + EXIT_RULES[pool]["stop_pct"] / 100), 4)
+    return float(target), float(stop)
+
+def save_history(results, today, crypto_results=None):
+    """Save picks with entry price, target, stop loss, and expiry date."""
+    from datetime import datetime, timedelta
+    picks = []
+
+    for r in results:
+        pool = cat_pool(r["category"])
+        target, stop = get_exit_target(r)
+        max_days = EXIT_RULES[pool]["max_days"]
+        expiry = (datetime.strptime(today, "%Y-%m-%d") + timedelta(days=max_days)).strftime("%Y-%m-%d")
+        picks.append({
+            "ticker":   r["ticker"],
+            "name":     r["name"],
+            "category": r["category"],
+            "price":    r["price"],
+            "target":   target,
+            "stop":     stop,
+            "tier":     r["tier"],
+            "score":    r["score"],
+            "pool":     pool,
+            "expiry":   expiry,
+            "mode":     r.get("scoring_mode", "dip"),
+            "hit":      None,   # "target" | "stop" | None
+        })
+
+    # Add crypto picks from CoinGecko
+    if crypto_results:
+        for r in crypto_results:
+            price  = r["price_usd"]
+            target = round(price * 1.25, 6)
+            stop   = round(price * (1 + EXIT_RULES["crypto"]["stop_pct"] / 100), 6)
+            from datetime import datetime, timedelta
+            expiry = (datetime.strptime(today, "%Y-%m-%d") + timedelta(days=120)).strftime("%Y-%m-%d")
+            picks.append({
+                "ticker":   r["symbol"],
+                "name":     r["name"],
+                "category": "Crypto",
+                "price":    price,
+                "target":   target,
+                "stop":     stop,
+                "tier":     r["tier"],
+                "score":    r["score"],
+                "pool":     "crypto",
+                "expiry":   expiry,
+                "mode":     "crypto",
+                "hit":      None,
+            })
+
+    # Load ALL history (not just last 5 — for exit tracking we need 180 days)
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE) as f:
+                history = json.load(f)
+        except:
+            history = []
+    else:
+        history = []
+
+    history.append({"date": today, "picks": picks})
+    # Keep max 90 days
+    history = history[-90:]
     try:
-        with open(HISTORY_FILE,"w") as f: json.dump(history,f,indent=2)
-    except Exception as e: print(f"  [WARN] history: {e}")
+        with open(HISTORY_FILE, "w") as f:
+            json.dump(history, f, indent=2)
+        print(f"  Saved {len(picks)} picks to history")
+    except Exception as e:
+        print(f"  [WARN] history save: {e}")
 
 def fetch_performance(history):
-    if not history: return []
-    tickers=list({p["ticker"] for e in history for p in e["picks"]})
-    if not tickers: return []
-    try: raw=yf.download(tickers,period="10d",interval="1d",group_by="ticker",threads=True,progress=False,auto_adjust=True)
-    except: return []
-    def latest(t):
-        try:
-            s=raw[t]["Close"].dropna() if len(tickers)>1 else raw["Close"].dropna()
-            return float(s.iloc[-1]) if not s.empty else None
-        except: return None
-    rows=[]
+    """
+    Fetch current prices for all open positions.
+    Returns (perf_rows, exit_alerts)
+    perf_rows: list of all open positions with current P&L
+    exit_alerts: list of positions that hit target or stop loss
+    """
+    from datetime import datetime
+    if not history: return [], []
+
+    today_str = datetime.now().strftime("%Y-%m-%d")
+
+    # Collect all open picks (not expired, not already hit)
+    open_picks = []
     for e in history:
         for p in e["picks"]:
-            cur=latest(p["ticker"])
-            if cur: rows.append({"date":e["date"],"ticker":p["ticker"],"name":p["name"],"category":p["category"],"entry_price":p["price"],"current_price":round(cur,4),"return_pct":round((cur-p["price"])/p["price"]*100,2),"tier":p["tier"]})
-    return rows
+            expiry = p.get("expiry", "2099-01-01")
+            if expiry >= today_str and p.get("hit") is None:
+                open_picks.append({**p, "entry_date": e["date"]})
+
+    if not open_picks:
+        return [], []
+
+    # Separate crypto (use CoinGecko) from others (use yfinance)
+    crypto_picks = [p for p in open_picks if p["pool"] == "crypto"]
+    stock_picks  = [p for p in open_picks if p["pool"] != "crypto"]
+
+    current_prices = {}
+
+    # Fetch stock/ETF prices via yfinance
+    if stock_picks:
+        tickers = list({p["ticker"] for p in stock_picks})
+        try:
+            raw = yf.download(tickers, period="5d", interval="1d",
+                              group_by="ticker", threads=True, progress=False, auto_adjust=True)
+            for t in tickers:
+                try:
+                    s = raw[t]["Close"].dropna() if len(tickers) > 1 else raw["Close"].dropna()
+                    if not s.empty:
+                        current_prices[t] = float(s.iloc[-1])
+                except:
+                    pass
+        except:
+            pass
+
+    # Fetch crypto prices via CoinGecko
+    if crypto_picks:
+        symbol_to_id = {c["symbol"]: c["id"] for c in CRYPTO_COINS}
+        ids_needed = list({symbol_to_id.get(p["ticker"], "") for p in crypto_picks if symbol_to_id.get(p["ticker"])})
+        if ids_needed:
+            try:
+                url = f"https://api.coingecko.com/api/v3/simple/price?ids={','.join(ids_needed)}&vs_currencies=usd"
+                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    cg_prices = json.loads(resp.read())
+                for p in crypto_picks:
+                    cg_id = symbol_to_id.get(p["ticker"])
+                    if cg_id and cg_id in cg_prices:
+                        current_prices[p["ticker"]] = cg_prices[cg_id]["usd"]
+            except Exception as e:
+                print(f"  [WARN] CoinGecko price fetch for exit check failed: {e}")
+
+    # Build perf rows and detect exit signals
+    perf_rows   = []
+    exit_alerts = []
+
+    for p in open_picks:
+        cur = current_prices.get(p["ticker"])
+        if cur is None:
+            continue
+
+        entry   = p["price"]
+        target  = p.get("target", entry * 1.15)
+        stop    = p.get("stop",   entry * 0.92)
+        ret_pct = round((cur - entry) / entry * 100, 2)
+
+        row = {
+            "entry_date":    p["entry_date"],
+            "ticker":        p["ticker"],
+            "name":          p["name"],
+            "category":      p["category"],
+            "pool":          p["pool"],
+            "entry_price":   entry,
+            "target_price":  target,
+            "stop_price":    stop,
+            "current_price": round(cur, 6),
+            "return_pct":    ret_pct,
+            "tier":          p["tier"],
+            "expiry":        p.get("expiry", ""),
+            "hit":           None,
+        }
+
+        # Check exit conditions
+        if cur >= target:
+            row["hit"] = "target"
+            exit_alerts.append({**row, "alert_type": "TARGET_HIT",
+                                 "message": f"🎯 {p['ticker']} hit your exit target! Entry: {entry:.4f} → Now: {cur:.4f} (+{ret_pct:.1f}%). Consider selling."})
+        elif cur <= stop:
+            row["hit"] = "stop"
+            exit_alerts.append({**row, "alert_type": "STOP_HIT",
+                                 "message": f"🛑 {p['ticker']} hit your stop loss. Entry: {entry:.4f} → Now: {cur:.4f} ({ret_pct:.1f}%). Consider cutting losses."})
+
+        perf_rows.append(row)
+
+    print(f"  Open positions tracked: {len(perf_rows)}  |  Exit alerts: {len(exit_alerts)}")
+    return perf_rows, exit_alerts
 
 # ══════════════════════════════════════════════════════
 #  MACRO CONTEXT
@@ -982,17 +1158,127 @@ def macro_html(m):
   <div style='margin-top:14px;padding-top:12px;border-top:1px solid #2d5a8e;font-size:13px;color:#bfdbfe;line-height:1.6'>💡 {m["regime_note"]}</div>
 </div>"""
 
+def build_exit_alert_html(exit_alerts):
+    """Red/green banner at top of email for any target or stop hits."""
+    if not exit_alerts:
+        return ""
+    cards = ""
+    for a in exit_alerts:
+        is_target = a["alert_type"] == "TARGET_HIT"
+        bg    = "#f0fdf4" if is_target else "#fef2f2"
+        bc    = "#16a34a" if is_target else "#dc2626"
+        icon  = "🎯" if is_target else "🛑"
+        label = "EXIT TARGET HIT" if is_target else "STOP LOSS HIT"
+        action = "Consider selling now" if is_target else "Consider cutting losses"
+        ret_color = "#15803d" if a["return_pct"] >= 0 else "#dc2626"
+        cards += f"""
+        <div style="background:{bg};border:2px solid {bc};border-radius:10px;padding:16px;margin-bottom:12px">
+          <table width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td valign="top">
+              <div style="font-size:11px;color:{bc};font-weight:800;text-transform:uppercase;letter-spacing:0.05em">{icon} {label}</div>
+              <div style="font-size:17px;font-weight:800;color:#111;margin:4px 0 2px">{a["ticker"]} — {a["name"]}</div>
+              <div style="font-size:12px;color:#6b7280">{a["category"]} · Entered {a["entry_date"]}</div>
+            </td>
+            <td valign="top" align="right" style="white-space:nowrap;padding-left:12px">
+              <div style="font-size:11px;color:#9ca3af">Return</div>
+              <div style="font-size:26px;font-weight:900;color:{ret_color}">{a["return_pct"]:+.1f}%</div>
+              <div style="font-size:12px;color:{bc};font-weight:700">{action}</div>
+            </td>
+          </tr></table>
+          <table cellpadding="0" cellspacing="6" style="margin-top:12px">
+            <tr>
+              <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
+                <div style="font-size:10px;color:#9ca3af">Entry</div>
+                <div style="font-size:14px;font-weight:800;color:#374151">{a["entry_price"]:,.4f}</div>
+              </td>
+              <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
+                <div style="font-size:10px;color:#9ca3af">Current</div>
+                <div style="font-size:14px;font-weight:800;color:{ret_color}">{a["current_price"]:,.4f}</div>
+              </td>
+              <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
+                <div style="font-size:10px;color:#9ca3af">Target was</div>
+                <div style="font-size:14px;font-weight:800;color:#15803d">{a["target_price"]:,.4f}</div>
+              </td>
+              <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
+                <div style="font-size:10px;color:#9ca3af">Stop was</div>
+                <div style="font-size:14px;font-weight:800;color:#dc2626">{a["stop_price"]:,.4f}</div>
+              </td>
+            </tr>
+          </table>
+        </div>"""
+    return f"""
+<div style="margin-bottom:24px">
+  <div style="font-size:15px;font-weight:800;color:#dc2626;margin-bottom:12px;
+              padding-bottom:8px;border-bottom:2px solid #fecaca">
+    ⚡ ACTION REQUIRED — EXIT SIGNALS ({len(exit_alerts)})
+  </div>
+  {cards}
+</div>"""
+
 def perf_html(rows):
     if not rows: return ""
-    r_rows=""
+    r_rows = ""
     for p in rows:
-        rc="#15803d" if p["return_pct"]>=0 else "#dc2626"; ra="▲" if p["return_pct"]>=0 else "▼"
-        cc=CATEGORY_COLORS.get(p["category"],"#374151")
-        r_rows+=f"<tr style='border-bottom:1px solid #f1f5f9'><td style='padding:7px 10px;font-size:11px;color:#9ca3af'>{p['date']}</td><td style='padding:7px 10px'><span style='font-size:12px;font-weight:700'>{p['ticker']}</span> <span style='font-size:10px;color:{cc};background:#f1f5f9;padding:1px 5px;border-radius:4px'>{p['category']}</span></td><td style='padding:7px 10px;font-size:12px'>{p['entry_price']:,.4f}</td><td style='padding:7px 10px;font-size:12px'>{p['current_price']:,.4f}</td><td style='padding:7px 10px;font-size:13px;font-weight:800;color:{rc}'>{ra} {abs(p['return_pct'])}%</td></tr>"
-    return f"""<div style='margin-bottom:24px'><div style='font-size:15px;font-weight:800;color:#374151;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e5e7eb'>📈 HOW LAST PICKS PERFORMED</div>
-  <table width='100%' cellpadding='0' cellspacing='0' style='border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;border-collapse:collapse'>
-    <thead><tr style='background:#f8fafc'><th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Date</th><th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Asset</th><th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Entry</th><th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Now</th><th style='padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left'>Return</th></tr></thead>
-    <tbody>{r_rows}</tbody></table></div>"""
+        rc = "#15803d" if p["return_pct"] >= 0 else "#dc2626"
+        ra = "▲" if p["return_pct"] >= 0 else "▼"
+        cc = CATEGORY_COLORS.get(p["category"], "#374151")
+        # Progress bar toward target
+        entry  = p["entry_price"]
+        target = p["target_price"]
+        stop   = p["stop_price"]
+        cur    = p["current_price"]
+        progress = max(0, min(100, int((cur - entry) / (target - entry) * 100))) if target != entry else 0
+        prog_color = "#15803d" if p["return_pct"] >= 0 else "#dc2626"
+        days_left = ""
+        if p.get("expiry"):
+            from datetime import datetime
+            try:
+                dl = (datetime.strptime(p["expiry"], "%Y-%m-%d") - datetime.now()).days
+                days_left = f"<div style='font-size:10px;color:#9ca3af'>{dl}d left</div>"
+            except: pass
+        r_rows += f"""
+        <tr style="border-bottom:1px solid #f1f5f9">
+          <td style="padding:8px 10px;font-size:11px;color:#9ca3af;white-space:nowrap">{p["entry_date"]}</td>
+          <td style="padding:8px 10px">
+            <span style="font-size:13px;font-weight:700">{p["ticker"]}</span>
+            <span style="font-size:10px;color:{cc};background:#f1f5f9;padding:1px 5px;border-radius:4px;margin-left:4px">{p["category"]}</span>
+            {days_left}
+          </td>
+          <td style="padding:8px 10px;font-size:12px;color:#374151">{entry:,.4f}</td>
+          <td style="padding:8px 10px;font-size:12px;font-weight:700;color:{rc}">{ra} {cur:,.4f}</td>
+          <td style="padding:8px 10px;font-size:13px;font-weight:800;color:{rc}">{p["return_pct"]:+.1f}%</td>
+          <td style="padding:8px 10px">
+            <div style="font-size:10px;color:#9ca3af;margin-bottom:2px">→ Target: {target:,.4f}</div>
+            <div style="background:#e5e7eb;border-radius:4px;height:6px;width:80px">
+              <div style="background:{prog_color};width:{progress}px;max-width:80px;height:6px;border-radius:4px"></div>
+            </div>
+          </td>
+          <td style="padding:8px 10px;font-size:11px;color:#dc2626">Stop: {stop:,.4f}</td>
+        </tr>"""
+    return f"""
+<div style="margin-bottom:24px">
+  <div style="font-size:15px;font-weight:800;color:#374151;margin-bottom:12px;
+              padding-bottom:8px;border-bottom:2px solid #e5e7eb">
+    📊 OPEN POSITIONS — Entry · Current · Target · Stop
+  </div>
+  <div style="font-size:12px;color:#6b7280;margin-bottom:10px;line-height:1.6">
+    All picks tracked until target hit, stop loss hit, or expiry date reached.
+    Progress bar shows % of the way from entry to target.
+  </div>
+  <table width="100%" cellpadding="0" cellspacing="0"
+         style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;border-collapse:collapse">
+    <thead><tr style="background:#f8fafc">
+      <th style="padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left">Entry Date</th>
+      <th style="padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left">Asset</th>
+      <th style="padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left">Entry</th>
+      <th style="padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left">Current</th>
+      <th style="padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left">P&amp;L</th>
+      <th style="padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left">Progress → Target</th>
+      <th style="padding:7px 10px;font-size:11px;color:#9ca3af;font-weight:600;text-align:left">Stop Loss</th>
+    </tr></thead>
+    <tbody>{r_rows}</tbody>
+  </table>
+</div>"""
 
 def mf_html(sgd_to_inr):
     total=sum(m["suggested_sip"] for m in INDIAN_MF_LIST if m["suggested_sip"]>0)
@@ -1109,7 +1395,7 @@ def asset_card(rank, r, usd_to_inr, sgd_to_inr, sgd_to_usd):
 #  EMAIL BUILDER
 # ══════════════════════════════════════════════════════
 
-def build_email(results, rn, rs_, usd_to_inr, sgd_to_inr, sgd_to_usd, date_str, macro, pf, crypto_html=""):
+def build_email(results, rn, rs_, usd_to_inr, sgd_to_inr, sgd_to_usd, date_str, macro, pf, crypto_html="", exit_html=""):
     strong=[r for r in results if r["tier"]=="Strong Buy"]; watch=[r for r in results if r["tier"]=="Watch"]
     rec_count=sum(1 for r in results if r.get("recovery")); brk_count=sum(1 for r in results if r.get("breakout"))
     total_sgd=sum(r["allocation_sgd"] for r in results)
@@ -1130,6 +1416,7 @@ def build_email(results, rn, rs_, usd_to_inr, sgd_to_inr, sgd_to_usd, date_str, 
       <td><div style='font-size:11px;color:#93c5fd;text-transform:uppercase'>Total Picks</div><div style='font-size:30px;font-weight:900;color:#fff'>{len(results)}</div></td>
     </tr></table>
   </div>
+  {exit_html}
   {macro_html(macro)}
   <table width='100%' cellpadding='6' cellspacing='0' style='margin:0 0 16px'><tr>
     <td width='50%'><div style='{rns};padding:12px 16px;border-radius:8px'><div style='font-size:11px;color:{rnc};font-weight:700;text-transform:uppercase'>Nifty Regime</div><div style='font-size:15px;font-weight:800;color:{rnc};margin-top:2px'>{rnl}</div></div></td>
@@ -1186,6 +1473,45 @@ def send_telegram(results, rn, rs_, macro, date_str, crypto_results=None):
         with urllib.request.urlopen(req,timeout=10) as resp: print("  Telegram sent." if resp.status==200 else f"  Telegram status {resp.status}")
     except Exception as e: print(f"  [WARN] Telegram: {e}")
 
+
+def send_exit_alerts_telegram(exit_alerts):
+    """Send immediate Telegram alerts for target/stop hits."""
+    token   = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
+    if not token or not chat_id or not exit_alerts:
+        return
+
+    lines = ["⚡ *ACTION REQUIRED — EXIT SIGNALS*", ""]
+    for a in exit_alerts:
+        is_target = a["alert_type"] == "TARGET_HIT"
+        icon  = "🎯" if is_target else "🛑"
+        label = "TARGET HIT — Consider Selling" if is_target else "STOP LOSS — Consider Cutting"
+        lines.append(
+            f"{icon} *{a['ticker']}* — {label}\n"
+            f"Entry: {a['entry_price']:,.4f} → Now: {a['current_price']:,.4f} "
+            f"({a['return_pct']:+.1f}%)\n"
+            f"Target: {a['target_price']:,.4f} | Stop: {a['stop_price']:,.4f}"
+        )
+        lines.append("")
+
+    lines.append("Check your email for full position details.")
+
+    try:
+        url     = f"https://api.telegram.org/bot{token}/sendMessage"
+        payload = json.dumps({
+            "chat_id":    chat_id,
+            "text":       "\n".join(lines),
+            "parse_mode": "Markdown"
+        }).encode()
+        req = urllib.request.Request(
+            url, data=payload,
+            headers={"Content-Type": "application/json"}, method="POST"
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            print(f"  Exit alert Telegram sent ({len(exit_alerts)} alerts).")
+    except Exception as e:
+        print(f"  [WARN] Exit alert Telegram failed: {e}")
+
 def send_email(subject, html_body):
     em=os.environ["EMAIL_ADDRESS"]; pw=os.environ["EMAIL_PASSWORD"]
     msg=MIMEMultipart("alternative"); msg["Subject"]=subject; msg["From"]=em; msg["To"]=em
@@ -1234,7 +1560,10 @@ def main():
     print(f"  Nifty: {rn.upper()}  |  S&P: {rs_.upper()}\n")
 
     macro=build_macro(bn,bs,usd_to_inr,sgd_to_usd,rn,rs_)
-    print("  Fetching past performance..."); pf_rows=fetch_performance(history); pf=perf_html(pf_rows)
+    print("  Fetching past performance...")
+    pf_rows, exit_alerts = fetch_performance(history)
+    pf = perf_html(pf_rows)
+    exit_html = build_exit_alert_html(exit_alerts)
 
     # Run crypto screener via CoinGecko
     crypto_results, fg_value, fg_label, crypto_html = run_crypto_screener(sgd_to_usd, sgd_to_inr)
@@ -1288,12 +1617,14 @@ def main():
         brk="🚀" if r.get("breakout") else "  "; rec="🔄" if r.get("recovery") else "  "
         print(f"  {mode_tag} [{r['tier']:11s}] {r['ticker']:16s} {r['category']:18s} Score={r['score']:5.1f}  SGD={r['allocation_sgd']:,.0f}  {r['trend_arrow']} {brk}{rec}  {ps}")
 
-    save_history(results,today_key)
-    html=build_email(results,rn,rs_,usd_to_inr,sgd_to_inr,sgd_to_usd,today,macro,pf,crypto_html)
+    save_history(results, today_key, crypto_results)
+    html=build_email(results,rn,rs_,usd_to_inr,sgd_to_inr,sgd_to_usd,today,macro,pf,crypto_html,exit_html)
     breakout_str=f" | {brk_count} Breakouts 🚀" if brk_count>0 else ""
     subject=f"[Screener {today}] {len(strong)} Strong Buy | {len(watch)} Watch{breakout_str} | {rec_count} Recovery 🔄 | SGD {TOTAL_BUDGET_SGD:,} | Nifty={rn.title()} · S&P={rs_.title()}"
     send_email(subject,html)
     send_telegram(results,rn,rs_,macro,today,crypto_results)
+    if exit_alerts:
+        send_exit_alerts_telegram(exit_alerts)
     print(f"\n  Done. SGD deployed: {sum(r['allocation_sgd'] for r in results):,.0f}")
 
 if __name__=="__main__":
