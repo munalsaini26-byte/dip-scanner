@@ -1422,20 +1422,14 @@ def build_email(results, rn, rs_, usd_to_inr, sgd_to_inr, sgd_to_usd, date_str, 
     <td width='50%'><div style='{rns};padding:12px 16px;border-radius:8px'><div style='font-size:11px;color:{rnc};font-weight:700;text-transform:uppercase'>Nifty Regime</div><div style='font-size:15px;font-weight:800;color:{rnc};margin-top:2px'>{rnl}</div></div></td>
     <td width='50%'><div style='{rss_};padding:12px 16px;border-radius:8px'><div style='font-size:11px;color:{rsc};font-weight:700;text-transform:uppercase'>S&amp;P Regime</div><div style='font-size:15px;font-weight:800;color:{rsc};margin-top:2px'>{rsl}</div></div></td>
   </tr></table>
-  <div style='background:#eef2ff;border:1px solid #c7d2fe;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#3730a3;line-height:1.7'>
-    <strong>Scoring modes:</strong> &nbsp;
-    <span style='background:#eef2ff;border:1px solid #6366f1;border-radius:4px;padding:1px 6px;font-size:11px'>📈 momentum</span> = Global ETFs &amp; Crypto — 6-12 month trend ride. Rewards high RSI, recent breakouts, absolute returns. &nbsp;
-    <span style='background:#f0fdf4;border:1px solid #16a34a;border-radius:4px;padding:1px 6px;font-size:11px'>🎯 dip</span> = Indian Stocks &amp; ETFs, Metals — 1-3 month recovery. Rewards RS vs benchmark, healthy RSI zone, regime recovery.
-  </div>
-  {pf}
   <div style='font-size:15px;font-weight:800;color:#1d4ed8;margin:8px 0;padding-bottom:8px;border-bottom:2px solid #bfdbfe'>AT A GLANCE — TOP {len(results)} PICKS</div>
   {summary_html(results,usd_to_inr,sgd_to_inr,sgd_to_usd)}
+  {crypto_html}
+  {mf_html(sgd_to_inr)}
   <div style='font-size:15px;font-weight:800;color:#15803d;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #bbf7d0'>STRONG BUY ({len(strong)})</div>
   {strong_cards}
   <div style='font-size:15px;font-weight:800;color:#a16207;margin:28px 0 14px;padding-bottom:8px;border-bottom:2px solid #fde68a'>WATCH LIST ({len(watch)})</div>
   {watch_cards}
-  {crypto_html}
-  {mf_html(sgd_to_inr)}
   <div style='margin-top:32px;padding:16px;background:#fff;border-radius:10px;font-size:11px;color:#9ca3af;border:1px solid #e5e7eb;line-height:1.8'>
     <strong style='color:#6b7280'>Dual Scoring:</strong> Momentum mode (Global ETF/Crypto): 3M Return + 1M Momentum + Trend + RSI Momentum + MACD + Breakout + Volume = 110 max. Dip Buy mode (Indian/Metals): RS vs Benchmark + Trend + RSI + MACD + ADX + Volume = 110 max.<br>
     <strong style='color:#6b7280'>Crypto Regime:</strong> BTC trend sets floor multiplier. Individual asset DMA confirms or adjusts. Bull+confirmed = ×1.15, Bear = ×0.65.<br>
