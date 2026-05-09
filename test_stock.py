@@ -1010,41 +1010,121 @@ def save_history(results, today, crypto_results=None):
     except Exception as e:
         print(f"  [WARN] history save: {e}")
 
+def check_recovery_difficulty(ticker, category, entry_price, current_price):
+    """
+    Layer 2: fires only when ALL 4 conditions true simultaneously:
+      1. Position down > 5% from entry
+      2. Price below both MA50 and MA200
+      3. RSI below 35
+      4. 2-week RS vs benchmark still negative
+    """
+    if category == "Crypto":
+        return False  # crypto handled separately
+    try:
+        ret_pct = (current_price - entry_price) / entry_price * 100
+        if ret_pct > -5:
+            return False  # not down enough to worry
+
+        df = yf.download(ticker, period="6mo", interval="1d",
+                         progress=False, auto_adjust=True)
+        if df.empty or len(df) < 50:
+            return False
+
+        close = df["Close"].squeeze()
+        price = float(close.iloc[-1])
+
+        # Condition 1: below MA50 and MA200
+        ma50  = float(close.rolling(50).mean().iloc[-1])
+        ma200 = float(close.rolling(200).mean().iloc[-1]) if len(close) >= 200 else ma50
+        if price > ma50 or price > ma200:
+            return False
+
+        # Condition 2: RSI below 35
+        delta = close.diff()
+        gain  = delta.clip(lower=0).rolling(14).mean()
+        loss  = (-delta.clip(upper=0)).rolling(14).mean()
+        rsi   = float((100 - (100 / (1 + gain / loss.replace(0, np.nan)))).iloc[-1])
+        if rsi >= 35:
+            return False
+
+        # Condition 3: 2-week RS vs benchmark still negative
+        bench_ticker = "^NSEI" if category in ("Indian Stock", "Indian ETF") else "^GSPC"
+        bench_df = yf.download(bench_ticker, period="1mo", interval="1d",
+                               progress=False, auto_adjust=True)
+        if not bench_df.empty and len(bench_df) >= 10:
+            bc = bench_df["Close"].squeeze()
+            stock_ret = float((close.iloc[-1] - close.iloc[-10]) / close.iloc[-10])
+            bench_ret = float((bc.iloc[-1]  - bc.iloc[-10])  / bc.iloc[-10])
+            if stock_ret - bench_ret > 0:
+                return False  # recovering vs benchmark — hold
+
+        return True  # all 4 conditions met
+
+    except Exception:
+        return False
+
+
+def check_crypto_recovery_difficulty(symbol, entry_price, current_price, fg_value):
+    """
+    Layer 2 for crypto — uses CoinGecko data + Fear & Greed.
+    Fires when:
+      1. Down > 8% from entry
+      2. Fear & Greed below 30 (extreme fear = market panic)
+      3. 7-day return still negative (no short-term recovery)
+    """
+    try:
+        ret_pct = (current_price - entry_price) / entry_price * 100
+        if ret_pct > -8:
+            return False
+        if fg_value >= 30:
+            return False  # not in panic territory
+        # 7-day return checked via CoinGecko in caller
+        return True
+    except Exception:
+        return False
+
+
 def fetch_performance(history):
     """
-    Fetch current prices for all open positions.
+    Two-layer exit detection across all open positions.
+
+    Layer 1 — Hard triggers (price-based, instant):
+      TARGET HIT : current price >= target price  → take profit
+      STOP HIT   : current price <= stop price    → cut losses
+
+    Layer 2 — Recovery Difficulty (technical, all 4 conditions):
+      RECOVERY WARNING : down >5%, below MA50+MA200, RSI<35, RS still negative
+
     Returns (perf_rows, exit_alerts)
-    perf_rows: list of all open positions with current P&L
-    exit_alerts: list of positions that hit target or stop loss
+    exit_alerts sorted: Layer 1 first (urgent), Layer 2 second (warning)
     """
     from datetime import datetime
-    if not history: return [], []
+    if not history:
+        return [], []
 
     today_str = datetime.now().strftime("%Y-%m-%d")
 
-    # Collect all open picks (not expired, not already hit)
     open_picks = []
     for e in history:
         for p in e["picks"]:
-            expiry = p.get("expiry", "2099-01-01")
-            if expiry >= today_str and p.get("hit") is None:
+            if p.get("expiry", "2099-01-01") >= today_str and p.get("hit") is None:
                 open_picks.append({**p, "entry_date": e["date"]})
 
     if not open_picks:
         return [], []
 
-    # Separate crypto (use CoinGecko) from others (use yfinance)
     crypto_picks = [p for p in open_picks if p["pool"] == "crypto"]
     stock_picks  = [p for p in open_picks if p["pool"] != "crypto"]
 
     current_prices = {}
 
-    # Fetch stock/ETF prices via yfinance
+    # Stock/ETF prices via yfinance
     if stock_picks:
         tickers = list({p["ticker"] for p in stock_picks})
         try:
             raw = yf.download(tickers, period="5d", interval="1d",
-                              group_by="ticker", threads=True, progress=False, auto_adjust=True)
+                              group_by="ticker", threads=True,
+                              progress=False, auto_adjust=True)
             for t in tickers:
                 try:
                     s = raw[t]["Close"].dropna() if len(tickers) > 1 else raw["Close"].dropna()
@@ -1055,30 +1135,36 @@ def fetch_performance(history):
         except:
             pass
 
-    # Fetch crypto prices via CoinGecko
+    # Crypto prices + 7d change via CoinGecko
+    crypto_7d = {}
     if crypto_picks:
         symbol_to_id = {c["symbol"]: c["id"] for c in CRYPTO_COINS}
         ids_needed = list({symbol_to_id.get(p["ticker"], "") for p in crypto_picks if symbol_to_id.get(p["ticker"])})
         if ids_needed:
             try:
-                url = f"https://api.coingecko.com/api/v3/simple/price?ids={','.join(ids_needed)}&vs_currencies=usd"
+                url = (f"https://api.coingecko.com/api/v3/coins/markets"
+                       f"?vs_currency=usd&ids={','.join(ids_needed)}"
+                       f"&price_change_percentage=7d")
                 req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
                 with urllib.request.urlopen(req, timeout=10) as resp:
-                    cg_prices = json.loads(resp.read())
-                for p in crypto_picks:
-                    cg_id = symbol_to_id.get(p["ticker"])
-                    if cg_id and cg_id in cg_prices:
-                        current_prices[p["ticker"]] = cg_prices[cg_id]["usd"]
+                    cg_data = json.loads(resp.read())
+                for coin in cg_data:
+                    sym = coin.get("symbol", "").upper()
+                    current_prices[sym] = coin.get("current_price", 0)
+                    crypto_7d[sym]      = coin.get("price_change_percentage_7d_in_currency", 0) or 0
             except Exception as e:
-                print(f"  [WARN] CoinGecko price fetch for exit check failed: {e}")
+                print(f"  [WARN] CoinGecko exit price fetch: {e}")
 
-    # Build perf rows and detect exit signals
-    perf_rows   = []
-    exit_alerts = []
+    # Fetch Fear & Greed for crypto Layer 2
+    fg_value, _ = fetch_fear_greed()
+
+    perf_rows    = []
+    layer1_alerts = []  # urgent — price-based
+    layer2_alerts = []  # warning — technical deterioration
 
     for p in open_picks:
         cur = current_prices.get(p["ticker"])
-        if cur is None:
+        if cur is None or cur == 0:
             continue
 
         entry   = p["price"]
@@ -1102,19 +1188,68 @@ def fetch_performance(history):
             "hit":           None,
         }
 
-        # Check exit conditions
+        # ── LAYER 1: Hard price triggers ─────────────────────────────────────
         if cur >= target:
             row["hit"] = "target"
-            exit_alerts.append({**row, "alert_type": "TARGET_HIT",
-                                 "message": f"🎯 {p['ticker']} hit your exit target! Entry: {entry:.4f} → Now: {cur:.4f} (+{ret_pct:.1f}%). Consider selling."})
+            layer1_alerts.append({
+                **row,
+                "alert_type":  "TARGET_HIT",
+                "alert_layer": 1,
+                "urgency":     "URGENT",
+                "headline":    f"🎯 {p['ticker']} hit your exit target!",
+                "action":      "Consider selling now — your target gain is reached.",
+                "detail":      f"Entry: {entry:,.4f} → Now: {cur:,.4f} ({ret_pct:+.1f}%). Target was {target:,.4f}.",
+            })
+
         elif cur <= stop:
             row["hit"] = "stop"
-            exit_alerts.append({**row, "alert_type": "STOP_HIT",
-                                 "message": f"🛑 {p['ticker']} hit your stop loss. Entry: {entry:.4f} → Now: {cur:.4f} ({ret_pct:.1f}%). Consider cutting losses."})
+            layer1_alerts.append({
+                **row,
+                "alert_type":  "STOP_HIT",
+                "alert_layer": 1,
+                "urgency":     "URGENT",
+                "headline":    f"🛑 {p['ticker']} hit your stop loss.",
+                "action":      "Consider cutting losses — price has broken your floor.",
+                "detail":      f"Entry: {entry:,.4f} → Now: {cur:,.4f} ({ret_pct:+.1f}%). Stop was {stop:,.4f}.",
+            })
+
+        else:
+            # ── LAYER 2: Recovery difficulty check ───────────────────────────
+            # Only run if position is already losing (saves API calls)
+            if ret_pct < -5:
+                if p["pool"] == "crypto":
+                    c7d = crypto_7d.get(p["ticker"], 0)
+                    is_difficult = (
+                        check_crypto_recovery_difficulty(
+                            p["ticker"], entry, cur, fg_value)
+                        and c7d < 0  # still falling in last 7 days
+                    )
+                else:
+                    is_difficult = check_recovery_difficulty(
+                        p["ticker"], p["category"], entry, cur)
+
+                if is_difficult:
+                    layer2_alerts.append({
+                        **row,
+                        "alert_type":  "RECOVERY_WARNING",
+                        "alert_layer": 2,
+                        "urgency":     "WARNING",
+                        "headline":    f"⚠️ {p['ticker']} — Recovery looks difficult.",
+                        "action":      "Consider exiting. Technical signals suggest this may not recover soon.",
+                        "detail":      (
+                            f"Entry: {entry:,.4f} → Now: {cur:,.4f} ({ret_pct:+.1f}%). "
+                            f"Price is below key moving averages, momentum is weak, "
+                            f"and the asset is still underperforming its benchmark. "
+                            f"Target was {target:,.4f}."
+                        ),
+                    })
 
         perf_rows.append(row)
 
-    print(f"  Open positions tracked: {len(perf_rows)}  |  Exit alerts: {len(exit_alerts)}")
+    # Layer 1 first (urgent), Layer 2 second (warning)
+    exit_alerts = layer1_alerts + layer2_alerts
+
+    print(f"  Open positions: {len(perf_rows)}  |  Layer 1 (urgent): {len(layer1_alerts)}  |  Layer 2 (warning): {len(layer2_alerts)}")
     return perf_rows, exit_alerts
 
 # ══════════════════════════════════════════════════════
@@ -1159,60 +1294,119 @@ def macro_html(m):
 </div>"""
 
 def build_exit_alert_html(exit_alerts):
-    """Red/green banner at top of email for any target or stop hits."""
+    """
+    Builds exit alert section with two visual layers:
+    Layer 1 (URGENT) — hard price triggers: target hit, stop hit
+    Layer 2 (WARNING) — recovery difficulty: technical deterioration
+    """
     if not exit_alerts:
         return ""
-    cards = ""
-    for a in exit_alerts:
-        is_target = a["alert_type"] == "TARGET_HIT"
-        bg    = "#f0fdf4" if is_target else "#fef2f2"
-        bc    = "#16a34a" if is_target else "#dc2626"
-        icon  = "🎯" if is_target else "🛑"
-        label = "EXIT TARGET HIT" if is_target else "STOP LOSS HIT"
-        action = "Consider selling now" if is_target else "Consider cutting losses"
+
+    layer1 = [a for a in exit_alerts if a.get("alert_layer") == 1]
+    layer2 = [a for a in exit_alerts if a.get("alert_layer") == 2]
+
+    def card(a):
+        atype = a["alert_type"]
+        if atype == "TARGET_HIT":
+            bg = "#f0fdf4"; bc = "#16a34a"; icon = "🎯"
+            label = "EXIT TARGET HIT — TAKE PROFIT"
+        elif atype == "STOP_HIT":
+            bg = "#fef2f2"; bc = "#dc2626"; icon = "🛑"
+            label = "STOP LOSS HIT — CUT LOSSES"
+        else:
+            bg = "#fffbeb"; bc = "#d97706"; icon = "⚠️"
+            label = "RECOVERY DIFFICULTY WARNING"
+
         ret_color = "#15803d" if a["return_pct"] >= 0 else "#dc2626"
-        cards += f"""
-        <div style="background:{bg};border:2px solid {bc};border-radius:10px;padding:16px;margin-bottom:12px">
+        return f"""
+        <div style="background:{bg};border:2px solid {bc};border-radius:10px;
+                    padding:16px;margin-bottom:12px">
           <table width="100%" cellpadding="0" cellspacing="0"><tr>
             <td valign="top">
-              <div style="font-size:11px;color:{bc};font-weight:800;text-transform:uppercase;letter-spacing:0.05em">{icon} {label}</div>
-              <div style="font-size:17px;font-weight:800;color:#111;margin:4px 0 2px">{a["ticker"]} — {a["name"]}</div>
-              <div style="font-size:12px;color:#6b7280">{a["category"]} · Entered {a["entry_date"]}</div>
+              <div style="font-size:11px;color:{bc};font-weight:800;text-transform:uppercase;
+                          letter-spacing:0.05em">{icon} {label}</div>
+              <div style="font-size:17px;font-weight:800;color:#111;margin:4px 0 2px">
+                {a["ticker"]} — {a["name"]}</div>
+              <div style="font-size:12px;color:#6b7280">
+                {a["category"]} · Entered {a["entry_date"]}</div>
+              <div style="font-size:12px;color:#374151;margin-top:8px;line-height:1.6">
+                {a.get("detail","")}
+              </div>
             </td>
-            <td valign="top" align="right" style="white-space:nowrap;padding-left:12px">
-              <div style="font-size:11px;color:#9ca3af">Return</div>
-              <div style="font-size:26px;font-weight:900;color:{ret_color}">{a["return_pct"]:+.1f}%</div>
-              <div style="font-size:12px;color:{bc};font-weight:700">{action}</div>
+            <td valign="top" align="right" style="white-space:nowrap;padding-left:16px">
+              <div style="font-size:11px;color:#9ca3af;margin-bottom:2px">P&amp;L</div>
+              <div style="font-size:26px;font-weight:900;color:{ret_color}">
+                {a["return_pct"]:+.1f}%</div>
+              <div style="font-size:12px;color:{bc};font-weight:700;margin-top:4px;
+                          max-width:160px;text-align:right">
+                {a.get("action","")}</div>
             </td>
           </tr></table>
-          <table cellpadding="0" cellspacing="6" style="margin-top:12px">
-            <tr>
-              <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
-                <div style="font-size:10px;color:#9ca3af">Entry</div>
-                <div style="font-size:14px;font-weight:800;color:#374151">{a["entry_price"]:,.4f}</div>
-              </td>
-              <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
-                <div style="font-size:10px;color:#9ca3af">Current</div>
-                <div style="font-size:14px;font-weight:800;color:{ret_color}">{a["current_price"]:,.4f}</div>
-              </td>
-              <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
-                <div style="font-size:10px;color:#9ca3af">Target was</div>
-                <div style="font-size:14px;font-weight:800;color:#15803d">{a["target_price"]:,.4f}</div>
-              </td>
-              <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
-                <div style="font-size:10px;color:#9ca3af">Stop was</div>
-                <div style="font-size:14px;font-weight:800;color:#dc2626">{a["stop_price"]:,.4f}</div>
-              </td>
-            </tr>
-          </table>
+          <table cellpadding="0" cellspacing="6" style="margin-top:12px"><tr>
+            <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
+              <div style="font-size:10px;color:#9ca3af">Entry</div>
+              <div style="font-size:13px;font-weight:800;color:#374151">
+                {a["entry_price"]:,.4f}</div>
+            </td>
+            <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
+              <div style="font-size:10px;color:#9ca3af">Current</div>
+              <div style="font-size:13px;font-weight:800;color:{ret_color}">
+                {a["current_price"]:,.4f}</div>
+            </td>
+            <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
+              <div style="font-size:10px;color:#9ca3af">Target</div>
+              <div style="font-size:13px;font-weight:800;color:#15803d">
+                {a["target_price"]:,.4f}</div>
+            </td>
+            <td style="background:#fff;border-radius:6px;padding:6px 12px;text-align:center">
+              <div style="font-size:10px;color:#9ca3af">Stop</div>
+              <div style="font-size:13px;font-weight:800;color:#dc2626">
+                {a["stop_price"]:,.4f}</div>
+            </td>
+          </tr></table>
         </div>"""
+
+    sections = ""
+
+    if layer1:
+        l1_cards = "".join(card(a) for a in layer1)
+        sections += f"""
+        <div style="margin-bottom:20px">
+          <div style="font-size:14px;font-weight:800;color:#dc2626;margin-bottom:10px;
+                      padding:8px 14px;background:#fef2f2;border-radius:8px;
+                      border-left:4px solid #dc2626">
+            ⚡ URGENT — Price target or stop loss hit ({len(layer1)} position{"s" if len(layer1)!=1 else ""})
+            &nbsp;·&nbsp;
+            <span style="font-size:12px;font-weight:500">Act today</span>
+          </div>
+          {l1_cards}
+        </div>"""
+
+    if layer2:
+        l2_cards = "".join(card(a) for a in layer2)
+        sections += f"""
+        <div style="margin-bottom:20px">
+          <div style="font-size:14px;font-weight:800;color:#d97706;margin-bottom:10px;
+                      padding:8px 14px;background:#fffbeb;border-radius:8px;
+                      border-left:4px solid #d97706">
+            ⚠️ WARNING — Recovery looks difficult ({len(layer2)} position{"s" if len(layer2)!=1 else ""})
+            &nbsp;·&nbsp;
+            <span style="font-size:12px;font-weight:500">
+              Price below key MAs, momentum weak, still underperforming benchmark.
+              Consider exiting.
+            </span>
+          </div>
+          {l2_cards}
+        </div>"""
+
+    total = len(exit_alerts)
     return f"""
 <div style="margin-bottom:24px">
-  <div style="font-size:15px;font-weight:800;color:#dc2626;margin-bottom:12px;
+  <div style="font-size:15px;font-weight:800;color:#dc2626;margin-bottom:14px;
               padding-bottom:8px;border-bottom:2px solid #fecaca">
-    ⚡ ACTION REQUIRED — EXIT SIGNALS ({len(exit_alerts)})
+    ⚡ EXIT SIGNALS — {total} alert{"s" if total!=1 else ""} today
   </div>
-  {cards}
+  {sections}
 </div>"""
 
 def perf_html(rows):
@@ -1469,42 +1663,71 @@ def send_telegram(results, rn, rs_, macro, date_str, crypto_results=None):
 
 
 def send_exit_alerts_telegram(exit_alerts):
-    """Send immediate Telegram alerts for target/stop hits."""
+    """
+    Sends exit alerts via Telegram split by layer:
+    Layer 1 (urgent) sent as one message.
+    Layer 2 (warning) sent as a separate message if present.
+    """
     token   = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
     if not token or not chat_id or not exit_alerts:
         return
 
-    lines = ["⚡ *ACTION REQUIRED — EXIT SIGNALS*", ""]
-    for a in exit_alerts:
-        is_target = a["alert_type"] == "TARGET_HIT"
-        icon  = "🎯" if is_target else "🛑"
-        label = "TARGET HIT — Consider Selling" if is_target else "STOP LOSS — Consider Cutting"
-        lines.append(
-            f"{icon} *{a['ticker']}* — {label}\n"
-            f"Entry: {a['entry_price']:,.4f} → Now: {a['current_price']:,.4f} "
-            f"({a['return_pct']:+.1f}%)\n"
-            f"Target: {a['target_price']:,.4f} | Stop: {a['stop_price']:,.4f}"
-        )
-        lines.append("")
+    layer1 = [a for a in exit_alerts if a.get("alert_layer") == 1]
+    layer2 = [a for a in exit_alerts if a.get("alert_layer") == 2]
 
-    lines.append("Check your email for full position details.")
+    def send_msg(text):
+        try:
+            url     = f"https://api.telegram.org/bot{token}/sendMessage"
+            payload = json.dumps({
+                "chat_id":    chat_id,
+                "text":       text,
+                "parse_mode": "Markdown"
+            }).encode()
+            req = urllib.request.Request(
+                url, data=payload,
+                headers={"Content-Type": "application/json"}, method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                return resp.status == 200
+        except Exception as e:
+            print(f"  [WARN] Telegram send failed: {e}")
+            return False
 
-    try:
-        url     = f"https://api.telegram.org/bot{token}/sendMessage"
-        payload = json.dumps({
-            "chat_id":    chat_id,
-            "text":       "\n".join(lines),
-            "parse_mode": "Markdown"
-        }).encode()
-        req = urllib.request.Request(
-            url, data=payload,
-            headers={"Content-Type": "application/json"}, method="POST"
-        )
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            print(f"  Exit alert Telegram sent ({len(exit_alerts)} alerts).")
-    except Exception as e:
-        print(f"  [WARN] Exit alert Telegram failed: {e}")
+    # Layer 1 message — urgent
+    if layer1:
+        lines = ["⚡ *URGENT — EXIT NOW*", ""]
+        for a in layer1:
+            atype = a["alert_type"]
+            icon  = "🎯" if atype == "TARGET_HIT" else "🛑"
+            label = "Target Hit — Take Profit" if atype == "TARGET_HIT" else "Stop Loss — Cut Losses"
+            lines.append(
+                f"{icon} *{a['ticker']}* — {label}\n"
+                f"Entry: {a['entry_price']:,.4f} → Now: {a['current_price']:,.4f} "
+                f"({a['return_pct']:+.1f}%)\n"
+                f"Target: {a['target_price']:,.4f}  |  Stop: {a['stop_price']:,.4f}"
+            )
+            lines.append("")
+        lines.append("_Open your email for full details._")
+        if send_msg("\n".join(lines)):
+            print(f"  Layer 1 exit alerts sent via Telegram ({len(layer1)}).")
+
+    # Layer 2 message — warning
+    if layer2:
+        lines = ["⚠️ *RECOVERY WARNING — Review These Positions*", ""]
+        for a in layer2:
+            lines.append(
+                f"⚠️ *{a['ticker']}* ({a['category']})\n"
+                f"Entry: {a['entry_price']:,.4f} → Now: {a['current_price']:,.4f} "
+                f"({a['return_pct']:+.1f}%)\n"
+                f"Price below key MAs, momentum weak, still underperforming benchmark.\n"
+                f"Target was: {a['target_price']:,.4f}  |  Stop: {a['stop_price']:,.4f}\n"
+                f"_Consider exiting — recovery looks difficult._"
+            )
+            lines.append("")
+        lines.append("_Check your email for technical details._")
+        if send_msg("\n".join(lines)):
+            print(f"  Layer 2 recovery warnings sent via Telegram ({len(layer2)}).")
 
 def send_email(subject, html_body):
     em=os.environ["EMAIL_ADDRESS"]; pw=os.environ["EMAIL_PASSWORD"]
