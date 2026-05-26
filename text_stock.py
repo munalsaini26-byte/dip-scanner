@@ -1108,6 +1108,19 @@ def fetch_performance(history):
     for e in history:
         for p in e["picks"]:
             if p.get("expiry", "2099-01-01") >= today_str and p.get("hit") is None:
+                # Backfill pool field for entries saved before v6
+                if "pool" not in p:
+                    cat = p.get("category", "")
+                    if cat in ("Indian Stock", "Indian ETF"):
+                        p["pool"] = "indian"
+                    elif cat == "Global ETF":
+                        p["pool"] = "global"
+                    elif cat == "Metal/Commodity":
+                        p["pool"] = "metal"
+                    elif cat == "Crypto":
+                        p["pool"] = "crypto"
+                    else:
+                        p["pool"] = "global"
                 open_picks.append({**p, "entry_date": e["date"]})
 
     if not open_picks:
