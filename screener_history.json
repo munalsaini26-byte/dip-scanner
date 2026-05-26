@@ -1,0 +1,71 @@
+[
+  {
+    "date": "2026-05-26",
+    "picks": [
+      {
+        "ticker": "TEJASNET.NS",
+        "name": "TEJASNET.NS",
+        "category": "Indian Stock",
+        "price": 501.4,
+        "tier": "Strong Buy",
+        "score": 98.4
+      },
+      {
+        "ticker": "JSWENERGY.NS",
+        "name": "JSWENERGY.NS",
+        "category": "Indian Stock",
+        "price": 576.0,
+        "tier": "Strong Buy",
+        "score": 98.0
+      },
+      {
+        "ticker": "ACMESOLAR.NS",
+        "name": "ACMESOLAR.NS",
+        "category": "Indian Stock",
+        "price": 302.75,
+        "tier": "Strong Buy",
+        "score": 94.5
+      },
+      {
+        "ticker": "HINDALCO.NS",
+        "name": "HINDALCO.NS",
+        "category": "Indian Stock",
+        "price": 1103.8,
+        "tier": "Strong Buy",
+        "score": 93.6
+      },
+      {
+        "ticker": "SAIL.NS",
+        "name": "SAIL.NS",
+        "category": "Indian Stock",
+        "price": 203.84,
+        "tier": "Strong Buy",
+        "score": 92.7
+      },
+      {
+        "ticker": "OBEROIRLTY.NS",
+        "name": "OBEROIRLTY.NS",
+        "category": "Indian Stock",
+        "price": 1693.7,
+        "tier": "Strong Buy",
+        "score": 91.6
+      },
+      {
+        "ticker": "EWY",
+        "name": "iShares MSCI South Korea ETF",
+        "category": "Global ETF",
+        "price": 198.98,
+        "tier": "Strong Buy",
+        "score": 90.0
+      },
+      {
+        "ticker": "SOXX",
+        "name": "iShares Semiconductor ETF",
+        "category": "Global ETF",
+        "price": 569.405,
+        "tier": "Strong Buy",
+        "score": 88.0
+      }
+    ]
+  }
+]
