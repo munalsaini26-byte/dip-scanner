@@ -1572,6 +1572,31 @@ def mf_html(sgd_to_inr):
     return f"""<div style='margin-top:32px'><div style='font-size:15px;font-weight:800;color:#7c3aed;margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid #e9d5ff'>🏦 INDIAN MF SIP RECOMMENDATIONS</div>
 <div style='font-size:12px;color:#6b7280;margin-bottom:14px;line-height:1.6'>Standing SIP — invest monthly via Indian bank. Total: <strong>Rs.{total:,}/month</strong> (≈ SGD {total/sgd_to_inr:,.0f}/month). Review annually.</div>{cards}</div>"""
 
+
+def _ticker_cell(r, mode_badge, ar):
+    """Pre-compute ticker cell HTML to avoid backslash-in-f-string issues."""
+    tracking_badge = (
+        "<span style='font-size:9px;color:#0369a1;background:#e0f2fe;"
+        "padding:1px 5px;border-radius:4px;margin-left:3px'>📌 TRACKING</span>"
+        if r.get("already_tracking") else ""
+    )
+    reentry_badge = (
+        "<span style='font-size:9px;color:#7c3aed;background:#ede9fe;"
+        "padding:1px 5px;border-radius:4px;margin-left:3px'>↩ RE-ENTRY</span>"
+        if r.get("re_entry") else ""
+    )
+    exit_badge = (
+        "<span style='font-size:9px;color:#dc2626;background:#fef2f2;"
+        "padding:1px 5px;border-radius:4px;margin-left:3px'>⚡ EXIT ACTIVE</span>"
+        if r.get("exit_active") else ""
+    )
+    name_trunc = r["name"][:28] + ("..." if len(r["name"]) > 28 else "")
+    return (
+        f"<div style='font-size:13px;font-weight:800;color:#111'>"
+        f"{r['ticker']}{mode_badge}{tracking_badge}{reentry_badge}{exit_badge}</div>"
+        f"<div style='font-size:11px;color:#9ca3af'>{name_trunc}</div>{ar}"
+    )
+
 def summary_html(results, usd_to_inr, sgd_to_inr, sgd_to_usd):
     by_cat={cat:[] for cat in CATEGORY_ORDER}
     for r in results:
@@ -1593,11 +1618,7 @@ def summary_html(results, usd_to_inr, sgd_to_inr, sgd_to_usd):
             if r.get("abs_return_3m") is not None: ar=f"<div style='font-size:10px;color:#15803d;font-weight:600'>+{r['abs_return_3m']*100:.1f}% (3M)</div>"
             rows+=f"""<tr style='border-bottom:1px solid #f1f5f9'>
               <td style='padding:8px 10px;font-size:13px;font-weight:700;color:#374151'>{rank[r["ticker"]]}</td>
-              <td style='padding:8px 10px'><div style='font-size:13px;font-weight:800;color:#111'>{r["ticker"]}{mode_badge}
-                    {"<span style=\'font-size:9px;color:#0369a1;background:#e0f2fe;padding:1px 5px;border-radius:4px;margin-left:3px\'>📌 TRACKING</span>" if r.get("already_tracking") else ""}
-                    {"<span style=\'font-size:9px;color:#7c3aed;background:#ede9fe;padding:1px 5px;border-radius:4px;margin-left:3px\'>↩ RE-ENTRY</span>" if r.get("re_entry") else ""}
-                    {"<span style=\'font-size:9px;color:#dc2626;background:#fef2f2;padding:1px 5px;border-radius:4px;margin-left:3px\'>⚡ EXIT ACTIVE</span>" if r.get("exit_active") else ""}
-                  </div><div style='font-size:11px;color:#9ca3af'>{r["name"][:28]}{"..." if len(r["name"])>28 else ""}</div>{ar}</td>
+              <td style='padding:8px 10px'>{_ticker_cell(r, mode_badge, ar)}</td>
               <td style='padding:8px 10px;font-size:12px'>{ps}</td>
               <td style='padding:8px 10px;text-align:center'><span style='background:{tb};color:{tc_};border-radius:10px;font-size:11px;font-weight:700;padding:2px 8px'>{r["tier"]}</span>{rec}{brk}</td>
               <td style='padding:8px 10px;text-align:center'><span style='font-size:14px;font-weight:900;color:{r["trend_color"]}'>{r["trend_arrow"]}</span><div style='font-size:10px;color:{r["trend_color"]};font-weight:600'>{r["trend_dir"]}</div></td>
