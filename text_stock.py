@@ -915,82 +915,133 @@ def load_history():
         return data[-5:] if len(data)>5 else data
     except: return []
 
-# Max hold days and stop loss % per pool
+# Exit rules per pool
 EXIT_RULES = {
-    "indian":  {"stop_pct": -8,  "max_days": 60,  "label": "Dip Buy"},
-    "global":  {"stop_pct": -7,  "max_days": 180, "label": "Momentum"},
-    "metal":   {"stop_pct": -6,  "max_days": 90,  "label": "Commodity"},
-    "crypto":  {"stop_pct": -12, "max_days": 120, "label": "Crypto"},
+    "indian":  {"stop_pct": -8,  "max_days": 60,  "min_target_pct": 15, "label": "Dip Buy"},
+    "global":  {"stop_pct": -7,  "max_days": 180, "min_target_pct": 15, "label": "Momentum"},
+    "metal":   {"stop_pct": -6,  "max_days": 90,  "min_target_pct": 10, "label": "Commodity"},
+    "crypto":  {"stop_pct": -12, "max_days": 120, "min_target_pct": 20, "label": "Crypto"},
 }
 
+# Max days to repeat an exit alert before auto-expiring
+EXIT_ALERT_MAX_DAYS = 5
+
 def get_exit_target(r):
-    """Return target price and stop loss price for a pick."""
+    """
+    Return (target_price, stop_loss_price) for a pick.
+    Target is the HIGHER of:
+      - nearest MA resistance / 3M high (technical level)
+      - minimum % gain threshold (ensures meaningful targets)
+    This prevents targets being set at or below entry price.
+    """
     price = r["price"]
     pool  = cat_pool(r["category"])
     t     = r.get("targets", {})
     mode  = r.get("scoring_mode", "dip")
+    rules = EXIT_RULES[pool]
+    min_target = round(price * (1 + rules["min_target_pct"] / 100), 4)
 
-    # Target price: nearest MA for dip, 3M high for momentum, +25% for crypto
     if pool == "crypto":
-        target = round(price * 1.25, 6)
+        technical_target = round(price * 1.20, 6)
     elif mode == "momentum":
-        # Use 3M high as target, fallback to +15%
-        target = t.get("three_month_high") or round(price * 1.15, 4)
+        technical_target = t.get("three_month_high") or 0
     else:
-        target = t.get("nearest_ma_val") or t.get("three_month_high") or round(price * 1.10, 4)
+        technical_target = t.get("nearest_ma_val") or t.get("three_month_high") or 0
 
-    stop = round(price * (1 + EXIT_RULES[pool]["stop_pct"] / 100), 4)
-    return float(target), float(stop)
+    # Use whichever is higher — never set target below minimum
+    target = max(float(technical_target or 0), min_target)
+    stop   = round(price * (1 + rules["stop_pct"] / 100), 4)
+    return round(target, 4), float(stop)
 
-def save_history(results, today, crypto_results=None):
-    """Save picks with entry price, target, stop loss, and expiry date."""
+def get_open_tickers(history, today_str):
+    """
+    Returns set of tickers that currently have an open position
+    (not expired, not hit, not alert-expired).
+    Used to prevent duplicate positions.
+    """
+    open_tickers = set()
+    for e in history:
+        for p in e["picks"]:
+            expiry = p.get("expiry", "2099-01-01")
+            hit    = p.get("hit")
+            alert_days = p.get("alert_days", 0)
+            # Position is "open" if not expired by date AND
+            # either not hit, or hit but alert still within 5-day window
+            if expiry >= today_str:
+                if hit is None:
+                    open_tickers.add(p["ticker"])
+                elif alert_days is not None and alert_days < EXIT_ALERT_MAX_DAYS:
+                    open_tickers.add(p["ticker"])  # still alerting
+    return open_tickers
+
+
+def save_history(results, today, crypto_results=None, open_tickers=None):
+    """
+    Save today's picks to history.
+    - Skips tickers already in open positions (no duplicate positions)
+    - Sets meaningful minimum targets
+    - Tracks alert_days for exit alert deduplication
+    """
     from datetime import datetime, timedelta
+    if open_tickers is None:
+        open_tickers = set()
+
     picks = []
+    skipped = []
 
     for r in results:
+        if r["ticker"] in open_tickers:
+            skipped.append(r["ticker"])
+            continue  # already tracking — don't open duplicate
         pool = cat_pool(r["category"])
         target, stop = get_exit_target(r)
         max_days = EXIT_RULES[pool]["max_days"]
         expiry = (datetime.strptime(today, "%Y-%m-%d") + timedelta(days=max_days)).strftime("%Y-%m-%d")
         picks.append({
-            "ticker":   r["ticker"],
-            "name":     r["name"],
-            "category": r["category"],
-            "price":    r["price"],
-            "target":   target,
-            "stop":     stop,
-            "tier":     r["tier"],
-            "score":    r["score"],
-            "pool":     pool,
-            "expiry":   expiry,
-            "mode":     r.get("scoring_mode", "dip"),
-            "hit":      None,   # "target" | "stop" | None
+            "ticker":     r["ticker"],
+            "name":       r["name"],
+            "category":   r["category"],
+            "price":      r["price"],
+            "target":     target,
+            "stop":       stop,
+            "tier":       r["tier"],
+            "score":      r["score"],
+            "pool":       pool,
+            "expiry":     expiry,
+            "mode":       r.get("scoring_mode", "dip"),
+            "hit":        None,
+            "alert_days": 0,   # counts how many days exit alert has fired
         })
 
-    # Add crypto picks from CoinGecko
     if crypto_results:
         for r in crypto_results:
+            if r["symbol"] in open_tickers:
+                skipped.append(r["symbol"])
+                continue
             price  = r["price_usd"]
-            target = round(price * 1.25, 6)
+            min_target = round(price * (1 + EXIT_RULES["crypto"]["min_target_pct"] / 100), 6)
+            target = max(round(price * 1.20, 6), min_target)
             stop   = round(price * (1 + EXIT_RULES["crypto"]["stop_pct"] / 100), 6)
-            from datetime import datetime, timedelta
             expiry = (datetime.strptime(today, "%Y-%m-%d") + timedelta(days=120)).strftime("%Y-%m-%d")
             picks.append({
-                "ticker":   r["symbol"],
-                "name":     r["name"],
-                "category": "Crypto",
-                "price":    price,
-                "target":   target,
-                "stop":     stop,
-                "tier":     r["tier"],
-                "score":    r["score"],
-                "pool":     "crypto",
-                "expiry":   expiry,
-                "mode":     "crypto",
-                "hit":      None,
+                "ticker":     r["symbol"],
+                "name":       r["name"],
+                "category":   "Crypto",
+                "price":      price,
+                "target":     target,
+                "stop":       stop,
+                "tier":       r["tier"],
+                "score":      r["score"],
+                "pool":       "crypto",
+                "expiry":     expiry,
+                "mode":       "crypto",
+                "hit":        None,
+                "alert_days": 0,
             })
 
-    # Load ALL history (not just last 5 — for exit tracking we need 180 days)
+    if skipped:
+        print(f"  Skipped duplicate positions: {', '.join(skipped)}")
+
     if os.path.exists(HISTORY_FILE):
         try:
             with open(HISTORY_FILE) as f:
@@ -1001,12 +1052,11 @@ def save_history(results, today, crypto_results=None):
         history = []
 
     history.append({"date": today, "picks": picks})
-    # Keep max 90 days
     history = history[-90:]
     try:
         with open(HISTORY_FILE, "w") as f:
             json.dump(history, f, indent=2)
-        print(f"  Saved {len(picks)} picks to history")
+        print(f"  Saved {len(picks)} new positions to history ({len(skipped)} already tracking)")
     except Exception as e:
         print(f"  [WARN] history save: {e}")
 
@@ -1202,30 +1252,42 @@ def fetch_performance(history):
         }
 
         # ── LAYER 1: Hard price triggers ─────────────────────────────────────
-        if cur >= target:
-            row["hit"] = "target"
-            layer1_alerts.append({
-                **row,
-                "alert_type":  "TARGET_HIT",
-                "alert_layer": 1,
-                "urgency":     "URGENT",
-                "headline":    f"🎯 {p['ticker']} hit your exit target!",
-                "action":      "Consider selling now — your target gain is reached.",
-                "detail":      f"Entry: {entry:,.4f} → Now: {cur:,.4f} ({ret_pct:+.1f}%). Target was {target:,.4f}.",
-            })
+        existing_hit  = p.get("hit")
+        alert_days    = p.get("alert_days", 0)
 
-        elif cur <= stop:
-            row["hit"] = "stop"
-            layer1_alerts.append({
-                **row,
-                "alert_type":  "STOP_HIT",
-                "alert_layer": 1,
-                "urgency":     "URGENT",
-                "headline":    f"🛑 {p['ticker']} hit your stop loss.",
-                "action":      "Consider cutting losses — price has broken your floor.",
-                "detail":      f"Entry: {entry:,.4f} → Now: {cur:,.4f} ({ret_pct:+.1f}%). Stop was {stop:,.4f}.",
-            })
+        if existing_hit in ("target", "stop") or cur >= target or cur <= stop:
+            # Determine hit type
+            if existing_hit == "target" or cur >= target:
+                hit_type = "target"
+                headline = f"🎯 {p['ticker']} hit your exit target!"
+                action   = "Consider selling now — your target gain is reached."
+                detail   = f"Entry: {entry:,.4f} → Now: {cur:,.4f} ({ret_pct:+.1f}%). Target: {target:,.4f}."
+                alert_type = "TARGET_HIT"
+            else:
+                hit_type = "stop"
+                headline = f"🛑 {p['ticker']} hit your stop loss."
+                action   = "Consider cutting losses — price has broken your floor."
+                detail   = f"Entry: {entry:,.4f} → Now: {cur:,.4f} ({ret_pct:+.1f}%). Stop: {stop:,.4f}."
+                alert_type = "STOP_HIT"
 
+            row["hit"]        = hit_type
+            row["alert_days"] = alert_days + 1
+
+            # Only fire alert if within 5-day window
+            if alert_days < EXIT_ALERT_MAX_DAYS:
+                days_remaining = EXIT_ALERT_MAX_DAYS - alert_days
+                layer1_alerts.append({
+                    **row,
+                    "alert_type":      alert_type,
+                    "alert_layer":     1,
+                    "urgency":         "URGENT",
+                    "headline":        headline,
+                    "action":          action,
+                    "detail":          detail,
+                    "alert_day_num":   alert_days + 1,
+                    "days_remaining":  days_remaining,
+                })
+            # After 5 days, silently expire — no more alerts
         else:
             # ── LAYER 2: Recovery difficulty check ───────────────────────────
             # Only run if position is already losing (saves API calls)
@@ -1344,6 +1406,12 @@ def build_exit_alert_html(exit_alerts):
                 {a["category"]} · Entered {a["entry_date"]}</div>
               <div style="font-size:12px;color:#374151;margin-top:8px;line-height:1.6">
                 {a.get("detail","")}
+              </div>
+              <div style="font-size:11px;color:{bc};font-weight:600;margin-top:6px;
+                          background:#fff;border-radius:4px;padding:3px 8px;display:inline-block">
+                Reminder {a.get("alert_day_num",1)} of {EXIT_ALERT_MAX_DAYS}
+                {"— last reminder tomorrow" if a.get("alert_day_num",1) == EXIT_ALERT_MAX_DAYS - 1 else
+                 "— final reminder, auto-expires after today" if a.get("alert_day_num",1) >= EXIT_ALERT_MAX_DAYS else ""}
               </div>
             </td>
             <td valign="top" align="right" style="white-space:nowrap;padding-left:16px">
@@ -1525,7 +1593,11 @@ def summary_html(results, usd_to_inr, sgd_to_inr, sgd_to_usd):
             if r.get("abs_return_3m") is not None: ar=f"<div style='font-size:10px;color:#15803d;font-weight:600'>+{r['abs_return_3m']*100:.1f}% (3M)</div>"
             rows+=f"""<tr style='border-bottom:1px solid #f1f5f9'>
               <td style='padding:8px 10px;font-size:13px;font-weight:700;color:#374151'>{rank[r["ticker"]]}</td>
-              <td style='padding:8px 10px'><div style='font-size:13px;font-weight:800;color:#111'>{r["ticker"]}{mode_badge}</div><div style='font-size:11px;color:#9ca3af'>{r["name"][:28]}{"..." if len(r["name"])>28 else ""}</div>{ar}</td>
+              <td style='padding:8px 10px'><div style='font-size:13px;font-weight:800;color:#111'>{r["ticker"]}{mode_badge}
+                    {"<span style=\'font-size:9px;color:#0369a1;background:#e0f2fe;padding:1px 5px;border-radius:4px;margin-left:3px\'>📌 TRACKING</span>" if r.get("already_tracking") else ""}
+                    {"<span style=\'font-size:9px;color:#7c3aed;background:#ede9fe;padding:1px 5px;border-radius:4px;margin-left:3px\'>↩ RE-ENTRY</span>" if r.get("re_entry") else ""}
+                    {"<span style=\'font-size:9px;color:#dc2626;background:#fef2f2;padding:1px 5px;border-radius:4px;margin-left:3px\'>⚡ EXIT ACTIVE</span>" if r.get("exit_active") else ""}
+                  </div><div style='font-size:11px;color:#9ca3af'>{r["name"][:28]}{"..." if len(r["name"])>28 else ""}</div>{ar}</td>
               <td style='padding:8px 10px;font-size:12px'>{ps}</td>
               <td style='padding:8px 10px;text-align:center'><span style='background:{tb};color:{tc_};border-radius:10px;font-size:11px;font-weight:700;padding:2px 8px'>{r["tier"]}</span>{rec}{brk}</td>
               <td style='padding:8px 10px;text-align:center'><span style='font-size:14px;font-weight:900;color:{r["trend_color"]}'>{r["trend_arrow"]}</span><div style='font-size:10px;color:{r["trend_color"]};font-weight:600'>{r["trend_dir"]}</div></td>
@@ -1795,6 +1867,33 @@ def main():
     pf = perf_html(pf_rows)
     exit_html = build_exit_alert_html(exit_alerts)
 
+    # Update exit_active tags now that we know which tickers have active alerts
+    exit_tickers = {a["ticker"] for a in exit_alerts}
+    for r in results:
+        r["exit_active"]      = r["ticker"] in exit_tickers
+        r["already_tracking"] = r["ticker"] in open_tickers and r["ticker"] not in exit_tickers
+
+    # Write back updated alert_days + hit status to history file
+    if pf_rows and os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE) as f:
+                hist_data = json.load(f)
+            # Build lookup: ticker+entry_date -> updated row
+            updates = {(r["ticker"], r["entry_date"]): r for r in pf_rows}
+            for entry in hist_data:
+                for p in entry["picks"]:
+                    key = (p["ticker"], entry["date"])
+                    if key in updates:
+                        upd = updates[key]
+                        if upd.get("hit"):
+                            p["hit"]        = upd["hit"]
+                            p["alert_days"] = upd.get("alert_days", 1)
+            with open(HISTORY_FILE, "w") as f:
+                json.dump(hist_data, f, indent=2)
+            print(f"  History updated with {len(pf_rows)} position statuses")
+        except Exception as e:
+            print(f"  [WARN] history update failed: {e}")
+
     # Run crypto screener via CoinGecko
     crypto_results, fg_value, fg_label, crypto_html = run_crypto_screener(sgd_to_usd, sgd_to_inr)
 
@@ -1833,7 +1932,17 @@ def main():
         print("  Crypto qualified: 0 — all filtered out during scoring")
 
     # Pass FULL scored list — apply_category_limits handles min/max per category
+    # Compute open tickers before applying limits — used for duplicate prevention + tagging
+    open_tickers = get_open_tickers(history, today_key)
+    print(f"  Currently tracking {len(open_tickers)} open positions: {', '.join(sorted(open_tickers)[:5])}{'...' if len(open_tickers)>5 else ''}")
+
     results=apply_category_limits(all_results)
+
+    # Tag each result with tracking/re-entry/exit status
+    for r in results:
+        r["already_tracking"] = r["ticker"] in open_tickers
+        r["re_entry"]         = False   # will be refined after exit check
+        r["exit_active"]      = False   # updated after fetch_performance
 
     allocs=compute_allocations(results)
     for r in results: r["allocation_sgd"]=round(allocs.get(r["ticker"],0),2)
@@ -1847,7 +1956,7 @@ def main():
         brk="🚀" if r.get("breakout") else "  "; rec="🔄" if r.get("recovery") else "  "
         print(f"  {mode_tag} [{r['tier']:11s}] {r['ticker']:16s} {r['category']:18s} Score={r['score']:5.1f}  SGD={r['allocation_sgd']:,.0f}  {r['trend_arrow']} {brk}{rec}  {ps}")
 
-    save_history(results, today_key, crypto_results)
+    save_history(results, today_key, crypto_results, open_tickers)
     html=build_email(results,rn,rs_,usd_to_inr,sgd_to_inr,sgd_to_usd,today,macro,pf,crypto_html,exit_html)
     breakout_str=f" | {brk_count} Breakouts 🚀" if brk_count>0 else ""
     subject=f"[Screener {today}] {len(strong)} Strong Buy | {len(watch)} Watch{breakout_str} | {rec_count} Recovery 🔄 | SGD {TOTAL_BUDGET_SGD:,} | Nifty={rn.title()} · S&P={rs_.title()}"
