@@ -1888,11 +1888,7 @@ def main():
     pf = perf_html(pf_rows)
     exit_html = build_exit_alert_html(exit_alerts)
 
-    # Update exit_active tags now that we know which tickers have active alerts
-    exit_tickers = {a["ticker"] for a in exit_alerts}
-    for r in results:
-        r["exit_active"]      = r["ticker"] in exit_tickers
-        r["already_tracking"] = r["ticker"] in open_tickers and r["ticker"] not in exit_tickers
+    # exit_active tags applied after results is built (see below)
 
     # Write back updated alert_days + hit status to history file
     if pf_rows and os.path.exists(HISTORY_FILE):
@@ -1960,10 +1956,11 @@ def main():
     results=apply_category_limits(all_results)
 
     # Tag each result with tracking/re-entry/exit status
+    exit_tickers = {a["ticker"] for a in exit_alerts}
     for r in results:
-        r["already_tracking"] = r["ticker"] in open_tickers
-        r["re_entry"]         = False   # will be refined after exit check
-        r["exit_active"]      = False   # updated after fetch_performance
+        r["already_tracking"] = r["ticker"] in open_tickers and r["ticker"] not in exit_tickers
+        r["re_entry"]         = False
+        r["exit_active"]      = r["ticker"] in exit_tickers
 
     allocs=compute_allocations(results)
     for r in results: r["allocation_sgd"]=round(allocs.get(r["ticker"],0),2)
