@@ -648,5 +648,70 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-06-10",
+    "picks": [
+      {
+        "ticker": "FORTIS.NS",
+        "name": "FORTIS.NS",
+        "category": "Indian Stock",
+        "price": 995.45,
+        "target": 1144.7675,
+        "stop": 915.814,
+        "tier": "Strong Buy",
+        "score": 75.7,
+        "pool": "indian",
+        "expiry": "2026-08-09",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CHAMBLFERT.NS",
+        "name": "CHAMBLFERT.NS",
+        "category": "Indian Stock",
+        "price": 478.4,
+        "target": 563.674,
+        "stop": 440.128,
+        "tier": "Strong Buy",
+        "score": 75.0,
+        "pool": "indian",
+        "expiry": "2026-08-09",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "SAILIFE.NS",
+        "category": "Indian Stock",
+        "price": 1203.8,
+        "target": 1384.37,
+        "stop": 1107.496,
+        "tier": "Strong Buy",
+        "score": 75.0,
+        "pool": "indian",
+        "expiry": "2026-08-09",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AEGISLOG.NS",
+        "name": "AEGISLOG.NS",
+        "category": "Indian Stock",
+        "price": 806.75,
+        "target": 927.7625,
+        "stop": 742.21,
+        "tier": "Strong Buy",
+        "score": 73.5,
+        "pool": "indian",
+        "expiry": "2026-08-09",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
