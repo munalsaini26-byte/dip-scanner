@@ -1103,5 +1103,55 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-06-15",
+    "picks": [
+      {
+        "ticker": "JETS",
+        "name": "US Global Jets ETF (Airlines)",
+        "category": "Global ETF",
+        "price": 29.53,
+        "target": 33.9595,
+        "stop": 27.4629,
+        "tier": "Strong Buy",
+        "score": 99.3,
+        "pool": "global",
+        "expiry": "2026-12-12",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 53.34,
+        "target": 61.341,
+        "stop": 49.6062,
+        "tier": "Strong Buy",
+        "score": 92.8,
+        "pool": "global",
+        "expiry": "2026-12-12",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLI",
+        "name": "Industrials Select SPDR",
+        "category": "Global ETF",
+        "price": 176.18,
+        "target": 202.607,
+        "stop": 163.8474,
+        "tier": "Strong Buy",
+        "score": 74.1,
+        "pool": "global",
+        "expiry": "2026-12-12",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
