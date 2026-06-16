@@ -1153,5 +1153,70 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-06-16",
+    "picks": [
+      {
+        "ticker": "HUDCO.NS",
+        "name": "HUDCO.NS",
+        "category": "Indian Stock",
+        "price": 212.83,
+        "target": 244.7545,
+        "stop": 195.8036,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-08-15",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PHOENIXLTD.NS",
+        "name": "PHOENIXLTD.NS",
+        "category": "Indian Stock",
+        "price": 1868.2,
+        "target": 2148.43,
+        "stop": 1718.744,
+        "tier": "Strong Buy",
+        "score": 95.4,
+        "pool": "indian",
+        "expiry": "2026-08-15",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GROWW.NS",
+        "name": "GROWW.NS",
+        "category": "Indian Stock",
+        "price": 199.68,
+        "target": 229.632,
+        "stop": 183.7056,
+        "tier": "Strong Buy",
+        "score": 94.5,
+        "pool": "indian",
+        "expiry": "2026-08-15",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "TITAGARH.NS",
+        "name": "TITAGARH.NS",
+        "category": "Indian Stock",
+        "price": 894.45,
+        "target": 1028.6175,
+        "stop": 822.894,
+        "tier": "Strong Buy",
+        "score": 92.2,
+        "pool": "indian",
+        "expiry": "2026-08-15",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
