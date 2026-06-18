@@ -1343,5 +1343,100 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-06-18",
+    "picks": [
+      {
+        "ticker": "ANTHEM.NS",
+        "name": "ANTHEM.NS",
+        "category": "Indian Stock",
+        "price": 799.0,
+        "target": 918.85,
+        "stop": 735.08,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-08-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KIRLOSENG.NS",
+        "name": "KIRLOSENG.NS",
+        "category": "Indian Stock",
+        "price": 1985.5,
+        "target": 2283.325,
+        "stop": 1826.66,
+        "tier": "Strong Buy",
+        "score": 95.1,
+        "pool": "indian",
+        "expiry": "2026-08-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ABSLAMC.NS",
+        "name": "ABSLAMC.NS",
+        "category": "Indian Stock",
+        "price": 1167.1,
+        "target": 1342.165,
+        "stop": 1073.732,
+        "tier": "Strong Buy",
+        "score": 95.0,
+        "pool": "indian",
+        "expiry": "2026-08-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VWO",
+        "name": "Vanguard Emerging Markets",
+        "category": "Global ETF",
+        "price": 59.81,
+        "target": 68.7815,
+        "stop": 55.6233,
+        "tier": "Strong Buy",
+        "score": 88.4,
+        "pool": "global",
+        "expiry": "2026-12-15",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IEFA",
+        "name": "iShares Core MSCI EAFE",
+        "category": "Global ETF",
+        "price": 96.81,
+        "target": 111.3315,
+        "stop": 90.0333,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "global",
+        "expiry": "2026-12-15",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EFA",
+        "name": "iShares MSCI EAFE",
+        "category": "Global ETF",
+        "price": 103.78,
+        "target": 119.347,
+        "stop": 96.5154,
+        "tier": "Strong Buy",
+        "score": 84.6,
+        "pool": "global",
+        "expiry": "2026-12-15",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
