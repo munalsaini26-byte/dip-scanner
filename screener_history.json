@@ -1438,5 +1438,130 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-06-19",
+    "picks": [
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 36.86,
+        "target": 42.389,
+        "stop": 34.2798,
+        "tier": "Strong Buy",
+        "score": 116.9,
+        "pool": "global",
+        "expiry": "2026-12-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SMH",
+        "name": "VanEck Semiconductor ETF",
+        "category": "Global ETF",
+        "price": 659.88,
+        "target": 758.862,
+        "stop": 613.6884,
+        "tier": "Strong Buy",
+        "score": 103.1,
+        "pool": "global",
+        "expiry": "2026-12-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWY",
+        "name": "iShares MSCI South Korea",
+        "category": "Global ETF",
+        "price": 219.2,
+        "target": 252.08,
+        "stop": 203.856,
+        "tier": "Strong Buy",
+        "score": 101.4,
+        "pool": "global",
+        "expiry": "2026-12-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOXX",
+        "name": "iShares Semiconductor ETF",
+        "category": "Global ETF",
+        "price": 639.45,
+        "target": 735.3675,
+        "stop": 594.6885,
+        "tier": "Strong Buy",
+        "score": 101.3,
+        "pool": "global",
+        "expiry": "2026-12-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IFCI.NS",
+        "name": "IFCI.NS",
+        "category": "Indian Stock",
+        "price": 85.91,
+        "target": 98.7965,
+        "stop": 79.0372,
+        "tier": "Strong Buy",
+        "score": 94.1,
+        "pool": "indian",
+        "expiry": "2026-08-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KIMS.NS",
+        "name": "KIMS.NS",
+        "category": "Indian Stock",
+        "price": 805.8,
+        "target": 926.67,
+        "stop": 741.336,
+        "tier": "Strong Buy",
+        "score": 93.8,
+        "pool": "indian",
+        "expiry": "2026-08-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "JINDALSAW.NS",
+        "name": "JINDALSAW.NS",
+        "category": "Indian Stock",
+        "price": 261.0,
+        "target": 300.15,
+        "stop": 240.12,
+        "tier": "Strong Buy",
+        "score": 93.7,
+        "pool": "indian",
+        "expiry": "2026-08-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CPER",
+        "name": "US Copper ETF",
+        "category": "Metal/Commodity",
+        "price": 38.86,
+        "target": 42.746,
+        "stop": 36.5284,
+        "tier": "Watch",
+        "score": 58.6,
+        "pool": "metal",
+        "expiry": "2026-09-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
