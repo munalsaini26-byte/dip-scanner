@@ -15,7 +15,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "ARKG",
@@ -45,7 +45,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "SMH",
@@ -60,7 +60,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "HACK",
@@ -75,7 +75,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "XLK",
@@ -90,7 +90,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "CIBR",
@@ -105,7 +105,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "EWY",
@@ -120,7 +120,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "QQQ",
@@ -150,7 +150,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "ROBO",
@@ -165,7 +165,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "EEM",
@@ -180,7 +180,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "USO",
@@ -710,7 +710,7 @@
         "expiry": "2026-08-09",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 1
+        "alert_days": 2
       }
     ]
   },
@@ -1558,6 +1558,71 @@
         "score": 58.6,
         "pool": "metal",
         "expiry": "2026-09-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-06-19",
+    "picks": [
+      {
+        "ticker": "EEM",
+        "name": "iShares MSCI Emerging Markets",
+        "category": "Global ETF",
+        "price": 70.79,
+        "target": 81.4085,
+        "stop": 65.8347,
+        "tier": "Strong Buy",
+        "score": 111.5,
+        "pool": "global",
+        "expiry": "2026-12-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UAE",
+        "name": "iShares MSCI UAE",
+        "category": "Global ETF",
+        "price": 20.35,
+        "target": 23.4025,
+        "stop": 18.9255,
+        "tier": "Strong Buy",
+        "score": 103.9,
+        "pool": "global",
+        "expiry": "2026-12-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IWM",
+        "name": "iShares Russell 2000",
+        "category": "Global ETF",
+        "price": 295.59,
+        "target": 339.9285,
+        "stop": 274.8987,
+        "tier": "Strong Buy",
+        "score": 95.9,
+        "pool": "global",
+        "expiry": "2026-12-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GABRIEL.NS",
+        "name": "GABRIEL.NS",
+        "category": "Indian Stock",
+        "price": 1197.4,
+        "target": 1377.01,
+        "stop": 1101.608,
+        "tier": "Strong Buy",
+        "score": 95.4,
+        "pool": "indian",
+        "expiry": "2026-08-18",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
