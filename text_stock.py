@@ -1157,7 +1157,10 @@ def fetch_performance(history):
     open_picks = []
     for e in history:
         for p in e["picks"]:
-            if p.get("expiry", "2099-01-01") >= today_str and p.get("hit") is None:
+            _expiry = p.get("expiry", "2099-01-01")
+            _hit = p.get("hit")
+            _alert_days = p.get("alert_days", 0)
+            if _expiry >= today_str and (_hit is None or (_hit in ("target","stop") and _alert_days < EXIT_ALERT_MAX_DAYS)):
                 # Backfill pool field for entries saved before v6
                 if "pool" not in p:
                     cat = p.get("category", "")
@@ -1891,23 +1894,38 @@ def main():
     # exit_active tags applied after results is built (see below)
 
     # Write back updated alert_days + hit status to history file
-    if pf_rows and os.path.exists(HISTORY_FILE):
+    if os.path.exists(HISTORY_FILE):
         try:
             with open(HISTORY_FILE) as f:
                 hist_data = json.load(f)
-            # Build lookup: ticker+entry_date -> updated row
+
+            # Build lookup: ticker+entry_date -> updated row from today's price check
             updates = {(r["ticker"], r["entry_date"]): r for r in pf_rows}
+
             for entry in hist_data:
                 for p in entry["picks"]:
                     key = (p["ticker"], entry["date"])
                     if key in updates:
                         upd = updates[key]
+                        # Always update hit status
                         if upd.get("hit"):
-                            p["hit"]        = upd["hit"]
-                            p["alert_days"] = upd.get("alert_days", 1)
+                            p["hit"] = upd["hit"]
+                        # Always increment alert_days for any position that has hit
+                        # This ensures reminders fire for up to EXIT_ALERT_MAX_DAYS days
+                        if p.get("hit") in ("target", "stop"):
+                            p["alert_days"] = upd.get("alert_days", p.get("alert_days", 0) + 1)
+                    else:
+                        # Position not in today's price check (e.g. price fetch failed)
+                        # Still increment alert_days if already hit, so it doesn't stall
+                        if p.get("hit") in ("target", "stop"):
+                            current_days = p.get("alert_days", 0)
+                            if current_days < EXIT_ALERT_MAX_DAYS:
+                                p["alert_days"] = current_days + 1
+
             with open(HISTORY_FILE, "w") as f:
                 json.dump(hist_data, f, indent=2)
-            print(f"  History updated with {len(pf_rows)} position statuses")
+            hit_count = sum(1 for e in hist_data for p in e["picks"] if p.get("hit"))
+            print(f"  History updated — {len(pf_rows)} positions checked, {hit_count} with active hit status")
         except Exception as e:
             print(f"  [WARN] history update failed: {e}")
 
