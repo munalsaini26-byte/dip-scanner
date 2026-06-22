@@ -15,7 +15,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "ARKG",
@@ -45,7 +45,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "SMH",
@@ -60,7 +60,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "HACK",
@@ -75,7 +75,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "XLK",
@@ -90,7 +90,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "CIBR",
@@ -105,7 +105,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "EWY",
@@ -120,7 +120,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "QQQ",
@@ -150,7 +150,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "ROBO",
@@ -165,7 +165,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "EEM",
@@ -180,7 +180,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "USO",
@@ -710,7 +710,7 @@
         "expiry": "2026-08-09",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 2
+        "alert_days": 3
       }
     ]
   },
@@ -1374,8 +1374,8 @@
         "pool": "indian",
         "expiry": "2026-08-17",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "target",
+        "alert_days": 1
       },
       {
         "ticker": "ABSLAMC.NS",
@@ -1624,6 +1624,131 @@
         "pool": "indian",
         "expiry": "2026-08-18",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-06-22",
+    "picks": [
+      {
+        "ticker": "JETS",
+        "name": "US Global Jets ETF (Airlines)",
+        "category": "Global ETF",
+        "price": 31.0,
+        "target": 35.65,
+        "stop": 28.83,
+        "tier": "Strong Buy",
+        "score": 105.2,
+        "pool": "global",
+        "expiry": "2026-12-19",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SCI.NS",
+        "name": "SCI.NS",
+        "category": "Indian Stock",
+        "price": 322.8,
+        "target": 371.22,
+        "stop": 296.976,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-08-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AUROPHARMA.NS",
+        "name": "AUROPHARMA.NS",
+        "category": "Indian Stock",
+        "price": 1491.9,
+        "target": 1715.685,
+        "stop": 1372.548,
+        "tier": "Strong Buy",
+        "score": 95.0,
+        "pool": "indian",
+        "expiry": "2026-08-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AMBER.NS",
+        "name": "AMBER.NS",
+        "category": "Indian Stock",
+        "price": 7906.5,
+        "target": 9092.475,
+        "stop": 7273.98,
+        "tier": "Strong Buy",
+        "score": 93.5,
+        "pool": "indian",
+        "expiry": "2026-08-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CLEAN.NS",
+        "name": "CLEAN.NS",
+        "category": "Indian Stock",
+        "price": 821.1,
+        "target": 944.265,
+        "stop": 755.412,
+        "tier": "Strong Buy",
+        "score": 92.3,
+        "pool": "indian",
+        "expiry": "2026-08-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CROMPTON.NS",
+        "name": "CROMPTON.NS",
+        "category": "Indian Stock",
+        "price": 276.25,
+        "target": 354.5934,
+        "stop": 254.15,
+        "tier": "Strong Buy",
+        "score": 91.0,
+        "pool": "indian",
+        "expiry": "2026-08-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLI",
+        "name": "Industrials Select SPDR",
+        "category": "Global ETF",
+        "price": 180.91,
+        "target": 208.0465,
+        "stop": 168.2463,
+        "tier": "Strong Buy",
+        "score": 85.3,
+        "pool": "global",
+        "expiry": "2026-12-19",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 53.57,
+        "target": 61.6055,
+        "stop": 49.8201,
+        "tier": "Strong Buy",
+        "score": 82.1,
+        "pool": "global",
+        "expiry": "2026-12-19",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
