@@ -15,7 +15,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "ARKG",
@@ -45,7 +45,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "SMH",
@@ -60,7 +60,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "HACK",
@@ -75,7 +75,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "XLK",
@@ -90,7 +90,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "CIBR",
@@ -105,7 +105,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "EWY",
@@ -120,7 +120,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "QQQ",
@@ -150,7 +150,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "ROBO",
@@ -165,7 +165,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "EEM",
@@ -180,7 +180,7 @@
         "expiry": "2026-12-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "USO",
@@ -710,7 +710,7 @@
         "expiry": "2026-08-09",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 3
+        "alert_days": 4
       }
     ]
   },
@@ -1375,7 +1375,7 @@
         "expiry": "2026-08-17",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "ABSLAMC.NS",
@@ -1749,6 +1749,116 @@
         "pool": "global",
         "expiry": "2026-12-19",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-06-23",
+    "picks": [
+      {
+        "ticker": "ZYDUSWELL.NS",
+        "name": "ZYDUSWELL.NS",
+        "category": "Indian Stock",
+        "price": 528.0,
+        "target": 607.2,
+        "stop": 485.76,
+        "tier": "Strong Buy",
+        "score": 94.7,
+        "pool": "indian",
+        "expiry": "2026-08-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "MEESHO.NS",
+        "category": "Indian Stock",
+        "price": 183.31,
+        "target": 235.57,
+        "stop": 168.6452,
+        "tier": "Strong Buy",
+        "score": 94.5,
+        "pool": "indian",
+        "expiry": "2026-08-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "LAURUSLABS.NS",
+        "name": "LAURUSLABS.NS",
+        "category": "Indian Stock",
+        "price": 1474.2,
+        "target": 1695.33,
+        "stop": 1356.264,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-08-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PNBHOUSING.NS",
+        "name": "PNBHOUSING.NS",
+        "category": "Indian Stock",
+        "price": 1026.0,
+        "target": 1179.9,
+        "stop": 943.92,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-08-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DIA",
+        "name": "SPDR Dow Jones",
+        "category": "Global ETF",
+        "price": 517.08,
+        "target": 594.642,
+        "stop": 480.8844,
+        "tier": "Strong Buy",
+        "score": 82.8,
+        "pool": "global",
+        "expiry": "2026-12-20",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UNG",
+        "name": "US Natural Gas Fund",
+        "category": "Metal/Commodity",
+        "price": 11.77,
+        "target": 12.947,
+        "stop": 11.0638,
+        "tier": "Watch",
+        "score": 55.0,
+        "pool": "metal",
+        "expiry": "2026-09-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DBA",
+        "name": "Invesco DB Agriculture",
+        "category": "Metal/Commodity",
+        "price": 26.65,
+        "target": 29.315,
+        "stop": 25.051,
+        "tier": "Watch",
+        "score": 42.0,
+        "pool": "metal",
+        "expiry": "2026-09-21",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
