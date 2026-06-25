@@ -1375,7 +1375,7 @@
         "expiry": "2026-08-17",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "ABSLAMC.NS",
@@ -1485,7 +1485,7 @@
         "expiry": "2026-12-16",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "SOXX",
@@ -1514,8 +1514,8 @@
         "pool": "indian",
         "expiry": "2026-08-18",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "KIMS.NS",
@@ -1559,8 +1559,8 @@
         "pool": "metal",
         "expiry": "2026-09-17",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       }
     ]
   },
@@ -1923,6 +1923,86 @@
         "score": 66.7,
         "pool": "global",
         "expiry": "2026-12-21",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-06-25",
+    "picks": [
+      {
+        "ticker": "HONASA.NS",
+        "name": "HONASA.NS",
+        "category": "Indian Stock",
+        "price": 420.0,
+        "target": 483.0,
+        "stop": 386.4,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-08-24",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "MOTHERSON.NS",
+        "name": "MOTHERSON.NS",
+        "category": "Indian Stock",
+        "price": 153.4,
+        "target": 176.41,
+        "stop": 141.128,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-08-24",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "SONACOMS.NS",
+        "category": "Indian Stock",
+        "price": 630.05,
+        "target": 724.5575,
+        "stop": 579.646,
+        "tier": "Strong Buy",
+        "score": 88.7,
+        "pool": "indian",
+        "expiry": "2026-08-24",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EXIDEIND.NS",
+        "name": "EXIDEIND.NS",
+        "category": "Indian Stock",
+        "price": 396.45,
+        "target": 455.9175,
+        "stop": 364.734,
+        "tier": "Strong Buy",
+        "score": 88.6,
+        "pool": "indian",
+        "expiry": "2026-08-24",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLP",
+        "name": "Consumer Staples SPDR",
+        "category": "Global ETF",
+        "price": 84.44,
+        "target": 97.106,
+        "stop": 78.5292,
+        "tier": "Strong Buy",
+        "score": 72.6,
+        "pool": "global",
+        "expiry": "2026-12-22",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
