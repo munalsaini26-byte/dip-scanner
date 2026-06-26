@@ -1375,7 +1375,7 @@
         "expiry": "2026-08-17",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "ABSLAMC.NS",
@@ -1485,7 +1485,7 @@
         "expiry": "2026-12-16",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "SOXX",
@@ -1515,7 +1515,7 @@
         "expiry": "2026-08-18",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "KIMS.NS",
@@ -1560,7 +1560,7 @@
         "expiry": "2026-09-17",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       }
     ]
   },
@@ -2004,6 +2004,101 @@
         "pool": "global",
         "expiry": "2026-12-22",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-06-26",
+    "picks": [
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 40.11,
+        "target": 46.1265,
+        "stop": 37.3023,
+        "tier": "Strong Buy",
+        "score": 105.6,
+        "pool": "global",
+        "expiry": "2026-12-23",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ACMESOLAR.NS",
+        "name": "ACMESOLAR.NS",
+        "category": "Indian Stock",
+        "price": 357.2,
+        "target": 410.78,
+        "stop": 328.624,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-08-25",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOXX",
+        "name": "iShares Semiconductor ETF",
+        "category": "Global ETF",
+        "price": 625.2,
+        "target": 718.98,
+        "stop": 581.436,
+        "tier": "Strong Buy",
+        "score": 81.4,
+        "pool": "global",
+        "expiry": "2026-12-23",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWY",
+        "name": "iShares MSCI South Korea",
+        "category": "Global ETF",
+        "price": 205.0,
+        "target": 235.75,
+        "stop": 190.65,
+        "tier": "Strong Buy",
+        "score": 74.6,
+        "pool": "global",
+        "expiry": "2026-12-23",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SMH",
+        "name": "VanEck Semiconductor ETF",
+        "category": "Global ETF",
+        "price": 636.88,
+        "target": 732.412,
+        "stop": 592.2984,
+        "tier": "Strong Buy",
+        "score": 73.1,
+        "pool": "global",
+        "expiry": "2026-12-23",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOYB",
+        "name": "Teucrium Soybean",
+        "category": "Metal/Commodity",
+        "price": 24.56,
+        "target": 27.016,
+        "stop": 23.0864,
+        "tier": "Strong Buy",
+        "score": 60.0,
+        "pool": "metal",
+        "expiry": "2026-09-24",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
