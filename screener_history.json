@@ -1485,7 +1485,7 @@
         "expiry": "2026-12-16",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "SOXX",
@@ -1515,7 +1515,7 @@
         "expiry": "2026-08-18",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "KIMS.NS",
@@ -1560,7 +1560,7 @@
         "expiry": "2026-09-17",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       }
     ]
   },
@@ -2099,6 +2099,116 @@
         "pool": "metal",
         "expiry": "2026-09-24",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-06-29",
+    "picks": [
+      {
+        "ticker": "ACUTAAS.NS",
+        "name": "ACUTAAS.NS",
+        "category": "Indian Stock",
+        "price": 3568.2,
+        "target": 4103.43,
+        "stop": 3282.744,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-08-28",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ATHERENERG.NS",
+        "name": "ATHERENERG.NS",
+        "category": "Indian Stock",
+        "price": 1083.75,
+        "target": 1246.3125,
+        "stop": 997.05,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-08-28",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BHEL.NS",
+        "name": "BHEL.NS",
+        "category": "Indian Stock",
+        "price": 413.75,
+        "target": 475.8125,
+        "stop": 380.65,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-08-28",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IWM",
+        "name": "iShares Russell 2000",
+        "category": "Global ETF",
+        "price": 299.83,
+        "target": 344.8045,
+        "stop": 278.8419,
+        "tier": "Strong Buy",
+        "score": 91.9,
+        "pool": "global",
+        "expiry": "2026-12-26",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 98.65,
+        "target": 113.4475,
+        "stop": 91.7445,
+        "tier": "Strong Buy",
+        "score": 78.2,
+        "pool": "global",
+        "expiry": "2026-12-26",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CIBR",
+        "name": "First Trust Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 85.36,
+        "target": 98.164,
+        "stop": 79.3848,
+        "tier": "Watch",
+        "score": 59.9,
+        "pool": "global",
+        "expiry": "2026-12-26",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UAE",
+        "name": "iShares MSCI UAE",
+        "category": "Global ETF",
+        "price": 19.24,
+        "target": 22.126,
+        "stop": 17.8932,
+        "tier": "Watch",
+        "score": 59.0,
+        "pool": "global",
+        "expiry": "2026-12-26",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
