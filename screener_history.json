@@ -1485,7 +1485,7 @@
         "expiry": "2026-12-16",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "SOXX",
@@ -1515,7 +1515,7 @@
         "expiry": "2026-08-18",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "KIMS.NS",
@@ -1560,7 +1560,7 @@
         "expiry": "2026-09-17",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       }
     ]
   },
@@ -2208,6 +2208,131 @@
         "score": 59.0,
         "pool": "global",
         "expiry": "2026-12-26",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-06-30",
+    "picks": [
+      {
+        "ticker": "JETS",
+        "name": "US Global Jets ETF (Airlines)",
+        "category": "Global ETF",
+        "price": 33.08,
+        "target": 38.042,
+        "stop": 30.7644,
+        "tier": "Strong Buy",
+        "score": 95.9,
+        "pool": "global",
+        "expiry": "2026-12-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VIJAYA.NS",
+        "name": "VIJAYA.NS",
+        "category": "Indian Stock",
+        "price": 1397.0,
+        "target": 1606.55,
+        "stop": 1285.24,
+        "tier": "Strong Buy",
+        "score": 95.4,
+        "pool": "indian",
+        "expiry": "2026-08-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KIMS.NS",
+        "name": "KIMS.NS",
+        "category": "Indian Stock",
+        "price": 821.0,
+        "target": 944.15,
+        "stop": 755.32,
+        "tier": "Strong Buy",
+        "score": 93.8,
+        "pool": "indian",
+        "expiry": "2026-08-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "JSWENERGY.NS",
+        "name": "JSWENERGY.NS",
+        "category": "Indian Stock",
+        "price": 581.45,
+        "target": 668.6675,
+        "stop": 534.934,
+        "tier": "Strong Buy",
+        "score": 90.2,
+        "pool": "indian",
+        "expiry": "2026-08-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLI",
+        "name": "Industrials Select SPDR",
+        "category": "Global ETF",
+        "price": 182.76,
+        "target": 210.174,
+        "stop": 169.9668,
+        "tier": "Strong Buy",
+        "score": 83.5,
+        "pool": "global",
+        "expiry": "2026-12-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 53.72,
+        "target": 61.778,
+        "stop": 49.9596,
+        "tier": "Strong Buy",
+        "score": 81.8,
+        "pool": "global",
+        "expiry": "2026-12-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKK",
+        "name": "ARK Innovation ETF",
+        "category": "Global ETF",
+        "price": 80.63,
+        "target": 92.7245,
+        "stop": 74.9859,
+        "tier": "Strong Buy",
+        "score": 78.5,
+        "pool": "global",
+        "expiry": "2026-12-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWU",
+        "name": "iShares MSCI UK",
+        "category": "Global ETF",
+        "price": 46.15,
+        "target": 53.0725,
+        "stop": 42.9195,
+        "tier": "Strong Buy",
+        "score": 75.9,
+        "pool": "global",
+        "expiry": "2026-12-27",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
