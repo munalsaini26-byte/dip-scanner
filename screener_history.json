@@ -1515,7 +1515,7 @@
         "expiry": "2026-08-18",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "KIMS.NS",
@@ -1560,7 +1560,7 @@
         "expiry": "2026-09-17",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       }
     ]
   },
@@ -2334,6 +2334,146 @@
         "pool": "global",
         "expiry": "2026-12-27",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-07-01",
+    "picks": [
+      {
+        "ticker": "CEMPRO.NS",
+        "name": "CEMPRO.NS",
+        "category": "Indian Stock",
+        "price": 1363.6,
+        "target": 1568.14,
+        "stop": 1254.512,
+        "tier": "Strong Buy",
+        "score": 92.2,
+        "pool": "indian",
+        "expiry": "2026-08-30",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HEXT.NS",
+        "name": "HEXT.NS",
+        "category": "Indian Stock",
+        "price": 550.05,
+        "target": 632.5575,
+        "stop": 506.046,
+        "tier": "Strong Buy",
+        "score": 90.9,
+        "pool": "indian",
+        "expiry": "2026-08-30",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HAL.NS",
+        "name": "HAL.NS",
+        "category": "Indian Stock",
+        "price": 4439.1001,
+        "target": 5104.9651,
+        "stop": 4083.9721,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-08-30",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "TARIL.NS",
+        "name": "TARIL.NS",
+        "category": "Indian Stock",
+        "price": 358.7,
+        "target": 558.9,
+        "stop": 330.004,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-08-30",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ROBO",
+        "name": "ROBO Global Robotics ETF",
+        "category": "Global ETF",
+        "price": 85.66,
+        "target": 98.509,
+        "stop": 79.6638,
+        "tier": "Strong Buy",
+        "score": 84.9,
+        "pool": "global",
+        "expiry": "2026-12-28",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DIA",
+        "name": "SPDR Dow Jones",
+        "category": "Global ETF",
+        "price": 522.39,
+        "target": 600.7485,
+        "stop": 485.8227,
+        "tier": "Strong Buy",
+        "score": 84.0,
+        "pool": "global",
+        "expiry": "2026-12-28",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IEFA",
+        "name": "iShares Core MSCI EAFE",
+        "category": "Global ETF",
+        "price": 96.58,
+        "target": 111.067,
+        "stop": 89.8194,
+        "tier": "Strong Buy",
+        "score": 80.9,
+        "pool": "global",
+        "expiry": "2026-12-28",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VEA",
+        "name": "Vanguard Developed Markets",
+        "category": "Global ETF",
+        "price": 71.25,
+        "target": 81.9375,
+        "stop": 66.2625,
+        "tier": "Strong Buy",
+        "score": 79.4,
+        "pool": "global",
+        "expiry": "2026-12-28",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UNG",
+        "name": "US Natural Gas Fund",
+        "category": "Metal/Commodity",
+        "price": 11.72,
+        "target": 12.892,
+        "stop": 11.0168,
+        "tier": "Watch",
+        "score": 47.8,
+        "pool": "metal",
+        "expiry": "2026-09-29",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
