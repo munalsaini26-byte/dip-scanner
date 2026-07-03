@@ -2054,8 +2054,8 @@
         "pool": "global",
         "expiry": "2026-12-23",
         "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "EWY",
@@ -2070,7 +2070,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "SMH",
@@ -2084,8 +2084,8 @@
         "pool": "global",
         "expiry": "2026-12-23",
         "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "SOYB",
@@ -2599,6 +2599,101 @@
         "pool": "metal",
         "expiry": "2026-09-30",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-07-03",
+    "picks": [
+      {
+        "ticker": "SUMICHEM.NS",
+        "name": "SUMICHEM.NS",
+        "category": "Indian Stock",
+        "price": 484.5,
+        "target": 652.25,
+        "stop": 445.74,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-09-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "PPLPHARMA.NS",
+        "category": "Indian Stock",
+        "price": 175.5,
+        "target": 216.88,
+        "stop": 161.46,
+        "tier": "Strong Buy",
+        "score": 95.4,
+        "pool": "indian",
+        "expiry": "2026-09-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ANANTRAJ.NS",
+        "name": "ANANTRAJ.NS",
+        "category": "Indian Stock",
+        "price": 553.55,
+        "target": 735.6,
+        "stop": 509.266,
+        "tier": "Strong Buy",
+        "score": 94.4,
+        "pool": "indian",
+        "expiry": "2026-09-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EXIDEIND.NS",
+        "name": "EXIDEIND.NS",
+        "category": "Indian Stock",
+        "price": 415.85,
+        "target": 478.2275,
+        "stop": 382.582,
+        "tier": "Strong Buy",
+        "score": 91.4,
+        "pool": "indian",
+        "expiry": "2026-09-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "INTELLECT.NS",
+        "name": "INTELLECT.NS",
+        "category": "Indian Stock",
+        "price": 780.8,
+        "target": 897.92,
+        "stop": 718.336,
+        "tier": "Strong Buy",
+        "score": 90.9,
+        "pool": "indian",
+        "expiry": "2026-09-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWG",
+        "name": "iShares MSCI Germany",
+        "category": "Global ETF",
+        "price": 42.31,
+        "target": 48.6565,
+        "stop": 39.3483,
+        "tier": "Strong Buy",
+        "score": 90.4,
+        "pool": "global",
+        "expiry": "2026-12-30",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
