@@ -2055,7 +2055,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "EWY",
@@ -2070,7 +2070,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "SMH",
@@ -2085,7 +2085,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "SOYB",
@@ -2694,6 +2694,86 @@
         "pool": "global",
         "expiry": "2026-12-30",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-07-06",
+    "picks": [
+      {
+        "ticker": "AUBANK.NS",
+        "name": "AUBANK.NS",
+        "category": "Indian Stock",
+        "price": 1062.5,
+        "target": 1221.875,
+        "stop": 977.5,
+        "tier": "Strong Buy",
+        "score": 94.4,
+        "pool": "indian",
+        "expiry": "2026-09-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 42.91,
+        "target": 49.3465,
+        "stop": 39.9063,
+        "tier": "Strong Buy",
+        "score": 93.5,
+        "pool": "global",
+        "expiry": "2027-01-02",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GRSE.NS",
+        "name": "GRSE.NS",
+        "category": "Indian Stock",
+        "price": 2765.0,
+        "target": 3179.75,
+        "stop": 2543.8,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IDFCFIRSTB.NS",
+        "name": "IDFCFIRSTB.NS",
+        "category": "Indian Stock",
+        "price": 81.43,
+        "target": 93.6445,
+        "stop": 74.9156,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOYB",
+        "name": "Teucrium Soybean",
+        "category": "Metal/Commodity",
+        "price": 24.44,
+        "target": 26.884,
+        "stop": 22.9736,
+        "tier": "Watch",
+        "score": 50.0,
+        "pool": "metal",
+        "expiry": "2026-10-04",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
