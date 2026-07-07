@@ -2055,7 +2055,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "EWY",
@@ -2070,7 +2070,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "SMH",
@@ -2085,7 +2085,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "SOYB",
@@ -2773,6 +2773,101 @@
         "score": 50.0,
         "pool": "metal",
         "expiry": "2026-10-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-07-07",
+    "picks": [
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 110.27,
+        "target": 126.8105,
+        "stop": 102.5511,
+        "tier": "Strong Buy",
+        "score": 97.7,
+        "pool": "global",
+        "expiry": "2027-01-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CIBR",
+        "name": "First Trust Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 92.91,
+        "target": 106.8465,
+        "stop": 86.4063,
+        "tier": "Strong Buy",
+        "score": 96.6,
+        "pool": "global",
+        "expiry": "2027-01-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DIXON.NS",
+        "name": "DIXON.NS",
+        "category": "Indian Stock",
+        "price": 13228.0,
+        "target": 18331.0,
+        "stop": 12169.76,
+        "tier": "Strong Buy",
+        "score": 93.3,
+        "pool": "indian",
+        "expiry": "2026-09-05",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BLUEJET.NS",
+        "name": "BLUEJET.NS",
+        "category": "Indian Stock",
+        "price": 572.0,
+        "target": 1008.4259,
+        "stop": 526.24,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-09-05",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "RITES.NS",
+        "name": "RITES.NS",
+        "category": "Indian Stock",
+        "price": 239.8,
+        "target": 275.77,
+        "stop": 220.616,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-09-05",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "WEAT",
+        "name": "Teucrium Wheat",
+        "category": "Metal/Commodity",
+        "price": 22.93,
+        "target": 25.223,
+        "stop": 21.5542,
+        "tier": "Watch",
+        "score": 50.0,
+        "pool": "metal",
+        "expiry": "2026-10-05",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
