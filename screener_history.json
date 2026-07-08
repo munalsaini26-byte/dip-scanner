@@ -2055,7 +2055,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "EWY",
@@ -2070,7 +2070,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "SMH",
@@ -2085,7 +2085,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "SOYB",
@@ -2869,6 +2869,146 @@
         "pool": "metal",
         "expiry": "2026-10-05",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-07-08",
+    "picks": [
+      {
+        "ticker": "JETS",
+        "name": "US Global Jets ETF (Airlines)",
+        "category": "Global ETF",
+        "price": 32.51,
+        "target": 37.3865,
+        "stop": 30.2343,
+        "tier": "Strong Buy",
+        "score": 112.4,
+        "pool": "global",
+        "expiry": "2027-01-04",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "J&KBANK.NS",
+        "name": "J&KBANK.NS",
+        "category": "Indian Stock",
+        "price": 169.85,
+        "target": 195.3275,
+        "stop": 156.262,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-06",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 56.05,
+        "target": 64.4575,
+        "stop": 52.1265,
+        "tier": "Strong Buy",
+        "score": 88.0,
+        "pool": "global",
+        "expiry": "2027-01-04",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BALRAMCHIN.NS",
+        "name": "BALRAMCHIN.NS",
+        "category": "Indian Stock",
+        "price": 572.0,
+        "target": 657.8,
+        "stop": 526.24,
+        "tier": "Strong Buy",
+        "score": 86.5,
+        "pool": "indian",
+        "expiry": "2026-09-06",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLI",
+        "name": "Industrials Select SPDR",
+        "category": "Global ETF",
+        "price": 182.38,
+        "target": 209.737,
+        "stop": 169.6134,
+        "tier": "Strong Buy",
+        "score": 78.6,
+        "pool": "global",
+        "expiry": "2027-01-04",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWU",
+        "name": "iShares MSCI UK",
+        "category": "Global ETF",
+        "price": 47.13,
+        "target": 54.1995,
+        "stop": 43.8309,
+        "tier": "Strong Buy",
+        "score": 75.2,
+        "pool": "global",
+        "expiry": "2027-01-04",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKK",
+        "name": "ARK Innovation ETF",
+        "category": "Global ETF",
+        "price": 81.19,
+        "target": 93.3685,
+        "stop": 75.5067,
+        "tier": "Strong Buy",
+        "score": 72.8,
+        "pool": "global",
+        "expiry": "2027-01-04",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SPY",
+        "name": "SPDR S&P 500 ETF",
+        "category": "Global ETF",
+        "price": 747.71,
+        "target": 859.8665,
+        "stop": 695.3703,
+        "tier": "Strong Buy",
+        "score": 71.2,
+        "pool": "global",
+        "expiry": "2027-01-04",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VOO",
+        "name": "Vanguard S&P 500",
+        "category": "Global ETF",
+        "price": 687.08,
+        "target": 790.142,
+        "stop": 638.9844,
+        "tier": "Strong Buy",
+        "score": 71.2,
+        "pool": "global",
+        "expiry": "2027-01-04",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
