@@ -2055,7 +2055,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "EWY",
@@ -2085,7 +2085,7 @@
         "expiry": "2026-12-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "SOYB",
@@ -3009,6 +3009,131 @@
         "pool": "global",
         "expiry": "2027-01-04",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-07-09",
+    "picks": [
+      {
+        "ticker": "DIVISLAB.NS",
+        "name": "DIVISLAB.NS",
+        "category": "Indian Stock",
+        "price": 6814.5,
+        "target": 7836.675,
+        "stop": 6269.34,
+        "tier": "Strong Buy",
+        "score": 91.3,
+        "pool": "indian",
+        "expiry": "2026-09-07",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARE&M.NS",
+        "name": "ARE&M.NS",
+        "category": "Indian Stock",
+        "price": 874.35,
+        "target": 1005.5025,
+        "stop": 804.402,
+        "tier": "Strong Buy",
+        "score": 90.9,
+        "pool": "indian",
+        "expiry": "2026-09-07",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "JINDALSAW.NS",
+        "name": "JINDALSAW.NS",
+        "category": "Indian Stock",
+        "price": 269.7,
+        "target": 310.155,
+        "stop": 248.124,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-07",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "MANKIND.NS",
+        "name": "MANKIND.NS",
+        "category": "Indian Stock",
+        "price": 2536.8999,
+        "target": 2917.4349,
+        "stop": 2333.9479,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-07",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VTI",
+        "name": "Vanguard Total Market",
+        "category": "Global ETF",
+        "price": 368.25,
+        "target": 423.4875,
+        "stop": 342.4725,
+        "tier": "Strong Buy",
+        "score": 67.2,
+        "pool": "global",
+        "expiry": "2027-01-05",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DIA",
+        "name": "SPDR Dow Jones",
+        "category": "Global ETF",
+        "price": 522.77,
+        "target": 601.1855,
+        "stop": 486.1761,
+        "tier": "Strong Buy",
+        "score": 66.4,
+        "pool": "global",
+        "expiry": "2027-01-05",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DJP",
+        "name": "iPath Bloomberg Commodity",
+        "category": "Metal/Commodity",
+        "price": 45.55,
+        "target": 50.105,
+        "stop": 42.817,
+        "tier": "Strong Buy",
+        "score": 60.0,
+        "pool": "metal",
+        "expiry": "2026-10-07",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity",
+        "category": "Metal/Commodity",
+        "price": 29.96,
+        "target": 32.956,
+        "stop": 28.1624,
+        "tier": "Strong Buy",
+        "score": 60.0,
+        "pool": "metal",
+        "expiry": "2026-10-07",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
