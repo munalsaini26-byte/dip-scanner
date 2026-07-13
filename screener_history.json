@@ -3248,5 +3248,85 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-07-13",
+    "picks": [
+      {
+        "ticker": "NIVABUPA.NS",
+        "name": "NIVABUPA.NS",
+        "category": "Indian Stock",
+        "price": 88.32,
+        "target": 101.568,
+        "stop": 81.2544,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-09-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CHENNPETRO.NS",
+        "name": "CHENNPETRO.NS",
+        "category": "Indian Stock",
+        "price": 1174.3,
+        "target": 1350.445,
+        "stop": 1080.356,
+        "tier": "Strong Buy",
+        "score": 95.4,
+        "pool": "indian",
+        "expiry": "2026-09-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PGEL.NS",
+        "category": "Indian Stock",
+        "price": 594.4,
+        "target": 827.6352,
+        "stop": 546.848,
+        "tier": "Strong Buy",
+        "score": 92.6,
+        "pool": "indian",
+        "expiry": "2026-09-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SONATSOFTW.NS",
+        "name": "SONATSOFTW.NS",
+        "category": "Indian Stock",
+        "price": 315.9,
+        "target": 428.6737,
+        "stop": 290.628,
+        "tier": "Strong Buy",
+        "score": 92.3,
+        "pool": "indian",
+        "expiry": "2026-09-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWZ",
+        "name": "iShares MSCI Brazil",
+        "category": "Global ETF",
+        "price": 35.93,
+        "target": 41.3365,
+        "stop": 33.4149,
+        "tier": "Strong Buy",
+        "score": 80.5,
+        "pool": "global",
+        "expiry": "2027-01-09",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
