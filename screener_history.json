@@ -3328,5 +3328,115 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-07-14",
+    "picks": [
+      {
+        "ticker": "BIOCON.NS",
+        "name": "BIOCON.NS",
+        "category": "Indian Stock",
+        "price": 437.75,
+        "target": 503.4125,
+        "stop": 402.73,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "LALPATHLAB.NS",
+        "name": "LALPATHLAB.NS",
+        "category": "Indian Stock",
+        "price": 1733.8,
+        "target": 1993.87,
+        "stop": 1595.096,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 40.59,
+        "target": 46.6785,
+        "stop": 37.7487,
+        "tier": "Strong Buy",
+        "score": 89.6,
+        "pool": "global",
+        "expiry": "2027-01-10",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLE",
+        "name": "Energy Select SPDR",
+        "category": "Global ETF",
+        "price": 56.74,
+        "target": 65.251,
+        "stop": 52.7682,
+        "tier": "Strong Buy",
+        "score": 72.7,
+        "pool": "global",
+        "expiry": "2027-01-10",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWC",
+        "name": "iShares MSCI Canada",
+        "category": "Global ETF",
+        "price": 58.73,
+        "target": 67.5395,
+        "stop": 54.6189,
+        "tier": "Strong Buy",
+        "score": 70.6,
+        "pool": "global",
+        "expiry": "2027-01-10",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLP",
+        "name": "Consumer Staples SPDR",
+        "category": "Global ETF",
+        "price": 84.59,
+        "target": 97.2785,
+        "stop": 78.6687,
+        "tier": "Strong Buy",
+        "score": 67.4,
+        "pool": "global",
+        "expiry": "2027-01-10",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOYB",
+        "name": "Teucrium Soybean",
+        "category": "Metal/Commodity",
+        "price": 25.33,
+        "target": 27.863,
+        "stop": 23.8102,
+        "tier": "Watch",
+        "score": 59.2,
+        "pool": "metal",
+        "expiry": "2026-10-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
