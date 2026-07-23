@@ -3734,8 +3734,8 @@
         "pool": "metal",
         "expiry": "2026-10-15",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "target",
+        "alert_days": 1
       }
     ]
   },
@@ -4154,6 +4154,131 @@
         "pool": "metal",
         "expiry": "2026-10-20",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-07-23",
+    "picks": [
+      {
+        "ticker": "INDUSINDBK.NS",
+        "name": "INDUSINDBK.NS",
+        "category": "Indian Stock",
+        "price": 1001.0,
+        "target": 1151.15,
+        "stop": 920.92,
+        "tier": "Strong Buy",
+        "score": 94.5,
+        "pool": "indian",
+        "expiry": "2026-09-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "PPLPHARMA.NS",
+        "category": "Indian Stock",
+        "price": 182.5,
+        "target": 209.875,
+        "stop": 167.9,
+        "tier": "Strong Buy",
+        "score": 88.3,
+        "pool": "indian",
+        "expiry": "2026-09-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ANANTRAJ.NS",
+        "name": "ANANTRAJ.NS",
+        "category": "Indian Stock",
+        "price": 592.85,
+        "target": 735.6,
+        "stop": 545.422,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2026-09-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "WEAT",
+        "name": "Teucrium Wheat",
+        "category": "Metal/Commodity",
+        "price": 26.0,
+        "target": 28.6,
+        "stop": 24.44,
+        "tier": "Strong Buy",
+        "score": 80.5,
+        "pool": "metal",
+        "expiry": "2026-10-21",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CIBR",
+        "name": "First Trust Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 89.33,
+        "target": 102.7295,
+        "stop": 83.0769,
+        "tier": "Strong Buy",
+        "score": 74.5,
+        "pool": "global",
+        "expiry": "2027-01-19",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 106.04,
+        "target": 121.946,
+        "stop": 98.6172,
+        "tier": "Strong Buy",
+        "score": 69.2,
+        "pool": "global",
+        "expiry": "2027-01-19",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EFA",
+        "name": "iShares MSCI EAFE",
+        "category": "Global ETF",
+        "price": 104.25,
+        "target": 119.8875,
+        "stop": 96.9525,
+        "tier": "Strong Buy",
+        "score": 66.3,
+        "pool": "global",
+        "expiry": "2027-01-19",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLP",
+        "name": "Consumer Staples SPDR",
+        "category": "Global ETF",
+        "price": 84.38,
+        "target": 97.037,
+        "stop": 78.4734,
+        "tier": "Watch",
+        "score": 56.6,
+        "pool": "global",
+        "expiry": "2027-01-19",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
