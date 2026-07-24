@@ -3735,7 +3735,7 @@
         "expiry": "2026-10-15",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 1
+        "alert_days": 2
       }
     ]
   },
@@ -4278,6 +4278,116 @@
         "score": 56.6,
         "pool": "global",
         "expiry": "2027-01-19",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-07-24",
+    "picks": [
+      {
+        "ticker": "NUVAMA.NS",
+        "name": "NUVAMA.NS",
+        "category": "Indian Stock",
+        "price": 1973.0,
+        "target": 2268.95,
+        "stop": 1815.16,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GABRIEL.NS",
+        "name": "GABRIEL.NS",
+        "category": "Indian Stock",
+        "price": 1358.7,
+        "target": 1562.505,
+        "stop": 1250.004,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2026-09-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CPER",
+        "name": "US Copper ETF",
+        "category": "Metal/Commodity",
+        "price": 38.24,
+        "target": 42.064,
+        "stop": 35.9456,
+        "tier": "Strong Buy",
+        "score": 64.2,
+        "pool": "metal",
+        "expiry": "2026-10-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWA",
+        "name": "iShares MSCI Australia",
+        "category": "Global ETF",
+        "price": 28.49,
+        "target": 32.7635,
+        "stop": 26.4957,
+        "tier": "Watch",
+        "score": 53.7,
+        "pool": "global",
+        "expiry": "2027-01-20",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 55.83,
+        "target": 64.2045,
+        "stop": 51.9219,
+        "tier": "Watch",
+        "score": 47.5,
+        "pool": "global",
+        "expiry": "2027-01-20",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLI",
+        "name": "Industrials Select SPDR",
+        "category": "Global ETF",
+        "price": 181.94,
+        "target": 209.231,
+        "stop": 169.2042,
+        "tier": "Watch",
+        "score": 46.3,
+        "pool": "global",
+        "expiry": "2027-01-20",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWU",
+        "name": "iShares MSCI UK",
+        "category": "Global ETF",
+        "price": 46.7,
+        "target": 53.705,
+        "stop": 43.431,
+        "tier": "Watch",
+        "score": 43.1,
+        "pool": "global",
+        "expiry": "2027-01-20",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
