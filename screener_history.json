@@ -3735,7 +3735,7 @@
         "expiry": "2026-10-15",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 3
+        "alert_days": 4
       }
     ]
   },
@@ -4469,6 +4469,86 @@
         "pool": "metal",
         "expiry": "2026-10-25",
         "mode": "dip",
+        "hit": "stop",
+        "alert_days": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-07-28",
+    "picks": [
+      {
+        "ticker": "ETERNAL.NS",
+        "name": "ETERNAL.NS",
+        "category": "Indian Stock",
+        "price": 304.75,
+        "target": 354.35,
+        "stop": 280.37,
+        "tier": "Strong Buy",
+        "score": 94.3,
+        "pool": "indian",
+        "expiry": "2026-09-26",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "FSL.NS",
+        "category": "Indian Stock",
+        "price": 268.35,
+        "target": 308.6025,
+        "stop": 246.882,
+        "tier": "Strong Buy",
+        "score": 93.0,
+        "pool": "indian",
+        "expiry": "2026-09-26",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "MANKIND.NS",
+        "name": "MANKIND.NS",
+        "category": "Indian Stock",
+        "price": 2600.8999,
+        "target": 2991.0349,
+        "stop": 2392.8279,
+        "tier": "Strong Buy",
+        "score": 91.5,
+        "pool": "indian",
+        "expiry": "2026-09-26",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DBA",
+        "name": "Invesco DB Agriculture",
+        "category": "Metal/Commodity",
+        "price": 27.62,
+        "target": 30.382,
+        "stop": 25.9628,
+        "tier": "Strong Buy",
+        "score": 66.5,
+        "pool": "metal",
+        "expiry": "2026-10-26",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KWEB",
+        "name": "KraneShares China Internet",
+        "category": "Global ETF",
+        "price": 27.0,
+        "target": 31.05,
+        "stop": 25.11,
+        "tier": "Watch",
+        "score": 48.8,
+        "pool": "global",
+        "expiry": "2027-01-24",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
