@@ -4300,7 +4300,7 @@
         "expiry": "2026-09-22",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "GABRIEL.NS",
@@ -4470,7 +4470,7 @@
         "expiry": "2026-10-25",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       }
     ]
   },
@@ -4799,6 +4799,131 @@
         "pool": "global",
         "expiry": "2027-01-26",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-07-31",
+    "picks": [
+      {
+        "ticker": "BAJAJFINSV.NS",
+        "name": "BAJAJFINSV.NS",
+        "category": "Indian Stock",
+        "price": 2012.7,
+        "target": 2314.605,
+        "stop": 1851.684,
+        "tier": "Strong Buy",
+        "score": 93.6,
+        "pool": "indian",
+        "expiry": "2026-09-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ACE.NS",
+        "name": "ACE.NS",
+        "category": "Indian Stock",
+        "price": 1065.8,
+        "target": 1225.67,
+        "stop": 980.536,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "WOCKPHARMA.NS",
+        "category": "Indian Stock",
+        "price": 1917.9,
+        "target": 2205.585,
+        "stop": 1764.468,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-09-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BLUEJET.NS",
+        "name": "BLUEJET.NS",
+        "category": "Indian Stock",
+        "price": 626.0,
+        "target": 804.5346,
+        "stop": 575.92,
+        "tier": "Strong Buy",
+        "score": 89.7,
+        "pool": "indian",
+        "expiry": "2026-09-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EFA",
+        "name": "iShares MSCI EAFE",
+        "category": "Global ETF",
+        "price": 106.24,
+        "target": 122.176,
+        "stop": 98.8032,
+        "tier": "Strong Buy",
+        "score": 72.8,
+        "pool": "global",
+        "expiry": "2027-01-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLP",
+        "name": "Consumer Staples SPDR",
+        "category": "Global ETF",
+        "price": 85.47,
+        "target": 98.2905,
+        "stop": 79.4871,
+        "tier": "Strong Buy",
+        "score": 68.3,
+        "pool": "global",
+        "expiry": "2027-01-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IEFA",
+        "name": "iShares Core MSCI EAFE",
+        "category": "Global ETF",
+        "price": 98.88,
+        "target": 113.712,
+        "stop": 91.9584,
+        "tier": "Strong Buy",
+        "score": 65.2,
+        "pool": "global",
+        "expiry": "2027-01-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "WEAT",
+        "name": "Teucrium Wheat",
+        "category": "Metal/Commodity",
+        "price": 24.62,
+        "target": 27.082,
+        "stop": 23.1428,
+        "tier": "Watch",
+        "score": 54.8,
+        "pool": "metal",
+        "expiry": "2026-10-29",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
