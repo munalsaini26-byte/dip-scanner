@@ -4300,7 +4300,7 @@
         "expiry": "2026-09-22",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "GABRIEL.NS",
@@ -4470,7 +4470,7 @@
         "expiry": "2026-10-25",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       }
     ]
   },
@@ -4504,8 +4504,8 @@
         "pool": "indian",
         "expiry": "2026-09-26",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "target",
+        "alert_days": 1
       },
       {
         "ticker": "MANKIND.NS",
@@ -4923,6 +4923,116 @@
         "score": 54.8,
         "pool": "metal",
         "expiry": "2026-10-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-08-03",
+    "picks": [
+      {
+        "ticker": "SONATSOFTW.NS",
+        "name": "SONATSOFTW.NS",
+        "category": "Indian Stock",
+        "price": 345.25,
+        "target": 397.0375,
+        "stop": 317.63,
+        "tier": "Strong Buy",
+        "score": 97.1,
+        "pool": "indian",
+        "expiry": "2026-10-02",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PAYTM.NS",
+        "name": "PAYTM.NS",
+        "category": "Indian Stock",
+        "price": 1419.0,
+        "target": 1631.85,
+        "stop": 1305.48,
+        "tier": "Strong Buy",
+        "score": 96.8,
+        "pool": "indian",
+        "expiry": "2026-10-02",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CPER",
+        "name": "US Copper ETF",
+        "category": "Metal/Commodity",
+        "price": 39.56,
+        "target": 43.516,
+        "stop": 37.1864,
+        "tier": "Strong Buy",
+        "score": 81.9,
+        "pool": "metal",
+        "expiry": "2026-11-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWU",
+        "name": "iShares MSCI UK",
+        "category": "Global ETF",
+        "price": 48.41,
+        "target": 55.6715,
+        "stop": 45.0213,
+        "tier": "Strong Buy",
+        "score": 76.2,
+        "pool": "global",
+        "expiry": "2027-01-30",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWA",
+        "name": "iShares MSCI Australia",
+        "category": "Global ETF",
+        "price": 29.34,
+        "target": 33.741,
+        "stop": 27.2862,
+        "tier": "Strong Buy",
+        "score": 73.0,
+        "pool": "global",
+        "expiry": "2027-01-30",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CIBR",
+        "name": "First Trust Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 91.83,
+        "target": 105.6045,
+        "stop": 85.4019,
+        "tier": "Strong Buy",
+        "score": 70.0,
+        "pool": "global",
+        "expiry": "2027-01-30",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity",
+        "category": "Metal/Commodity",
+        "price": 32.04,
+        "target": 35.244,
+        "stop": 30.1176,
+        "tier": "Strong Buy",
+        "score": 65.0,
+        "pool": "metal",
+        "expiry": "2026-11-01",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
