@@ -4300,7 +4300,7 @@
         "expiry": "2026-09-22",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "GABRIEL.NS",
@@ -4505,7 +4505,7 @@
         "expiry": "2026-09-26",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "MANKIND.NS",
@@ -5033,6 +5033,71 @@
         "score": 65.0,
         "pool": "metal",
         "expiry": "2026-11-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-08-04",
+    "picks": [
+      {
+        "ticker": "GLAND.NS",
+        "name": "GLAND.NS",
+        "category": "Indian Stock",
+        "price": 2622.1001,
+        "target": 3015.4151,
+        "stop": 2412.3321,
+        "tier": "Strong Buy",
+        "score": 91.1,
+        "pool": "indian",
+        "expiry": "2026-10-03",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AFFLE.NS",
+        "name": "AFFLE.NS",
+        "category": "Indian Stock",
+        "price": 1676.0,
+        "target": 2146.7,
+        "stop": 1541.92,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-03",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AIIL.NS",
+        "name": "AIIL.NS",
+        "category": "Indian Stock",
+        "price": 561.3,
+        "target": 667.9,
+        "stop": 516.396,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-03",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "USO",
+        "name": "United States Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 129.17,
+        "target": 152.96,
+        "stop": 121.4198,
+        "tier": "Strong Buy",
+        "score": 65.0,
+        "pool": "metal",
+        "expiry": "2026-11-02",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
