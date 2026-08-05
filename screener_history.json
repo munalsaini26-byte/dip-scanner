@@ -4505,7 +4505,7 @@
         "expiry": "2026-09-26",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "MANKIND.NS",
@@ -4864,8 +4864,8 @@
         "pool": "indian",
         "expiry": "2026-09-29",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "EFA",
@@ -5099,6 +5099,146 @@
         "pool": "metal",
         "expiry": "2026-11-02",
         "mode": "dip",
+        "hit": "stop",
+        "alert_days": 1
+      }
+    ]
+  },
+  {
+    "date": "2026-08-05",
+    "picks": [
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 114.07,
+        "target": 131.1805,
+        "stop": 106.0851,
+        "tier": "Strong Buy",
+        "score": 98.1,
+        "pool": "global",
+        "expiry": "2027-02-01",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLK",
+        "name": "Technology Select SPDR",
+        "category": "Global ETF",
+        "price": 186.9,
+        "target": 214.935,
+        "stop": 173.817,
+        "tier": "Strong Buy",
+        "score": 98.0,
+        "pool": "global",
+        "expiry": "2027-02-01",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ASTERDM.NS",
+        "name": "ASTERDM.NS",
+        "category": "Indian Stock",
+        "price": 846.9,
+        "target": 973.935,
+        "stop": 779.148,
+        "tier": "Strong Buy",
+        "score": 93.7,
+        "pool": "indian",
+        "expiry": "2026-10-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DIA",
+        "name": "SPDR Dow Jones",
+        "category": "Global ETF",
+        "price": 540.43,
+        "target": 621.4945,
+        "stop": 502.5999,
+        "tier": "Strong Buy",
+        "score": 93.3,
+        "pool": "global",
+        "expiry": "2027-02-01",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "NIACL.NS",
+        "name": "NIACL.NS",
+        "category": "Indian Stock",
+        "price": 181.28,
+        "target": 210.3773,
+        "stop": 166.7776,
+        "tier": "Strong Buy",
+        "score": 92.2,
+        "pool": "indian",
+        "expiry": "2026-10-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SPY",
+        "name": "SPDR S&P 500 ETF",
+        "category": "Global ETF",
+        "price": 771.33,
+        "target": 887.0295,
+        "stop": 717.3369,
+        "tier": "Strong Buy",
+        "score": 91.7,
+        "pool": "global",
+        "expiry": "2027-02-01",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLI",
+        "name": "Industrials Select SPDR",
+        "category": "Global ETF",
+        "price": 186.4,
+        "target": 214.36,
+        "stop": 173.352,
+        "tier": "Strong Buy",
+        "score": 90.6,
+        "pool": "global",
+        "expiry": "2027-02-01",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 57.88,
+        "target": 66.562,
+        "stop": 53.8284,
+        "tier": "Strong Buy",
+        "score": 85.1,
+        "pool": "global",
+        "expiry": "2027-02-01",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ROBO",
+        "name": "ROBO Global Robotics ETF",
+        "category": "Global ETF",
+        "price": 84.34,
+        "target": 96.991,
+        "stop": 78.4362,
+        "tier": "Strong Buy",
+        "score": 84.4,
+        "pool": "global",
+        "expiry": "2027-02-01",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
