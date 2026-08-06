@@ -4505,7 +4505,7 @@
         "expiry": "2026-09-26",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "MANKIND.NS",
@@ -4865,7 +4865,7 @@
         "expiry": "2026-09-29",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "EFA",
@@ -5100,7 +5100,7 @@
         "expiry": "2026-11-02",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       }
     ]
   },
@@ -5239,6 +5239,116 @@
         "pool": "global",
         "expiry": "2027-02-01",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-08-06",
+    "picks": [
+      {
+        "ticker": "TATATECH.NS",
+        "name": "TATATECH.NS",
+        "category": "Indian Stock",
+        "price": 800.45,
+        "target": 920.5175,
+        "stop": 736.414,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-05",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SAILIFE.NS",
+        "name": "SAILIFE.NS",
+        "category": "Indian Stock",
+        "price": 1418.7,
+        "target": 1631.505,
+        "stop": 1305.204,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-10-05",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "TATACAP.NS",
+        "name": "TATACAP.NS",
+        "category": "Indian Stock",
+        "price": 383.7,
+        "target": 441.255,
+        "stop": 353.004,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-10-05",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 41.24,
+        "target": 47.426,
+        "stop": 38.3532,
+        "tier": "Strong Buy",
+        "score": 83.8,
+        "pool": "global",
+        "expiry": "2027-02-02",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DBA",
+        "name": "Invesco DB Agriculture",
+        "category": "Metal/Commodity",
+        "price": 27.63,
+        "target": 30.393,
+        "stop": 25.9722,
+        "tier": "Strong Buy",
+        "score": 60.0,
+        "pool": "metal",
+        "expiry": "2026-11-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GLD",
+        "name": "SPDR Gold Shares",
+        "category": "Metal/Commodity",
+        "price": 389.64,
+        "target": 428.604,
+        "stop": 366.2616,
+        "tier": "Watch",
+        "score": 53.0,
+        "pool": "metal",
+        "expiry": "2026-11-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IAU",
+        "name": "iShares Gold Trust",
+        "category": "Metal/Commodity",
+        "price": 79.85,
+        "target": 87.835,
+        "stop": 75.059,
+        "tier": "Watch",
+        "score": 53.0,
+        "pool": "metal",
+        "expiry": "2026-11-04",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
