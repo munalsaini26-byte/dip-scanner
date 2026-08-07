@@ -4505,7 +4505,7 @@
         "expiry": "2026-09-26",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "MANKIND.NS",
@@ -4865,7 +4865,7 @@
         "expiry": "2026-09-29",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "EFA",
@@ -5100,7 +5100,7 @@
         "expiry": "2026-11-02",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       }
     ]
   },
@@ -5349,6 +5349,146 @@
         "pool": "metal",
         "expiry": "2026-11-04",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-08-07",
+    "picks": [
+      {
+        "ticker": "ENRIN.NS",
+        "name": "ENRIN.NS",
+        "category": "Indian Stock",
+        "price": 3695.0,
+        "target": 4249.25,
+        "stop": 3399.4,
+        "tier": "Strong Buy",
+        "score": 97.6,
+        "pool": "indian",
+        "expiry": "2026-10-06",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CHENNPETRO.NS",
+        "name": "CHENNPETRO.NS",
+        "category": "Indian Stock",
+        "price": 1271.8,
+        "target": 1462.57,
+        "stop": 1170.056,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-06",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PARADEEP.NS",
+        "name": "PARADEEP.NS",
+        "category": "Indian Stock",
+        "price": 149.97,
+        "target": 228.23,
+        "stop": 137.9724,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-06",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PGEL.NS",
+        "name": "PGEL.NS",
+        "category": "Indian Stock",
+        "price": 629.0,
+        "target": 736.5253,
+        "stop": 578.68,
+        "tier": "Strong Buy",
+        "score": 86.4,
+        "pool": "indian",
+        "expiry": "2026-10-06",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VEA",
+        "name": "Vanguard Developed Markets",
+        "category": "Global ETF",
+        "price": 72.12,
+        "target": 82.938,
+        "stop": 67.0716,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "global",
+        "expiry": "2027-02-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VTI",
+        "name": "Vanguard Total Market",
+        "category": "Global ETF",
+        "price": 379.07,
+        "target": 435.9305,
+        "stop": 352.5351,
+        "tier": "Strong Buy",
+        "score": 80.2,
+        "pool": "global",
+        "expiry": "2027-02-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWC",
+        "name": "iShares MSCI Canada",
+        "category": "Global ETF",
+        "price": 60.7,
+        "target": 69.805,
+        "stop": 56.451,
+        "tier": "Strong Buy",
+        "score": 79.1,
+        "pool": "global",
+        "expiry": "2027-02-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "JETS",
+        "name": "US Global Jets ETF (Airlines)",
+        "category": "Global ETF",
+        "price": 32.64,
+        "target": 37.536,
+        "stop": 30.3552,
+        "tier": "Strong Buy",
+        "score": 78.5,
+        "pool": "global",
+        "expiry": "2027-02-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VOO",
+        "name": "Vanguard S&P 500",
+        "category": "Global ETF",
+        "price": 706.4,
+        "target": 812.36,
+        "stop": 656.952,
+        "tier": "Strong Buy",
+        "score": 77.5,
+        "pool": "global",
+        "expiry": "2027-02-03",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
