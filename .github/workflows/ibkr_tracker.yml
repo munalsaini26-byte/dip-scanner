@@ -1,0 +1,32 @@
+name: IBKR Portfolio Tracker
+
+on:
+  schedule:
+    - cron: '0 0 * * 1-5'   # 8:00 AM SGT = 00:00 UTC, weekdays only
+  workflow_dispatch:          # allows manual trigger anytime
+
+jobs:
+  update-portfolio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests gspread google-auth
+
+      - name: Run IBKR Tracker
+        env:
+          IBKR_TOKEN:                  ${{ secrets.IBKR_TOKEN }}
+          IBKR_QUERY_ID:               ${{ secrets.IBKR_QUERY_ID }}
+          GOOGLE_SHEET_ID:             ${{ secrets.GOOGLE_SHEET_ID }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python ibkr_tracker.py
