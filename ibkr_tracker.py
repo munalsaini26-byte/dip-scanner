@@ -15,7 +15,7 @@ SHEET_ID             = os.environ.get("GOOGLE_SHEET_ID")
 SERVICE_ACCOUNT_JSON = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON")
 
 SEND_URL = (
-    f"https://gdcdyn.interactivebrokers.com/Universal/servlet/"
+    f"https://ndcdyn.interactivebrokers.com/Universal/servlet/"
     f"FlexStatementService.SendRequest?t={IBKR_TOKEN}&q={IBKR_QUERY_ID}&v=3"
 )
 
