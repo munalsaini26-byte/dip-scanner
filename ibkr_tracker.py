@@ -30,22 +30,40 @@ def fetch_ibkr_csv():
         raise Exception(f"IBKR Error {error_code}: {error_msg}")
     
     ref_code = text.split("<ReferenceCode>")[1].split("</ReferenceCode>")[0]
-    print(f"Reference code: {ref_code}. Waiting 15 seconds...")
-    time.sleep(15)
     
-    print("Step 2: Fetching statement...")
-    get_resp = requests.get(f"{GET_URL}&referenceCode={ref_code}", timeout=60)
-    csv_text = get_resp.text
+    # Use the exact URL IBKR returns in the response
+    base_get_url = text.split("<Url>")[1].split("</Url>")[0].strip()
+    print(f"Reference code: {ref_code}. Waiting 20 seconds...")
+    time.sleep(20)
     
-    if csv_text.strip().startswith("<"):
+    # Try with token + reference code appended to IBKR's own URL
+    get_url_final = f"{base_get_url}?t={IBKR_TOKEN}&q={IBKR_QUERY_ID}&v=3&referenceCode={ref_code}"
+    
+    # Retry up to 3 times with increasing wait
+    for attempt in range(3):
+        print(f"Step 2: Fetching statement (attempt {attempt + 1})...")
+        get_resp = requests.get(get_url_final, timeout=60)
+        csv_text = get_resp.text
+        
+        if not csv_text.strip().startswith("<"):
+            print("CSV data received successfully.")
+            return csv_text
+        
+        # Still getting XML — check error
         if "<Status>Fail</Status>" in csv_text:
             error_code = csv_text.split("<ErrorCode>")[1].split("</ErrorCode>")[0]
             error_msg  = csv_text.split("<ErrorMessage>")[1].split("</ErrorMessage>")[0]
-            raise Exception(f"IBKR GetStatement Error {error_code}: {error_msg}")
-        raise Exception("IBKR returned XML instead of CSV")
+            print(f"Attempt {attempt + 1} failed: Error {error_code}: {error_msg}")
+            if attempt < 2:
+                wait = 20 * (attempt + 2)
+                print(f"Waiting {wait} seconds before retry...")
+                time.sleep(wait)
+            else:
+                raise Exception(f"IBKR GetStatement Error {error_code}: {error_msg}")
+        else:
+            raise Exception("IBKR returned unexpected XML response")
     
-    print("CSV data received successfully.")
-    return csv_text
+    raise Exception("All retry attempts failed")
 
 # ── STEP 2: PARSE CSV ────────────────────────────────────────────────────────
 def parse_ibkr_csv(csv_text):
