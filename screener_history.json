@@ -4865,7 +4865,7 @@
         "expiry": "2026-09-29",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "EFA",
@@ -5100,7 +5100,7 @@
         "expiry": "2026-11-02",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       }
     ]
   },
@@ -5489,6 +5489,161 @@
         "pool": "global",
         "expiry": "2027-02-03",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-08-10",
+    "picks": [
+      {
+        "ticker": "BALRAMCHIN.NS",
+        "name": "BALRAMCHIN.NS",
+        "category": "Indian Stock",
+        "price": 644.3,
+        "target": 740.945,
+        "stop": 592.756,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-09",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "WOCKPHARMA.NS",
+        "category": "Indian Stock",
+        "price": 1983.0,
+        "target": 2280.45,
+        "stop": 1824.36,
+        "tier": "Strong Buy",
+        "score": 89.6,
+        "pool": "indian",
+        "expiry": "2026-10-09",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "NAVINFLUOR.NS",
+        "name": "NAVINFLUOR.NS",
+        "category": "Indian Stock",
+        "price": 8232.0,
+        "target": 9466.8,
+        "stop": 7573.44,
+        "tier": "Strong Buy",
+        "score": 87.6,
+        "pool": "indian",
+        "expiry": "2026-10-09",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EFA",
+        "name": "iShares MSCI EAFE",
+        "category": "Global ETF",
+        "price": 108.55,
+        "target": 124.8325,
+        "stop": 100.9515,
+        "tier": "Strong Buy",
+        "score": 83.1,
+        "pool": "global",
+        "expiry": "2027-02-06",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IEFA",
+        "name": "iShares Core MSCI EAFE",
+        "category": "Global ETF",
+        "price": 101.08,
+        "target": 116.242,
+        "stop": 94.0044,
+        "tier": "Strong Buy",
+        "score": 81.7,
+        "pool": "global",
+        "expiry": "2027-02-06",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWG",
+        "name": "iShares MSCI Germany",
+        "category": "Global ETF",
+        "price": 44.02,
+        "target": 50.623,
+        "stop": 40.9386,
+        "tier": "Strong Buy",
+        "score": 81.4,
+        "pool": "global",
+        "expiry": "2027-02-06",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWJ",
+        "name": "iShares MSCI Japan",
+        "category": "Global ETF",
+        "price": 96.9,
+        "target": 111.435,
+        "stop": 90.117,
+        "tier": "Strong Buy",
+        "score": 80.2,
+        "pool": "global",
+        "expiry": "2027-02-06",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLV",
+        "name": "Health Care Select SPDR",
+        "category": "Global ETF",
+        "price": 165.68,
+        "target": 190.532,
+        "stop": 154.0824,
+        "tier": "Strong Buy",
+        "score": 79.9,
+        "pool": "global",
+        "expiry": "2027-02-06",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IVV",
+        "name": "iShares Core S&P 500",
+        "category": "Global ETF",
+        "price": 776.73,
+        "target": 893.2395,
+        "stop": 722.3589,
+        "tier": "Strong Buy",
+        "score": 77.9,
+        "pool": "global",
+        "expiry": "2027-02-06",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PALL",
+        "name": "Aberdeen Palladium ETF",
+        "category": "Metal/Commodity",
+        "price": 25.05,
+        "target": 27.555,
+        "stop": 23.547,
+        "tier": "Watch",
+        "score": 53.0,
+        "pool": "metal",
+        "expiry": "2026-11-08",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
