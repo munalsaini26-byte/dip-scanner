@@ -4865,7 +4865,7 @@
         "expiry": "2026-09-29",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "EFA",
@@ -5100,7 +5100,7 @@
         "expiry": "2026-11-02",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       }
     ]
   },
@@ -5643,6 +5643,146 @@
         "score": 53.0,
         "pool": "metal",
         "expiry": "2026-11-08",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-08-11",
+    "picks": [
+      {
+        "ticker": "CIBR",
+        "name": "First Trust Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 100.6,
+        "target": 115.69,
+        "stop": 93.558,
+        "tier": "Strong Buy",
+        "score": 116.3,
+        "pool": "global",
+        "expiry": "2027-02-07",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWU",
+        "name": "iShares MSCI UK",
+        "category": "Global ETF",
+        "price": 48.49,
+        "target": 55.7635,
+        "stop": 45.0957,
+        "tier": "Strong Buy",
+        "score": 92.6,
+        "pool": "global",
+        "expiry": "2027-02-07",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARE&M.NS",
+        "name": "ARE&M.NS",
+        "category": "Indian Stock",
+        "price": 958.3,
+        "target": 1102.045,
+        "stop": 881.636,
+        "tier": "Strong Buy",
+        "score": 90.4,
+        "pool": "indian",
+        "expiry": "2026-10-10",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWA",
+        "name": "iShares MSCI Australia",
+        "category": "Global ETF",
+        "price": 30.05,
+        "target": 34.5575,
+        "stop": 27.9465,
+        "tier": "Strong Buy",
+        "score": 90.4,
+        "pool": "global",
+        "expiry": "2027-02-07",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KPRMILL.NS",
+        "name": "KPRMILL.NS",
+        "category": "Indian Stock",
+        "price": 1118.6,
+        "target": 1286.39,
+        "stop": 1029.112,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-10",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SUMICHEM.NS",
+        "name": "SUMICHEM.NS",
+        "category": "Indian Stock",
+        "price": 566.3,
+        "target": 651.245,
+        "stop": 520.996,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-10",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CPER",
+        "name": "US Copper ETF",
+        "category": "Metal/Commodity",
+        "price": 40.18,
+        "target": 44.198,
+        "stop": 37.7692,
+        "tier": "Strong Buy",
+        "score": 70.7,
+        "pool": "metal",
+        "expiry": "2026-11-09",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DJP",
+        "name": "iPath Bloomberg Commodity",
+        "category": "Metal/Commodity",
+        "price": 48.49,
+        "target": 53.339,
+        "stop": 45.5806,
+        "tier": "Strong Buy",
+        "score": 70.0,
+        "pool": "metal",
+        "expiry": "2026-11-09",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity",
+        "category": "Metal/Commodity",
+        "price": 32.32,
+        "target": 35.552,
+        "stop": 30.3808,
+        "tier": "Strong Buy",
+        "score": 60.2,
+        "pool": "metal",
+        "expiry": "2026-11-09",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
