@@ -5788,5 +5788,85 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-08-12",
+    "picks": [
+      {
+        "ticker": "ABB.NS",
+        "name": "ABB.NS",
+        "category": "Indian Stock",
+        "price": 7668.0,
+        "target": 8818.2,
+        "stop": 7054.56,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2026-10-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HONASA.NS",
+        "name": "HONASA.NS",
+        "category": "Indian Stock",
+        "price": 468.9,
+        "target": 539.235,
+        "stop": 431.388,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2026-10-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "THELEELA.NS",
+        "name": "THELEELA.NS",
+        "category": "Indian Stock",
+        "price": 507.3,
+        "target": 583.395,
+        "stop": 466.716,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2026-10-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLE",
+        "name": "Energy Select SPDR",
+        "category": "Global ETF",
+        "price": 60.93,
+        "target": 70.0695,
+        "stop": 56.6649,
+        "tier": "Strong Buy",
+        "score": 78.1,
+        "pool": "global",
+        "expiry": "2027-02-08",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BNO",
+        "name": "Brent Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 50.96,
+        "target": 60.13,
+        "stop": 47.9024,
+        "tier": "Strong Buy",
+        "score": 60.0,
+        "pool": "metal",
+        "expiry": "2026-11-10",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
