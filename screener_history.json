@@ -5868,5 +5868,130 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-08-13",
+    "picks": [
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 118.86,
+        "target": 136.689,
+        "stop": 110.5398,
+        "tier": "Strong Buy",
+        "score": 104.0,
+        "pool": "global",
+        "expiry": "2027-02-09",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IFCI.NS",
+        "name": "IFCI.NS",
+        "category": "Indian Stock",
+        "price": 77.01,
+        "target": 90.07,
+        "stop": 70.8492,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "NETWEB.NS",
+        "name": "NETWEB.NS",
+        "category": "Indian Stock",
+        "price": 5129.7002,
+        "target": 5899.1552,
+        "stop": 4719.3242,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-10-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AIIL.NS",
+        "name": "AIIL.NS",
+        "category": "Indian Stock",
+        "price": 573.9,
+        "target": 667.9,
+        "stop": 527.988,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2026-10-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VWO",
+        "name": "Vanguard Emerging Markets",
+        "category": "Global ETF",
+        "price": 60.41,
+        "target": 69.4715,
+        "stop": 56.1813,
+        "tier": "Strong Buy",
+        "score": 79.5,
+        "pool": "global",
+        "expiry": "2027-02-09",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLK",
+        "name": "Technology Select SPDR",
+        "category": "Global ETF",
+        "price": 188.86,
+        "target": 217.189,
+        "stop": 175.6398,
+        "tier": "Strong Buy",
+        "score": 79.1,
+        "pool": "global",
+        "expiry": "2027-02-09",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IWM",
+        "name": "iShares Russell 2000",
+        "category": "Global ETF",
+        "price": 302.71,
+        "target": 348.1165,
+        "stop": 281.5203,
+        "tier": "Strong Buy",
+        "score": 78.3,
+        "pool": "global",
+        "expiry": "2027-02-09",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CORN",
+        "name": "Teucrium Corn",
+        "category": "Metal/Commodity",
+        "price": 18.2,
+        "target": 20.02,
+        "stop": 17.108,
+        "tier": "Strong Buy",
+        "score": 70.0,
+        "pool": "metal",
+        "expiry": "2026-11-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
