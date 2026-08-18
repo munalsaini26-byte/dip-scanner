@@ -6243,5 +6243,115 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-08-18",
+    "picks": [
+      {
+        "ticker": "OBEROIRLTY.NS",
+        "name": "OBEROIRLTY.NS",
+        "category": "Indian Stock",
+        "price": 1920.1,
+        "target": 2208.115,
+        "stop": 1766.492,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-10-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ACE.NS",
+        "name": "ACE.NS",
+        "category": "Indian Stock",
+        "price": 1176.3,
+        "target": 1352.745,
+        "stop": 1082.196,
+        "tier": "Strong Buy",
+        "score": 94.7,
+        "pool": "indian",
+        "expiry": "2026-10-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "COFORGE.NS",
+        "name": "COFORGE.NS",
+        "category": "Indian Stock",
+        "price": 1775.0,
+        "target": 2041.25,
+        "stop": 1633.0,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2026-10-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWJ",
+        "name": "iShares MSCI Japan",
+        "category": "Global ETF",
+        "price": 98.21,
+        "target": 112.9415,
+        "stop": 91.3353,
+        "tier": "Strong Buy",
+        "score": 83.1,
+        "pool": "global",
+        "expiry": "2027-02-14",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLV",
+        "name": "Health Care Select SPDR",
+        "category": "Global ETF",
+        "price": 167.37,
+        "target": 192.4755,
+        "stop": 155.6541,
+        "tier": "Strong Buy",
+        "score": 80.8,
+        "pool": "global",
+        "expiry": "2027-02-14",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWC",
+        "name": "iShares MSCI Canada",
+        "category": "Global ETF",
+        "price": 62.23,
+        "target": 71.5645,
+        "stop": 57.8739,
+        "tier": "Strong Buy",
+        "score": 79.0,
+        "pool": "global",
+        "expiry": "2027-02-14",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EFA",
+        "name": "iShares MSCI EAFE",
+        "category": "Global ETF",
+        "price": 108.64,
+        "target": 124.936,
+        "stop": 101.0352,
+        "tier": "Strong Buy",
+        "score": 78.7,
+        "pool": "global",
+        "expiry": "2027-02-14",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
