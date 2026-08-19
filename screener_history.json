@@ -6353,5 +6353,115 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-08-19",
+    "picks": [
+      {
+        "ticker": "MRPL.NS",
+        "name": "MRPL.NS",
+        "category": "Indian Stock",
+        "price": 178.5,
+        "target": 206.77,
+        "stop": 164.22,
+        "tier": "Strong Buy",
+        "score": 94.4,
+        "pool": "indian",
+        "expiry": "2026-10-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BALRAMCHIN.NS",
+        "name": "BALRAMCHIN.NS",
+        "category": "Indian Stock",
+        "price": 665.0,
+        "target": 764.75,
+        "stop": 611.8,
+        "tier": "Strong Buy",
+        "score": 93.2,
+        "pool": "indian",
+        "expiry": "2026-10-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CIBR",
+        "name": "First Trust Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 97.44,
+        "target": 112.056,
+        "stop": 90.6192,
+        "tier": "Strong Buy",
+        "score": 92.8,
+        "pool": "global",
+        "expiry": "2027-02-15",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IEFA",
+        "name": "iShares Core MSCI EAFE",
+        "category": "Global ETF",
+        "price": 99.88,
+        "target": 114.862,
+        "stop": 92.8884,
+        "tier": "Strong Buy",
+        "score": 77.5,
+        "pool": "global",
+        "expiry": "2027-02-15",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UAE",
+        "name": "iShares MSCI UAE",
+        "category": "Global ETF",
+        "price": 19.56,
+        "target": 22.494,
+        "stop": 18.1908,
+        "tier": "Strong Buy",
+        "score": 77.2,
+        "pool": "global",
+        "expiry": "2027-02-15",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DBA",
+        "name": "Invesco DB Agriculture",
+        "category": "Metal/Commodity",
+        "price": 28.03,
+        "target": 30.833,
+        "stop": 26.3482,
+        "tier": "Strong Buy",
+        "score": 70.0,
+        "pool": "metal",
+        "expiry": "2026-11-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CPER",
+        "name": "US Copper ETF",
+        "category": "Metal/Commodity",
+        "price": 39.18,
+        "target": 43.098,
+        "stop": 36.8292,
+        "tier": "Strong Buy",
+        "score": 61.8,
+        "pool": "metal",
+        "expiry": "2026-11-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
