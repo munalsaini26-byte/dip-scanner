@@ -6463,5 +6463,130 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-08-20",
+    "picks": [
+      {
+        "ticker": "ARKK",
+        "name": "ARK Innovation ETF",
+        "category": "Global ETF",
+        "price": 83.31,
+        "target": 95.8065,
+        "stop": 77.4783,
+        "tier": "Strong Buy",
+        "score": 96.6,
+        "pool": "global",
+        "expiry": "2027-02-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KFINTECH.NS",
+        "name": "KFINTECH.NS",
+        "category": "Indian Stock",
+        "price": 969.75,
+        "target": 1159.1056,
+        "stop": 892.17,
+        "tier": "Strong Buy",
+        "score": 92.9,
+        "pool": "indian",
+        "expiry": "2026-10-19",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLE",
+        "name": "Energy Select SPDR",
+        "category": "Global ETF",
+        "price": 63.58,
+        "target": 73.117,
+        "stop": 59.1294,
+        "tier": "Strong Buy",
+        "score": 89.5,
+        "pool": "global",
+        "expiry": "2027-02-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VOO",
+        "name": "Vanguard S&P 500",
+        "category": "Global ETF",
+        "price": 706.91,
+        "target": 812.9465,
+        "stop": 657.4263,
+        "tier": "Strong Buy",
+        "score": 80.9,
+        "pool": "global",
+        "expiry": "2027-02-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IVV",
+        "name": "iShares Core S&P 500",
+        "category": "Global ETF",
+        "price": 772.74,
+        "target": 888.651,
+        "stop": 718.6482,
+        "tier": "Strong Buy",
+        "score": 79.7,
+        "pool": "global",
+        "expiry": "2027-02-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWG",
+        "name": "iShares MSCI Germany",
+        "category": "Global ETF",
+        "price": 44.04,
+        "target": 50.646,
+        "stop": 40.9572,
+        "tier": "Strong Buy",
+        "score": 79.4,
+        "pool": "global",
+        "expiry": "2027-02-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PALL",
+        "name": "Aberdeen Palladium ETF",
+        "category": "Metal/Commodity",
+        "price": 24.23,
+        "target": 27.2877,
+        "stop": 22.7762,
+        "tier": "Strong Buy",
+        "score": 65.0,
+        "pool": "metal",
+        "expiry": "2026-11-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOYB",
+        "name": "Teucrium Soybean",
+        "category": "Metal/Commodity",
+        "price": 26.16,
+        "target": 28.776,
+        "stop": 24.5904,
+        "tier": "Strong Buy",
+        "score": 63.6,
+        "pool": "metal",
+        "expiry": "2026-11-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
