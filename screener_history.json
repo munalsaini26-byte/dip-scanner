@@ -6588,5 +6588,85 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-08-21",
+    "picks": [
+      {
+        "ticker": "URBANCO.NS",
+        "name": "URBANCO.NS",
+        "category": "Indian Stock",
+        "price": 155.47,
+        "target": 186.73,
+        "stop": 143.0324,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-10-20",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HONASA.NS",
+        "name": "HONASA.NS",
+        "category": "Indian Stock",
+        "price": 490.2,
+        "target": 563.73,
+        "stop": 450.984,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-20",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EEM",
+        "name": "iShares MSCI Emerging Markets",
+        "category": "Global ETF",
+        "price": 66.62,
+        "target": 76.613,
+        "stop": 61.9566,
+        "tier": "Strong Buy",
+        "score": 73.9,
+        "pool": "global",
+        "expiry": "2027-02-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VWO",
+        "name": "Vanguard Emerging Markets",
+        "category": "Global ETF",
+        "price": 60.02,
+        "target": 69.023,
+        "stop": 55.8186,
+        "tier": "Strong Buy",
+        "score": 73.7,
+        "pool": "global",
+        "expiry": "2027-02-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLK",
+        "name": "Technology Select SPDR",
+        "category": "Global ETF",
+        "price": 183.1,
+        "target": 210.565,
+        "stop": 170.283,
+        "tier": "Strong Buy",
+        "score": 71.3,
+        "pool": "global",
+        "expiry": "2027-02-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
