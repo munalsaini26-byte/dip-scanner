@@ -6668,5 +6668,115 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-08-24",
+    "picks": [
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 49.45,
+        "target": 56.8675,
+        "stop": 45.9885,
+        "tier": "Strong Buy",
+        "score": 112.5,
+        "pool": "global",
+        "expiry": "2027-02-20",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AEGISLOG.NS",
+        "name": "AEGISLOG.NS",
+        "category": "Indian Stock",
+        "price": 1379.6,
+        "target": 1586.54,
+        "stop": 1269.232,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-23",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PVRINOX.NS",
+        "name": "PVRINOX.NS",
+        "category": "Indian Stock",
+        "price": 1230.0,
+        "target": 1414.5,
+        "stop": 1131.6,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-10-23",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EIDPARRY.NS",
+        "name": "EIDPARRY.NS",
+        "category": "Indian Stock",
+        "price": 850.35,
+        "target": 977.9025,
+        "stop": 782.322,
+        "tier": "Strong Buy",
+        "score": 87.8,
+        "pool": "indian",
+        "expiry": "2026-10-23",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKW",
+        "name": "ARK Next Gen Internet ETF",
+        "category": "Global ETF",
+        "price": 155.49,
+        "target": 178.8135,
+        "stop": 144.6057,
+        "tier": "Strong Buy",
+        "score": 86.2,
+        "pool": "global",
+        "expiry": "2027-02-20",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "FINX",
+        "name": "Global X Fintech ETF",
+        "category": "Global ETF",
+        "price": 27.553,
+        "target": 31.6859,
+        "stop": 25.6243,
+        "tier": "Strong Buy",
+        "score": 82.1,
+        "pool": "global",
+        "expiry": "2027-02-20",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CORN",
+        "name": "Teucrium Corn",
+        "category": "Metal/Commodity",
+        "price": 19.01,
+        "target": 20.911,
+        "stop": 17.8694,
+        "tier": "Strong Buy",
+        "score": 76.8,
+        "pool": "metal",
+        "expiry": "2026-11-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
