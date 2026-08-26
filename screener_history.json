@@ -6948,5 +6948,100 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-08-26",
+    "picks": [
+      {
+        "ticker": "XLV",
+        "name": "Health Care Select SPDR",
+        "category": "Global ETF",
+        "price": 175.29,
+        "target": 201.5835,
+        "stop": 163.0197,
+        "tier": "Strong Buy",
+        "score": 87.4,
+        "pool": "global",
+        "expiry": "2027-02-22",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CUB.NS",
+        "name": "CUB.NS",
+        "category": "Indian Stock",
+        "price": 224.85,
+        "target": 258.5775,
+        "stop": 206.862,
+        "tier": "Strong Buy",
+        "score": 86.4,
+        "pool": "indian",
+        "expiry": "2026-10-25",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "NETWEB.NS",
+        "name": "NETWEB.NS",
+        "category": "Indian Stock",
+        "price": 5348.0,
+        "target": 6150.2,
+        "stop": 4920.16,
+        "tier": "Strong Buy",
+        "score": 85.9,
+        "pool": "indian",
+        "expiry": "2026-10-25",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ACE.NS",
+        "name": "ACE.NS",
+        "category": "Indian Stock",
+        "price": 1164.2,
+        "target": 1338.83,
+        "stop": 1071.064,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2026-10-25",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWC",
+        "name": "iShares MSCI Canada",
+        "category": "Global ETF",
+        "price": 62.64,
+        "target": 72.036,
+        "stop": 58.2552,
+        "tier": "Strong Buy",
+        "score": 83.8,
+        "pool": "global",
+        "expiry": "2027-02-22",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWA",
+        "name": "iShares MSCI Australia",
+        "category": "Global ETF",
+        "price": 30.43,
+        "target": 34.9945,
+        "stop": 28.2999,
+        "tier": "Strong Buy",
+        "score": 83.7,
+        "pool": "global",
+        "expiry": "2027-02-22",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
