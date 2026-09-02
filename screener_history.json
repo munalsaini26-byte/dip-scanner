@@ -6700,7 +6700,7 @@
         "expiry": "2026-10-23",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "PVRINOX.NS",
@@ -7259,8 +7259,8 @@
         "pool": "metal",
         "expiry": "2026-11-26",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "ARKK",
@@ -7553,6 +7553,116 @@
         "score": 67.2,
         "pool": "global",
         "expiry": "2027-02-28",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-02",
+    "picks": [
+      {
+        "ticker": "AEGISVOPAK.NS",
+        "name": "AEGISVOPAK.NS",
+        "category": "Indian Stock",
+        "price": 286.05,
+        "target": 328.9575,
+        "stop": 263.166,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-11-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ATHERENERG.NS",
+        "name": "ATHERENERG.NS",
+        "category": "Indian Stock",
+        "price": 1662.0,
+        "target": 1911.3,
+        "stop": 1529.04,
+        "tier": "Strong Buy",
+        "score": 96.0,
+        "pool": "indian",
+        "expiry": "2026-11-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BEML.NS",
+        "name": "BEML.NS",
+        "category": "Indian Stock",
+        "price": 2031.4,
+        "target": 2336.11,
+        "stop": 1868.888,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-11-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KSA",
+        "name": "iShares MSCI Saudi Arabia",
+        "category": "Global ETF",
+        "price": 38.62,
+        "target": 44.413,
+        "stop": 35.9166,
+        "tier": "Strong Buy",
+        "score": 84.5,
+        "pool": "global",
+        "expiry": "2027-03-01",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "WEAT",
+        "name": "Teucrium Wheat",
+        "category": "Metal/Commodity",
+        "price": 28.0,
+        "target": 30.8,
+        "stop": 26.32,
+        "tier": "Strong Buy",
+        "score": 82.9,
+        "pool": "metal",
+        "expiry": "2026-12-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOYB",
+        "name": "Teucrium Soybean",
+        "category": "Metal/Commodity",
+        "price": 27.78,
+        "target": 30.558,
+        "stop": 26.1132,
+        "tier": "Strong Buy",
+        "score": 78.5,
+        "pool": "metal",
+        "expiry": "2026-12-01",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWU",
+        "name": "iShares MSCI UK",
+        "category": "Global ETF",
+        "price": 48.19,
+        "target": 55.4185,
+        "stop": 44.8167,
+        "tier": "Watch",
+        "score": 51.8,
+        "pool": "global",
+        "expiry": "2027-03-01",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
