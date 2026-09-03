@@ -6700,7 +6700,7 @@
         "expiry": "2026-10-23",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "PVRINOX.NS",
@@ -7134,8 +7134,8 @@
         "pool": "global",
         "expiry": "2027-02-23",
         "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "DBA",
@@ -7260,7 +7260,7 @@
         "expiry": "2026-11-26",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "ARKK",
@@ -7663,6 +7663,116 @@
         "score": 51.8,
         "pool": "global",
         "expiry": "2027-03-01",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-03",
+    "picks": [
+      {
+        "ticker": "OBEROIRLTY.NS",
+        "name": "OBEROIRLTY.NS",
+        "category": "Indian Stock",
+        "price": 1900.0,
+        "target": 2185.0,
+        "stop": 1748.0,
+        "tier": "Strong Buy",
+        "score": 98.0,
+        "pool": "indian",
+        "expiry": "2026-11-02",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KIRLOSENG.NS",
+        "name": "KIRLOSENG.NS",
+        "category": "Indian Stock",
+        "price": 2257.0,
+        "target": 2595.55,
+        "stop": 2076.44,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-11-02",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity",
+        "category": "Metal/Commodity",
+        "price": 34.89,
+        "target": 38.379,
+        "stop": 32.7966,
+        "tier": "Strong Buy",
+        "score": 78.4,
+        "pool": "metal",
+        "expiry": "2026-12-02",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLV",
+        "name": "Health Care Select SPDR",
+        "category": "Global ETF",
+        "price": 172.95,
+        "target": 198.8925,
+        "stop": 160.8435,
+        "tier": "Strong Buy",
+        "score": 73.5,
+        "pool": "global",
+        "expiry": "2027-03-02",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWA",
+        "name": "iShares MSCI Australia",
+        "category": "Global ETF",
+        "price": 30.03,
+        "target": 34.5345,
+        "stop": 27.9279,
+        "tier": "Strong Buy",
+        "score": 60.2,
+        "pool": "global",
+        "expiry": "2027-03-02",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 57.66,
+        "target": 66.309,
+        "stop": 53.6238,
+        "tier": "Watch",
+        "score": 54.7,
+        "pool": "global",
+        "expiry": "2027-03-02",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "FINX",
+        "name": "Global X Fintech ETF",
+        "category": "Global ETF",
+        "price": 26.804,
+        "target": 30.8246,
+        "stop": 24.9277,
+        "tier": "Watch",
+        "score": 53.8,
+        "pool": "global",
+        "expiry": "2027-03-02",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
