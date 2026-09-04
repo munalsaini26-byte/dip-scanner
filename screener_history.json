@@ -6700,7 +6700,7 @@
         "expiry": "2026-10-23",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "PVRINOX.NS",
@@ -7135,7 +7135,7 @@
         "expiry": "2027-02-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "DBA",
@@ -7260,7 +7260,7 @@
         "expiry": "2026-11-26",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "ARKK",
@@ -7773,6 +7773,86 @@
         "score": 53.8,
         "pool": "global",
         "expiry": "2027-03-02",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-04",
+    "picks": [
+      {
+        "ticker": "GLAND.NS",
+        "name": "GLAND.NS",
+        "category": "Indian Stock",
+        "price": 2935.0,
+        "target": 3375.25,
+        "stop": 2700.2,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-11-03",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ACMESOLAR.NS",
+        "name": "ACMESOLAR.NS",
+        "category": "Indian Stock",
+        "price": 416.8,
+        "target": 479.32,
+        "stop": 383.456,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-11-03",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BRIGADE.NS",
+        "name": "BRIGADE.NS",
+        "category": "Indian Stock",
+        "price": 698.9,
+        "target": 803.735,
+        "stop": 642.988,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2026-11-03",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IVV",
+        "name": "iShares Core S&P 500",
+        "category": "Global ETF",
+        "price": 777.13,
+        "target": 893.6995,
+        "stop": 722.7309,
+        "tier": "Strong Buy",
+        "score": 69.2,
+        "pool": "global",
+        "expiry": "2027-03-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EFA",
+        "name": "iShares MSCI EAFE",
+        "category": "Global ETF",
+        "price": 108.21,
+        "target": 124.4415,
+        "stop": 100.6353,
+        "tier": "Strong Buy",
+        "score": 68.8,
+        "pool": "global",
+        "expiry": "2027-03-03",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
