@@ -7135,7 +7135,7 @@
         "expiry": "2027-02-23",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "DBA",
@@ -7260,7 +7260,7 @@
         "expiry": "2026-11-26",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "ARKK",
@@ -8008,6 +8008,101 @@
         "score": 70.3,
         "pool": "global",
         "expiry": "2027-03-06",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-08",
+    "picks": [
+      {
+        "ticker": "DATAPATTNS.NS",
+        "name": "DATAPATTNS.NS",
+        "category": "Indian Stock",
+        "price": 4943.6001,
+        "target": 5685.1401,
+        "stop": 4548.1121,
+        "tier": "Strong Buy",
+        "score": 94.9,
+        "pool": "indian",
+        "expiry": "2026-11-07",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IFCI.NS",
+        "name": "IFCI.NS",
+        "category": "Indian Stock",
+        "price": 92.48,
+        "target": 106.352,
+        "stop": 85.0816,
+        "tier": "Strong Buy",
+        "score": 94.5,
+        "pool": "indian",
+        "expiry": "2026-11-07",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "NIACL.NS",
+        "name": "NIACL.NS",
+        "category": "Indian Stock",
+        "price": 204.01,
+        "target": 234.6115,
+        "stop": 187.6892,
+        "tier": "Strong Buy",
+        "score": 94.5,
+        "pool": "indian",
+        "expiry": "2026-11-07",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EEM",
+        "name": "iShares MSCI Emerging Markets",
+        "category": "Global ETF",
+        "price": 68.7,
+        "target": 79.005,
+        "stop": 63.891,
+        "tier": "Strong Buy",
+        "score": 89.9,
+        "pool": "global",
+        "expiry": "2027-03-07",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "VWO",
+        "name": "Vanguard Emerging Markets",
+        "category": "Global ETF",
+        "price": 61.44,
+        "target": 70.656,
+        "stop": 57.1392,
+        "tier": "Strong Buy",
+        "score": 74.3,
+        "pool": "global",
+        "expiry": "2027-03-07",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWJ",
+        "name": "iShares MSCI Japan",
+        "category": "Global ETF",
+        "price": 98.28,
+        "target": 113.022,
+        "stop": 91.4004,
+        "tier": "Strong Buy",
+        "score": 67.1,
+        "pool": "global",
+        "expiry": "2027-03-07",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
