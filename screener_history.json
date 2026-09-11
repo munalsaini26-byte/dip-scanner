@@ -7824,8 +7824,8 @@
         "pool": "indian",
         "expiry": "2026-11-03",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "IVV",
@@ -7979,8 +7979,8 @@
         "pool": "metal",
         "expiry": "2026-12-06",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "EWC",
@@ -8044,8 +8044,8 @@
         "pool": "indian",
         "expiry": "2026-11-07",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "NIACL.NS",
@@ -8414,6 +8414,71 @@
         "pool": "global",
         "expiry": "2027-03-09",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-11",
+    "picks": [
+      {
+        "ticker": "FIVESTAR.NS",
+        "name": "FIVESTAR.NS",
+        "category": "Indian Stock",
+        "price": 552.4,
+        "target": 657.613,
+        "stop": 508.208,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "indian",
+        "expiry": "2026-11-10",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "OIL.NS",
+        "name": "OIL.NS",
+        "category": "Indian Stock",
+        "price": 487.05,
+        "target": 560.1075,
+        "stop": 448.086,
+        "tier": "Strong Buy",
+        "score": 90.9,
+        "pool": "indian",
+        "expiry": "2026-11-10",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DJP",
+        "name": "iPath Bloomberg Commodity",
+        "category": "Metal/Commodity",
+        "price": 53.38,
+        "target": 58.718,
+        "stop": 50.1772,
+        "tier": "Strong Buy",
+        "score": 77.9,
+        "pool": "metal",
+        "expiry": "2026-12-10",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity",
+        "category": "Metal/Commodity",
+        "price": 36.94,
+        "target": 40.634,
+        "stop": 34.7236,
+        "tier": "Strong Buy",
+        "score": 76.8,
+        "pool": "metal",
+        "expiry": "2026-12-10",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
