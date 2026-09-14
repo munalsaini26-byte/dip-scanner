@@ -7825,7 +7825,7 @@
         "expiry": "2026-11-03",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "IVV",
@@ -7980,7 +7980,7 @@
         "expiry": "2026-12-06",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "EWC",
@@ -8045,7 +8045,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "NIACL.NS",
@@ -8184,8 +8184,8 @@
         "pool": "indian",
         "expiry": "2026-11-08",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "target",
+        "alert_days": 1
       },
       {
         "ticker": "BNO",
@@ -8479,6 +8479,86 @@
         "pool": "metal",
         "expiry": "2026-12-10",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "picks": [
+      {
+        "ticker": "SOYB",
+        "name": "Teucrium Soybean",
+        "category": "Metal/Commodity",
+        "price": 27.5,
+        "target": 30.25,
+        "stop": 25.85,
+        "tier": "Strong Buy",
+        "score": 83.6,
+        "pool": "metal",
+        "expiry": "2026-12-13",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 57.25,
+        "target": 65.8375,
+        "stop": 53.2425,
+        "tier": "Watch",
+        "score": 49.8,
+        "pool": "global",
+        "expiry": "2027-03-13",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CIBR",
+        "name": "First Trust Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 94.4,
+        "target": 108.56,
+        "stop": 87.792,
+        "tier": "Watch",
+        "score": 47.6,
+        "pool": "global",
+        "expiry": "2027-03-13",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SPY",
+        "name": "SPDR S&P 500 ETF",
+        "category": "Global ETF",
+        "price": 764.29,
+        "target": 878.9335,
+        "stop": 710.7897,
+        "tier": "Watch",
+        "score": 46.6,
+        "pool": "global",
+        "expiry": "2027-03-13",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IVV",
+        "name": "iShares Core S&P 500",
+        "category": "Global ETF",
+        "price": 767.92,
+        "target": 883.108,
+        "stop": 714.1656,
+        "tier": "Watch",
+        "score": 44.0,
+        "pool": "global",
+        "expiry": "2027-03-13",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
