@@ -7825,7 +7825,7 @@
         "expiry": "2026-11-03",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "IVV",
@@ -7980,7 +7980,7 @@
         "expiry": "2026-12-06",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "EWC",
@@ -8030,7 +8030,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "IFCI.NS",
@@ -8045,7 +8045,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "NIACL.NS",
@@ -8060,7 +8060,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "EEM",
@@ -8155,7 +8155,7 @@
         "expiry": "2026-11-08",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "PCBL.NS",
@@ -8185,7 +8185,7 @@
         "expiry": "2026-11-08",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "BNO",
@@ -8199,8 +8199,8 @@
         "pool": "metal",
         "expiry": "2026-12-08",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "target",
+        "alert_days": 1
       },
       {
         "ticker": "USO",
@@ -8214,8 +8214,8 @@
         "pool": "metal",
         "expiry": "2026-12-08",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "target",
+        "alert_days": 1
       },
       {
         "ticker": "VEA",
@@ -8653,6 +8653,56 @@
         "score": 47.9,
         "pool": "global",
         "expiry": "2027-03-14",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-16",
+    "picks": [
+      {
+        "ticker": "PAYTM.NS",
+        "name": "PAYTM.NS",
+        "category": "Indian Stock",
+        "price": 1790.0,
+        "target": 2058.5,
+        "stop": 1646.8,
+        "tier": "Strong Buy",
+        "score": 82.5,
+        "pool": "indian",
+        "expiry": "2026-11-15",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "FSL.NS",
+        "category": "Indian Stock",
+        "price": 277.75,
+        "target": 367.7732,
+        "stop": 255.53,
+        "tier": "Strong Buy",
+        "score": 79.5,
+        "pool": "indian",
+        "expiry": "2026-11-15",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWJ",
+        "name": "iShares MSCI Japan",
+        "category": "Global ETF",
+        "price": 96.92,
+        "target": 111.458,
+        "stop": 90.1356,
+        "tier": "Watch",
+        "score": 43.5,
+        "pool": "global",
+        "expiry": "2027-03-15",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
