@@ -7825,7 +7825,7 @@
         "expiry": "2026-11-03",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "IVV",
@@ -7980,7 +7980,7 @@
         "expiry": "2026-12-06",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "EWC",
@@ -8030,7 +8030,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "IFCI.NS",
@@ -8045,7 +8045,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "NIACL.NS",
@@ -8060,7 +8060,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "EEM",
@@ -8155,7 +8155,7 @@
         "expiry": "2026-11-08",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "PCBL.NS",
@@ -8185,7 +8185,7 @@
         "expiry": "2026-11-08",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "BNO",
@@ -8200,7 +8200,7 @@
         "expiry": "2026-12-08",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "USO",
@@ -8215,7 +8215,7 @@
         "expiry": "2026-12-08",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "VEA",
@@ -8703,6 +8703,101 @@
         "score": 43.5,
         "pool": "global",
         "expiry": "2027-03-15",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-17",
+    "picks": [
+      {
+        "ticker": "SYRMA.NS",
+        "name": "SYRMA.NS",
+        "category": "Indian Stock",
+        "price": 1617.7,
+        "target": 1860.355,
+        "stop": 1488.284,
+        "tier": "Strong Buy",
+        "score": 79.5,
+        "pool": "indian",
+        "expiry": "2026-11-16",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ACE.NS",
+        "name": "ACE.NS",
+        "category": "Indian Stock",
+        "price": 1205.6,
+        "target": 1386.44,
+        "stop": 1109.152,
+        "tier": "Strong Buy",
+        "score": 75.0,
+        "pool": "indian",
+        "expiry": "2026-11-16",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PCBL.NS",
+        "name": "PCBL.NS",
+        "category": "Indian Stock",
+        "price": 329.4,
+        "target": 401.2002,
+        "stop": 303.048,
+        "tier": "Strong Buy",
+        "score": 72.5,
+        "pool": "indian",
+        "expiry": "2026-11-16",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "USO",
+        "name": "United States Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 156.17,
+        "target": 171.787,
+        "stop": 146.7998,
+        "tier": "Strong Buy",
+        "score": 70.8,
+        "pool": "metal",
+        "expiry": "2026-12-16",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWZ",
+        "name": "iShares MSCI Brazil",
+        "category": "Global ETF",
+        "price": 37.48,
+        "target": 43.102,
+        "stop": 34.8564,
+        "tier": "Strong Buy",
+        "score": 65.5,
+        "pool": "global",
+        "expiry": "2027-03-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 47.85,
+        "target": 55.0275,
+        "stop": 44.5005,
+        "tier": "Strong Buy",
+        "score": 63.6,
+        "pool": "global",
+        "expiry": "2027-03-16",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
