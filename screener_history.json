@@ -8030,7 +8030,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "IFCI.NS",
@@ -8060,7 +8060,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "EEM",
@@ -8155,7 +8155,7 @@
         "expiry": "2026-11-08",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "PCBL.NS",
@@ -8185,7 +8185,7 @@
         "expiry": "2026-11-08",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "BNO",
@@ -8200,7 +8200,7 @@
         "expiry": "2026-12-08",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "USO",
@@ -8215,7 +8215,7 @@
         "expiry": "2026-12-08",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "VEA",
@@ -8798,6 +8798,176 @@
         "score": 63.6,
         "pool": "global",
         "expiry": "2027-03-16",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-18",
+    "picks": [
+      {
+        "ticker": "JSL.NS",
+        "name": "JSL.NS",
+        "category": "Indian Stock",
+        "price": 752.15,
+        "target": 864.9725,
+        "stop": 691.978,
+        "tier": "Strong Buy",
+        "score": 92.6,
+        "pool": "indian",
+        "expiry": "2026-11-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PVRINOX.NS",
+        "name": "PVRINOX.NS",
+        "category": "Indian Stock",
+        "price": 1333.9,
+        "target": 1533.985,
+        "stop": 1227.188,
+        "tier": "Strong Buy",
+        "score": 91.7,
+        "pool": "indian",
+        "expiry": "2026-11-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "FINCABLES.NS",
+        "name": "FINCABLES.NS",
+        "category": "Indian Stock",
+        "price": 1410.0,
+        "target": 1621.5,
+        "stop": 1297.2,
+        "tier": "Strong Buy",
+        "score": 90.5,
+        "pool": "indian",
+        "expiry": "2026-11-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ANTHEM.NS",
+        "name": "ANTHEM.NS",
+        "category": "Indian Stock",
+        "price": 938.25,
+        "target": 1078.9875,
+        "stop": 863.19,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2026-11-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BNO",
+        "name": "Brent Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 60.91,
+        "target": 67.001,
+        "stop": 57.2554,
+        "tier": "Strong Buy",
+        "score": 83.0,
+        "pool": "metal",
+        "expiry": "2026-12-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CORN",
+        "name": "Teucrium Corn",
+        "category": "Metal/Commodity",
+        "price": 19.83,
+        "target": 21.813,
+        "stop": 18.6402,
+        "tier": "Strong Buy",
+        "score": 80.1,
+        "pool": "metal",
+        "expiry": "2026-12-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UAE",
+        "name": "iShares MSCI UAE",
+        "category": "Global ETF",
+        "price": 20.2,
+        "target": 23.23,
+        "stop": 18.786,
+        "tier": "Strong Buy",
+        "score": 76.1,
+        "pool": "global",
+        "expiry": "2027-03-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKW",
+        "name": "ARK Next Gen Internet ETF",
+        "category": "Global ETF",
+        "price": 157.01,
+        "target": 180.5615,
+        "stop": 146.0193,
+        "tier": "Watch",
+        "score": 54.1,
+        "pool": "global",
+        "expiry": "2027-03-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "QQQ",
+        "name": "Invesco QQQ (Nasdaq 100)",
+        "category": "Global ETF",
+        "price": 716.92,
+        "target": 824.458,
+        "stop": 666.7356,
+        "tier": "Watch",
+        "score": 51.8,
+        "pool": "global",
+        "expiry": "2027-03-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLK",
+        "name": "Technology Select SPDR",
+        "category": "Global ETF",
+        "price": 188.06,
+        "target": 216.269,
+        "stop": 174.8958,
+        "tier": "Watch",
+        "score": 51.3,
+        "pool": "global",
+        "expiry": "2027-03-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWY",
+        "name": "iShares MSCI South Korea",
+        "category": "Global ETF",
+        "price": 182.39,
+        "target": 219.2,
+        "stop": 169.6227,
+        "tier": "Watch",
+        "score": 46.0,
+        "pool": "global",
+        "expiry": "2027-03-17",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
