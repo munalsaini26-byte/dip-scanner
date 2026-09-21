@@ -8030,7 +8030,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "IFCI.NS",
@@ -8060,7 +8060,7 @@
         "expiry": "2026-11-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "EEM",
@@ -8155,7 +8155,7 @@
         "expiry": "2026-11-08",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "PCBL.NS",
@@ -8200,7 +8200,7 @@
         "expiry": "2026-12-08",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "USO",
@@ -8215,7 +8215,7 @@
         "expiry": "2026-12-08",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "VEA",
@@ -8968,6 +8968,101 @@
         "score": 46.0,
         "pool": "global",
         "expiry": "2027-03-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-21",
+    "picks": [
+      {
+        "ticker": "USHAMART.NS",
+        "name": "USHAMART.NS",
+        "category": "Indian Stock",
+        "price": 530.3,
+        "target": 609.845,
+        "stop": 487.876,
+        "tier": "Strong Buy",
+        "score": 95.4,
+        "pool": "indian",
+        "expiry": "2026-11-20",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "MEDANTA.NS",
+        "name": "MEDANTA.NS",
+        "category": "Indian Stock",
+        "price": 1501.8,
+        "target": 1727.07,
+        "stop": 1381.656,
+        "tier": "Strong Buy",
+        "score": 91.6,
+        "pool": "indian",
+        "expiry": "2026-11-20",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AUROPHARMA.NS",
+        "name": "AUROPHARMA.NS",
+        "category": "Indian Stock",
+        "price": 1718.0,
+        "target": 1975.7,
+        "stop": 1580.56,
+        "tier": "Strong Buy",
+        "score": 89.7,
+        "pool": "indian",
+        "expiry": "2026-11-20",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DJP",
+        "name": "iPath Bloomberg Commodity",
+        "category": "Metal/Commodity",
+        "price": 52.7,
+        "target": 57.97,
+        "stop": 49.538,
+        "tier": "Strong Buy",
+        "score": 75.8,
+        "pool": "metal",
+        "expiry": "2026-12-20",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SMH",
+        "name": "VanEck Semiconductor ETF",
+        "category": "Global ETF",
+        "price": 573.0,
+        "target": 668.91,
+        "stop": 532.89,
+        "tier": "Strong Buy",
+        "score": 62.8,
+        "pool": "global",
+        "expiry": "2027-03-20",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOXX",
+        "name": "iShares Semiconductor ETF",
+        "category": "Global ETF",
+        "price": 533.07,
+        "target": 654.582,
+        "stop": 495.7551,
+        "tier": "Strong Buy",
+        "score": 61.6,
+        "pool": "global",
+        "expiry": "2027-03-20",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
