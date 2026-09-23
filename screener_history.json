@@ -9208,5 +9208,85 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-09-23",
+    "picks": [
+      {
+        "ticker": "ARKK",
+        "name": "ARK Innovation ETF",
+        "category": "Global ETF",
+        "price": 90.72,
+        "target": 104.328,
+        "stop": 84.3696,
+        "tier": "Strong Buy",
+        "score": 101.2,
+        "pool": "global",
+        "expiry": "2027-03-22",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 122.98,
+        "target": 141.427,
+        "stop": 114.3714,
+        "tier": "Strong Buy",
+        "score": 99.0,
+        "pool": "global",
+        "expiry": "2027-03-22",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "POONAWALLA.NS",
+        "name": "POONAWALLA.NS",
+        "category": "Indian Stock",
+        "price": 478.85,
+        "target": 550.6775,
+        "stop": 440.542,
+        "tier": "Strong Buy",
+        "score": 97.3,
+        "pool": "indian",
+        "expiry": "2026-11-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "WHIRLPOOL.NS",
+        "name": "WHIRLPOOL.NS",
+        "category": "Indian Stock",
+        "price": 865.25,
+        "target": 1412.4539,
+        "stop": 796.03,
+        "tier": "Strong Buy",
+        "score": 93.2,
+        "pool": "indian",
+        "expiry": "2026-11-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "JYOTICNC.NS",
+        "name": "JYOTICNC.NS",
+        "category": "Indian Stock",
+        "price": 1100.8,
+        "target": 1265.92,
+        "stop": 1012.736,
+        "tier": "Strong Buy",
+        "score": 91.8,
+        "pool": "indian",
+        "expiry": "2026-11-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
