@@ -9288,5 +9288,85 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-09-24",
+    "picks": [
+      {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity",
+        "category": "Metal/Commodity",
+        "price": 36.15,
+        "target": 39.765,
+        "stop": 33.981,
+        "tier": "Strong Buy",
+        "score": 95.0,
+        "pool": "metal",
+        "expiry": "2026-12-23",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CPER",
+        "name": "US Copper ETF",
+        "category": "Metal/Commodity",
+        "price": 40.61,
+        "target": 44.671,
+        "stop": 38.1734,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "metal",
+        "expiry": "2026-12-23",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CAPLIPOINT.NS",
+        "name": "CAPLIPOINT.NS",
+        "category": "Indian Stock",
+        "price": 2867.3999,
+        "target": 3297.5099,
+        "stop": 2638.0079,
+        "tier": "Strong Buy",
+        "score": 82.5,
+        "pool": "indian",
+        "expiry": "2026-11-23",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "RBLBANK.NS",
+        "name": "RBLBANK.NS",
+        "category": "Indian Stock",
+        "price": 412.75,
+        "target": 474.6625,
+        "stop": 379.73,
+        "tier": "Strong Buy",
+        "score": 78.8,
+        "pool": "indian",
+        "expiry": "2026-11-23",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SHYAMMETL.NS",
+        "name": "SHYAMMETL.NS",
+        "category": "Indian Stock",
+        "price": 1097.9,
+        "target": 1262.585,
+        "stop": 1010.068,
+        "tier": "Strong Buy",
+        "score": 78.8,
+        "pool": "indian",
+        "expiry": "2026-11-23",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
