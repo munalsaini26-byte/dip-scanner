@@ -9368,5 +9368,85 @@
         "alert_days": 0
       }
     ]
+  },
+  {
+    "date": "2026-09-25",
+    "picks": [
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 53.53,
+        "target": 61.5595,
+        "stop": 49.7829,
+        "tier": "Strong Buy",
+        "score": 109.8,
+        "pool": "global",
+        "expiry": "2027-03-24",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "USO",
+        "name": "United States Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 153.09,
+        "target": 168.399,
+        "stop": 143.9046,
+        "tier": "Strong Buy",
+        "score": 95.0,
+        "pool": "metal",
+        "expiry": "2026-12-24",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "LALPATHLAB.NS",
+        "name": "LALPATHLAB.NS",
+        "category": "Indian Stock",
+        "price": 1952.3,
+        "target": 2245.145,
+        "stop": 1796.116,
+        "tier": "Strong Buy",
+        "score": 80.9,
+        "pool": "indian",
+        "expiry": "2026-11-24",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "SONACOMS.NS",
+        "category": "Indian Stock",
+        "price": 824.5,
+        "target": 948.175,
+        "stop": 758.54,
+        "tier": "Strong Buy",
+        "score": 78.8,
+        "pool": "indian",
+        "expiry": "2026-11-24",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KAYNES.NS",
+        "name": "KAYNES.NS",
+        "category": "Indian Stock",
+        "price": 3650.0,
+        "target": 4197.5,
+        "stop": 3358.0,
+        "tier": "Strong Buy",
+        "score": 75.8,
+        "pool": "indian",
+        "expiry": "2026-11-24",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
   }
 ]
