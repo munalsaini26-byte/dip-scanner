@@ -9114,8 +9114,8 @@
         "pool": "indian",
         "expiry": "2026-11-21",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "SOYB",
@@ -9443,6 +9443,101 @@
         "score": 75.8,
         "pool": "indian",
         "expiry": "2026-11-24",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-28",
+    "picks": [
+      {
+        "ticker": "BNO",
+        "name": "Brent Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 59.65,
+        "target": 65.615,
+        "stop": 56.071,
+        "tier": "Strong Buy",
+        "score": 92.5,
+        "pool": "metal",
+        "expiry": "2026-12-27",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLK",
+        "name": "Technology Select SPDR",
+        "category": "Global ETF",
+        "price": 196.27,
+        "target": 225.7105,
+        "stop": 182.5311,
+        "tier": "Strong Buy",
+        "score": 83.2,
+        "pool": "global",
+        "expiry": "2027-03-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UAE",
+        "name": "iShares MSCI UAE",
+        "category": "Global ETF",
+        "price": 20.24,
+        "target": 23.276,
+        "stop": 18.8232,
+        "tier": "Strong Buy",
+        "score": 76.0,
+        "pool": "global",
+        "expiry": "2027-03-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "QQQ",
+        "name": "Invesco QQQ (Nasdaq 100)",
+        "category": "Global ETF",
+        "price": 744.5,
+        "target": 856.175,
+        "stop": 692.385,
+        "tier": "Strong Buy",
+        "score": 75.3,
+        "pool": "global",
+        "expiry": "2027-03-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKW",
+        "name": "ARK Next Gen Internet ETF",
+        "category": "Global ETF",
+        "price": 163.88,
+        "target": 188.462,
+        "stop": 152.4084,
+        "tier": "Strong Buy",
+        "score": 73.5,
+        "pool": "global",
+        "expiry": "2027-03-27",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CASTROLIND.NS",
+        "name": "CASTROLIND.NS",
+        "category": "Indian Stock",
+        "price": 201.04,
+        "target": 231.196,
+        "stop": 184.9568,
+        "tier": "Strong Buy",
+        "score": 71.5,
+        "pool": "indian",
+        "expiry": "2026-11-27",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
