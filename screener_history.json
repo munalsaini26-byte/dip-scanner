@@ -9115,7 +9115,7 @@
         "expiry": "2026-11-21",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "SOYB",
@@ -9399,8 +9399,8 @@
         "pool": "metal",
         "expiry": "2026-12-24",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "LALPATHLAB.NS",
@@ -9648,6 +9648,86 @@
         "score": 65.4,
         "pool": "global",
         "expiry": "2027-03-28",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-09-30",
+    "picks": [
+      {
+        "ticker": "CUPID.NS",
+        "name": "CUPID.NS",
+        "category": "Indian Stock",
+        "price": 311.65,
+        "target": 358.3975,
+        "stop": 286.718,
+        "tier": "Strong Buy",
+        "score": 82.5,
+        "pool": "indian",
+        "expiry": "2026-11-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CIBR",
+        "name": "First Trust Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 101.97,
+        "target": 117.2655,
+        "stop": 94.8321,
+        "tier": "Strong Buy",
+        "score": 80.7,
+        "pool": "global",
+        "expiry": "2027-03-29",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SYRMA.NS",
+        "name": "SYRMA.NS",
+        "category": "Indian Stock",
+        "price": 1782.9,
+        "target": 2050.335,
+        "stop": 1640.268,
+        "tier": "Strong Buy",
+        "score": 79.4,
+        "pool": "indian",
+        "expiry": "2026-11-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SAIL.NS",
+        "name": "SAIL.NS",
+        "category": "Indian Stock",
+        "price": 181.49,
+        "target": 208.7135,
+        "stop": 166.9708,
+        "tier": "Strong Buy",
+        "score": 76.5,
+        "pool": "indian",
+        "expiry": "2026-11-29",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AIQ",
+        "name": "Global X AI & Technology ETF",
+        "category": "Global ETF",
+        "price": 65.05,
+        "target": 74.8075,
+        "stop": 60.4965,
+        "tier": "Strong Buy",
+        "score": 68.9,
+        "pool": "global",
+        "expiry": "2027-03-29",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
