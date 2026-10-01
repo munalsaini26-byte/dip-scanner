@@ -9115,7 +9115,7 @@
         "expiry": "2026-11-21",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "SOYB",
@@ -9334,8 +9334,8 @@
         "pool": "indian",
         "expiry": "2026-11-23",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "RBLBANK.NS",
@@ -9400,7 +9400,7 @@
         "expiry": "2026-12-24",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "LALPATHLAB.NS",
@@ -9728,6 +9728,116 @@
         "score": 68.9,
         "pool": "global",
         "expiry": "2027-03-29",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-01",
+    "picks": [
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 121.24,
+        "target": 139.426,
+        "stop": 112.7532,
+        "tier": "Strong Buy",
+        "score": 88.9,
+        "pool": "global",
+        "expiry": "2027-03-30",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "STLTECH.NS",
+        "name": "STLTECH.NS",
+        "category": "Indian Stock",
+        "price": 955.35,
+        "target": 1098.6525,
+        "stop": 878.922,
+        "tier": "Strong Buy",
+        "score": 82.5,
+        "pool": "indian",
+        "expiry": "2026-11-30",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKK",
+        "name": "ARK Innovation ETF",
+        "category": "Global ETF",
+        "price": 89.1,
+        "target": 102.465,
+        "stop": 82.863,
+        "tier": "Strong Buy",
+        "score": 80.3,
+        "pool": "global",
+        "expiry": "2027-03-30",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "TDPOWERSYS.NS",
+        "name": "TDPOWERSYS.NS",
+        "category": "Indian Stock",
+        "price": 792.15,
+        "target": 910.9725,
+        "stop": 728.778,
+        "tier": "Strong Buy",
+        "score": 79.5,
+        "pool": "indian",
+        "expiry": "2026-11-30",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KOTAKBANK.NS",
+        "name": "KOTAKBANK.NS",
+        "category": "Indian Stock",
+        "price": 418.35,
+        "target": 481.1025,
+        "stop": 384.882,
+        "tier": "Strong Buy",
+        "score": 75.0,
+        "pool": "indian",
+        "expiry": "2026-11-30",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HFCL.NS",
+        "name": "HFCL.NS",
+        "category": "Indian Stock",
+        "price": 238.36,
+        "target": 274.114,
+        "stop": 219.2912,
+        "tier": "Strong Buy",
+        "score": 74.2,
+        "pool": "indian",
+        "expiry": "2026-11-30",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWJ",
+        "name": "iShares MSCI Japan",
+        "category": "Global ETF",
+        "price": 97.46,
+        "target": 112.079,
+        "stop": 90.6378,
+        "tier": "Strong Buy",
+        "score": 68.7,
+        "pool": "global",
+        "expiry": "2027-03-30",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
