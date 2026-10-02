@@ -9115,7 +9115,7 @@
         "expiry": "2026-11-21",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "SOYB",
@@ -9335,7 +9335,7 @@
         "expiry": "2026-11-23",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "RBLBANK.NS",
@@ -9400,7 +9400,7 @@
         "expiry": "2026-12-24",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "LALPATHLAB.NS",
@@ -9838,6 +9838,41 @@
         "score": 68.7,
         "pool": "global",
         "expiry": "2027-03-30",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-02",
+    "picks": [
+      {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity",
+        "category": "Metal/Commodity",
+        "price": 36.04,
+        "target": 39.644,
+        "stop": 33.8776,
+        "tier": "Strong Buy",
+        "score": 80.0,
+        "pool": "metal",
+        "expiry": "2026-12-31",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ROBO",
+        "name": "ROBO Global Robotics ETF",
+        "category": "Global ETF",
+        "price": 81.01,
+        "target": 93.1615,
+        "stop": 75.3393,
+        "tier": "Strong Buy",
+        "score": 61.2,
+        "pool": "global",
+        "expiry": "2027-03-31",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
