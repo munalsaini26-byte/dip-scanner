@@ -9335,7 +9335,7 @@
         "expiry": "2026-11-23",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "RBLBANK.NS",
@@ -9400,7 +9400,7 @@
         "expiry": "2026-12-24",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "LALPATHLAB.NS",
@@ -9874,6 +9874,86 @@
         "pool": "global",
         "expiry": "2027-03-31",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-05",
+    "picks": [
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 54.0,
+        "target": 62.1,
+        "stop": 50.22,
+        "tier": "Strong Buy",
+        "score": 95.9,
+        "pool": "global",
+        "expiry": "2027-04-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWY",
+        "name": "iShares MSCI South Korea",
+        "category": "Global ETF",
+        "price": 191.88,
+        "target": 220.662,
+        "stop": 178.4484,
+        "tier": "Strong Buy",
+        "score": 77.3,
+        "pool": "global",
+        "expiry": "2027-04-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CYIENT.NS",
+        "name": "CYIENT.NS",
+        "category": "Indian Stock",
+        "price": 1140.2,
+        "target": 1311.23,
+        "stop": 1048.984,
+        "tier": "Strong Buy",
+        "score": 75.0,
+        "pool": "indian",
+        "expiry": "2026-12-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWZ",
+        "name": "iShares MSCI Brazil",
+        "category": "Global ETF",
+        "price": 38.19,
+        "target": 43.9185,
+        "stop": 35.5167,
+        "tier": "Strong Buy",
+        "score": 73.6,
+        "pool": "global",
+        "expiry": "2027-04-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "USO",
+        "name": "United States Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 147.37,
+        "target": 162.107,
+        "stop": 138.5278,
+        "tier": "Strong Buy",
+        "score": 66.6,
+        "pool": "metal",
+        "expiry": "2027-01-03",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
