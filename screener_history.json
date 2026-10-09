@@ -1,70 +1,5 @@
 [
   {
-    "date": "2026-06-09",
-    "picks": [
-      {
-        "ticker": "ABSLAMC.NS",
-        "name": "ABSLAMC.NS",
-        "category": "Indian Stock",
-        "price": 1065.1,
-        "target": 1224.865,
-        "stop": 979.892,
-        "tier": "Strong Buy",
-        "score": 79.5,
-        "pool": "indian",
-        "expiry": "2026-08-08",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "ASTERDM.NS",
-        "name": "ASTERDM.NS",
-        "category": "Indian Stock",
-        "price": 791.45,
-        "target": 910.1675,
-        "stop": 728.134,
-        "tier": "Strong Buy",
-        "score": 75.0,
-        "pool": "indian",
-        "expiry": "2026-08-08",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "VTI",
-        "name": "Vanguard Total Market",
-        "category": "Global ETF",
-        "price": 364.47,
-        "target": 419.1405,
-        "stop": 338.9571,
-        "tier": "Strong Buy",
-        "score": 60.3,
-        "pool": "global",
-        "expiry": "2026-12-06",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "VOO",
-        "name": "Vanguard S&P 500",
-        "category": "Global ETF",
-        "price": 679.68,
-        "target": 781.632,
-        "stop": 632.1024,
-        "tier": "Watch",
-        "score": 57.8,
-        "pool": "global",
-        "expiry": "2026-12-06",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-06-10",
     "picks": [
       {
@@ -9310,7 +9245,7 @@
         "expiry": "2027-04-03",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "EWY",
@@ -9324,8 +9259,8 @@
         "pool": "global",
         "expiry": "2027-04-03",
         "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "CYIENT.NS",
@@ -9729,6 +9664,131 @@
         "pool": "metal",
         "expiry": "2027-01-06",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-09",
+    "picks": [
+      {
+        "ticker": "XLE",
+        "name": "Energy Select SPDR",
+        "category": "Global ETF",
+        "price": 65.24,
+        "target": 75.026,
+        "stop": 60.6732,
+        "tier": "Strong Buy",
+        "score": 95.7,
+        "pool": "global",
+        "expiry": "2027-04-07",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 125.35,
+        "target": 144.1525,
+        "stop": 116.5755,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "global",
+        "expiry": "2027-04-07",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOXX",
+        "name": "iShares Semiconductor ETF",
+        "category": "Global ETF",
+        "price": 563.28,
+        "target": 647.772,
+        "stop": 523.8504,
+        "tier": "Strong Buy",
+        "score": 77.4,
+        "pool": "global",
+        "expiry": "2027-04-07",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ABDL.NS",
+        "name": "ABDL.NS",
+        "category": "Indian Stock",
+        "price": 711.55,
+        "target": 818.2825,
+        "stop": 654.626,
+        "tier": "Strong Buy",
+        "score": 75.5,
+        "pool": "indian",
+        "expiry": "2026-12-08",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PERSISTENT.NS",
+        "name": "PERSISTENT.NS",
+        "category": "Indian Stock",
+        "price": 5770.0,
+        "target": 6635.5,
+        "stop": 5308.4,
+        "tier": "Strong Buy",
+        "score": 75.0,
+        "pool": "indian",
+        "expiry": "2026-12-08",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KARURVYSYA.NS",
+        "name": "KARURVYSYA.NS",
+        "category": "Indian Stock",
+        "price": 339.9,
+        "target": 390.885,
+        "stop": 312.708,
+        "tier": "Strong Buy",
+        "score": 73.7,
+        "pool": "indian",
+        "expiry": "2026-12-08",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KOTAKBANK.NS",
+        "name": "KOTAKBANK.NS",
+        "category": "Indian Stock",
+        "price": 441.0,
+        "target": 507.15,
+        "stop": 405.72,
+        "tier": "Strong Buy",
+        "score": 71.8,
+        "pool": "indian",
+        "expiry": "2026-12-08",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLP",
+        "name": "Consumer Staples SPDR",
+        "category": "Global ETF",
+        "price": 83.42,
+        "target": 95.933,
+        "stop": 77.5806,
+        "tier": "Strong Buy",
+        "score": 67.6,
+        "pool": "global",
+        "expiry": "2027-04-07",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
