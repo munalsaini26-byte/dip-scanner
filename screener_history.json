@@ -1,70 +1,5 @@
 [
   {
-    "date": "2026-06-11",
-    "picks": [
-      {
-        "ticker": "BALRAMCHIN.NS",
-        "name": "BALRAMCHIN.NS",
-        "category": "Indian Stock",
-        "price": 549.9,
-        "target": 632.385,
-        "stop": 505.908,
-        "tier": "Strong Buy",
-        "score": 77.0,
-        "pool": "indian",
-        "expiry": "2026-08-10",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "BLUEJET.NS",
-        "name": "BLUEJET.NS",
-        "category": "Indian Stock",
-        "price": 498.65,
-        "target": 573.4475,
-        "stop": 458.758,
-        "tier": "Strong Buy",
-        "score": 75.8,
-        "pool": "indian",
-        "expiry": "2026-08-10",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "ABDL.NS",
-        "name": "ABDL.NS",
-        "category": "Indian Stock",
-        "price": 610.2,
-        "target": 701.73,
-        "stop": 561.384,
-        "tier": "Strong Buy",
-        "score": 73.5,
-        "pool": "indian",
-        "expiry": "2026-08-10",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "XLP",
-        "name": "Consumer Staples SPDR",
-        "category": "Global ETF",
-        "price": 85.49,
-        "target": 98.3135,
-        "stop": 79.5057,
-        "tier": "Strong Buy",
-        "score": 64.5,
-        "pool": "global",
-        "expiry": "2026-12-08",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-06-12",
     "picks": [
       {
@@ -9180,7 +9115,7 @@
         "expiry": "2027-04-03",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "EWY",
@@ -9195,7 +9130,7 @@
         "expiry": "2027-04-03",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "CYIENT.NS",
@@ -9430,7 +9365,7 @@
         "expiry": "2026-12-06",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "VTI",
@@ -9788,6 +9723,86 @@
         "score": 75.0,
         "pool": "indian",
         "expiry": "2026-12-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-13",
+    "picks": [
+      {
+        "ticker": "EWZ",
+        "name": "iShares MSCI Brazil",
+        "category": "Global ETF",
+        "price": 43.54,
+        "target": 50.071,
+        "stop": 40.4922,
+        "tier": "Strong Buy",
+        "score": 97.8,
+        "pool": "global",
+        "expiry": "2027-04-11",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "FSL.NS",
+        "name": "FSL.NS",
+        "category": "Indian Stock",
+        "price": 291.75,
+        "target": 359.3569,
+        "stop": 268.41,
+        "tier": "Strong Buy",
+        "score": 82.5,
+        "pool": "indian",
+        "expiry": "2026-12-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "NIACL.NS",
+        "name": "NIACL.NS",
+        "category": "Indian Stock",
+        "price": 191.38,
+        "target": 231.2,
+        "stop": 176.0696,
+        "tier": "Strong Buy",
+        "score": 80.8,
+        "pool": "indian",
+        "expiry": "2026-12-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "USO",
+        "name": "United States Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 151.03,
+        "target": 166.133,
+        "stop": 141.9682,
+        "tier": "Strong Buy",
+        "score": 80.0,
+        "pool": "metal",
+        "expiry": "2027-01-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HCLTECH.NS",
+        "name": "HCLTECH.NS",
+        "category": "Indian Stock",
+        "price": 1326.0,
+        "target": 1679.9579,
+        "stop": 1219.92,
+        "tier": "Strong Buy",
+        "score": 79.5,
+        "pool": "indian",
+        "expiry": "2026-12-12",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
