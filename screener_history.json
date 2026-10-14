@@ -1,175 +1,5 @@
 [
   {
-    "date": "2026-06-12",
-    "picks": [
-      {
-        "ticker": "SOXX",
-        "name": "iShares Semiconductor ETF",
-        "category": "Global ETF",
-        "price": 586.93,
-        "target": 674.9695,
-        "stop": 545.8449,
-        "tier": "Strong Buy",
-        "score": 90.2,
-        "pool": "global",
-        "expiry": "2026-12-09",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "KSA",
-        "name": "iShares MSCI Saudi Arabia",
-        "category": "Global ETF",
-        "price": 39.29,
-        "target": 45.1835,
-        "stop": 36.5397,
-        "tier": "Strong Buy",
-        "score": 87.2,
-        "pool": "global",
-        "expiry": "2026-12-09",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "SMH",
-        "name": "VanEck Semiconductor ETF",
-        "category": "Global ETF",
-        "price": 609.45,
-        "target": 700.8675,
-        "stop": 566.7885,
-        "tier": "Strong Buy",
-        "score": 85.3,
-        "pool": "global",
-        "expiry": "2026-12-09",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "ARKG",
-        "name": "ARK Genomic Revolution ETF",
-        "category": "Global ETF",
-        "price": 33.65,
-        "target": 38.6975,
-        "stop": 31.2945,
-        "tier": "Strong Buy",
-        "score": 84.4,
-        "pool": "global",
-        "expiry": "2026-12-09",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "EWY",
-        "name": "iShares MSCI South Korea",
-        "category": "Global ETF",
-        "price": 198.94,
-        "target": 228.781,
-        "stop": 185.0142,
-        "tier": "Strong Buy",
-        "score": 84.3,
-        "pool": "global",
-        "expiry": "2026-12-09",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "JBMA.NS",
-        "name": "JBMA.NS",
-        "category": "Indian Stock",
-        "price": 683.75,
-        "target": 786.3125,
-        "stop": 629.05,
-        "tier": "Strong Buy",
-        "score": 79.5,
-        "pool": "indian",
-        "expiry": "2026-08-11",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "HACK",
-        "name": "ETFMG Prime Cybersecurity ETF",
-        "category": "Global ETF",
-        "price": 96.62,
-        "target": 111.113,
-        "stop": 89.8566,
-        "tier": "Strong Buy",
-        "score": 76.0,
-        "pool": "global",
-        "expiry": "2026-12-09",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "QQQ",
-        "name": "Invesco QQQ (Nasdaq 100)",
-        "category": "Global ETF",
-        "price": 717.12,
-        "target": 824.688,
-        "stop": 666.9216,
-        "tier": "Strong Buy",
-        "score": 75.9,
-        "pool": "global",
-        "expiry": "2026-12-09",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "CIBR",
-        "name": "First Trust Cybersecurity ETF",
-        "category": "Global ETF",
-        "price": 85.47,
-        "target": 98.2905,
-        "stop": 79.4871,
-        "tier": "Strong Buy",
-        "score": 75.2,
-        "pool": "global",
-        "expiry": "2026-12-09",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "LICHSGFIN.NS",
-        "name": "LICHSGFIN.NS",
-        "category": "Indian Stock",
-        "price": 559.5,
-        "target": 643.425,
-        "stop": 514.74,
-        "tier": "Strong Buy",
-        "score": 75.0,
-        "pool": "indian",
-        "expiry": "2026-08-11",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "CPER",
-        "name": "US Copper ETF",
-        "category": "Metal/Commodity",
-        "price": 38.94,
-        "target": 42.834,
-        "stop": 36.6036,
-        "tier": "Watch",
-        "score": 58.0,
-        "pool": "metal",
-        "expiry": "2026-09-10",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-06-15",
     "picks": [
       {
@@ -9115,7 +8945,7 @@
         "expiry": "2027-04-03",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "EWY",
@@ -9130,7 +8960,7 @@
         "expiry": "2027-04-03",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "CYIENT.NS",
@@ -9365,7 +9195,7 @@
         "expiry": "2026-12-06",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "VTI",
@@ -9804,6 +9634,116 @@
         "pool": "indian",
         "expiry": "2026-12-12",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-14",
+    "picks": [
+      {
+        "ticker": "UNG",
+        "name": "US Natural Gas Fund",
+        "category": "Metal/Commodity",
+        "price": 11.41,
+        "target": 16.9,
+        "stop": 10.7254,
+        "tier": "Strong Buy",
+        "score": 87.0,
+        "pool": "metal",
+        "expiry": "2027-01-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BNO",
+        "name": "Brent Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 65.1,
+        "target": 71.61,
+        "stop": 61.194,
+        "tier": "Strong Buy",
+        "score": 84.0,
+        "pool": "metal",
+        "expiry": "2027-01-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ELECON.NS",
+        "name": "ELECON.NS",
+        "category": "Indian Stock",
+        "price": 486.9,
+        "target": 567.4835,
+        "stop": 447.948,
+        "tier": "Strong Buy",
+        "score": 78.7,
+        "pool": "indian",
+        "expiry": "2026-12-13",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SPY",
+        "name": "SPDR S&P 500 ETF",
+        "category": "Global ETF",
+        "price": 778.01,
+        "target": 894.7115,
+        "stop": 723.5493,
+        "tier": "Strong Buy",
+        "score": 65.8,
+        "pool": "global",
+        "expiry": "2027-04-12",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IVV",
+        "name": "iShares Core S&P 500",
+        "category": "Global ETF",
+        "price": 781.54,
+        "target": 898.771,
+        "stop": 726.8322,
+        "tier": "Strong Buy",
+        "score": 65.8,
+        "pool": "global",
+        "expiry": "2027-04-12",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWC",
+        "name": "iShares MSCI Canada",
+        "category": "Global ETF",
+        "price": 59.91,
+        "target": 68.8965,
+        "stop": 55.7163,
+        "tier": "Strong Buy",
+        "score": 60.2,
+        "pool": "global",
+        "expiry": "2027-04-12",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKW",
+        "name": "ARK Next Gen Internet ETF",
+        "category": "Global ETF",
+        "price": 165.75,
+        "target": 190.6125,
+        "stop": 154.1475,
+        "tier": "Strong Buy",
+        "score": 60.1,
+        "pool": "global",
+        "expiry": "2027-04-12",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
