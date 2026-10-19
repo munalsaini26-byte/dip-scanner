@@ -1,70 +1,5 @@
 [
   {
-    "date": "2026-06-16",
-    "picks": [
-      {
-        "ticker": "HUDCO.NS",
-        "name": "HUDCO.NS",
-        "category": "Indian Stock",
-        "price": 212.83,
-        "target": 244.7545,
-        "stop": 195.8036,
-        "tier": "Strong Buy",
-        "score": 99.0,
-        "pool": "indian",
-        "expiry": "2026-08-15",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "PHOENIXLTD.NS",
-        "name": "PHOENIXLTD.NS",
-        "category": "Indian Stock",
-        "price": 1868.2,
-        "target": 2148.43,
-        "stop": 1718.744,
-        "tier": "Strong Buy",
-        "score": 95.4,
-        "pool": "indian",
-        "expiry": "2026-08-15",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "GROWW.NS",
-        "name": "GROWW.NS",
-        "category": "Indian Stock",
-        "price": 199.68,
-        "target": 229.632,
-        "stop": 183.7056,
-        "tier": "Strong Buy",
-        "score": 94.5,
-        "pool": "indian",
-        "expiry": "2026-08-15",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "TITAGARH.NS",
-        "name": "TITAGARH.NS",
-        "category": "Indian Stock",
-        "price": 894.45,
-        "target": 1028.6175,
-        "stop": 822.894,
-        "tier": "Strong Buy",
-        "score": 92.2,
-        "pool": "indian",
-        "expiry": "2026-08-15",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-06-17",
     "picks": [
       {
@@ -9085,7 +9020,7 @@
         "expiry": "2027-04-06",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "PNBHOUSING.NS",
@@ -9210,7 +9145,7 @@
         "expiry": "2027-04-07",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "ABDL.NS",
@@ -9335,7 +9270,7 @@
         "expiry": "2026-12-11",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "CARTRADE.NS",
@@ -9399,8 +9334,8 @@
         "pool": "indian",
         "expiry": "2026-12-12",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "USO",
@@ -9449,8 +9384,8 @@
         "pool": "metal",
         "expiry": "2027-01-12",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "BNO",
@@ -9713,6 +9648,101 @@
         "score": 58.4,
         "pool": "global",
         "expiry": "2027-04-14",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-19",
+    "picks": [
+      {
+        "ticker": "XLP",
+        "name": "Consumer Staples SPDR",
+        "category": "Global ETF",
+        "price": 87.62,
+        "target": 100.763,
+        "stop": 81.4866,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "global",
+        "expiry": "2027-04-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLE",
+        "name": "Energy Select SPDR",
+        "category": "Global ETF",
+        "price": 68.24,
+        "target": 78.476,
+        "stop": 63.4632,
+        "tier": "Strong Buy",
+        "score": 84.6,
+        "pool": "global",
+        "expiry": "2027-04-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PERSISTENT.NS",
+        "name": "PERSISTENT.NS",
+        "category": "Indian Stock",
+        "price": 5690.0,
+        "target": 6543.5,
+        "stop": 5234.8,
+        "tier": "Strong Buy",
+        "score": 78.5,
+        "pool": "indian",
+        "expiry": "2026-12-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HFCL.NS",
+        "name": "HFCL.NS",
+        "category": "Indian Stock",
+        "price": 268.81,
+        "target": 309.1315,
+        "stop": 247.3052,
+        "tier": "Strong Buy",
+        "score": 73.5,
+        "pool": "indian",
+        "expiry": "2026-12-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DJP",
+        "name": "iPath Bloomberg Commodity",
+        "category": "Metal/Commodity",
+        "price": 52.72,
+        "target": 57.992,
+        "stop": 49.5568,
+        "tier": "Strong Buy",
+        "score": 62.6,
+        "pool": "metal",
+        "expiry": "2027-01-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 55.52,
+        "target": 63.848,
+        "stop": 51.6336,
+        "tier": "Watch",
+        "score": 48.3,
+        "pool": "global",
+        "expiry": "2027-04-17",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
