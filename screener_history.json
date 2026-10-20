@@ -1,130 +1,5 @@
 [
   {
-    "date": "2026-06-17",
-    "picks": [
-      {
-        "ticker": "ITI.NS",
-        "name": "ITI.NS",
-        "category": "Indian Stock",
-        "price": 306.2,
-        "target": 356.65,
-        "stop": 281.704,
-        "tier": "Strong Buy",
-        "score": 99.0,
-        "pool": "indian",
-        "expiry": "2026-08-16",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "DATAPATTNS.NS",
-        "name": "DATAPATTNS.NS",
-        "category": "Indian Stock",
-        "price": 4769.6001,
-        "target": 5485.0401,
-        "stop": 4388.0321,
-        "tier": "Strong Buy",
-        "score": 98.9,
-        "pool": "indian",
-        "expiry": "2026-08-16",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "GRSE.NS",
-        "name": "GRSE.NS",
-        "category": "Indian Stock",
-        "price": 2818.3999,
-        "target": 3468.3401,
-        "stop": 2592.9279,
-        "tier": "Strong Buy",
-        "score": 95.4,
-        "pool": "indian",
-        "expiry": "2026-08-16",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "OLECTRA.NS",
-        "name": "OLECTRA.NS",
-        "category": "Indian Stock",
-        "price": 1354.9,
-        "target": 1671.0,
-        "stop": 1246.508,
-        "tier": "Strong Buy",
-        "score": 95.4,
-        "pool": "indian",
-        "expiry": "2026-08-16",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "EWJ",
-        "name": "iShares MSCI Japan",
-        "category": "Global ETF",
-        "price": 94.12,
-        "target": 108.238,
-        "stop": 87.5316,
-        "tier": "Strong Buy",
-        "score": 83.5,
-        "pool": "global",
-        "expiry": "2026-12-14",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "EWC",
-        "name": "iShares MSCI Canada",
-        "category": "Global ETF",
-        "price": 59.11,
-        "target": 67.9765,
-        "stop": 54.9723,
-        "tier": "Strong Buy",
-        "score": 79.7,
-        "pool": "global",
-        "expiry": "2026-12-14",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "IVV",
-        "name": "iShares Core S&P 500",
-        "category": "Global ETF",
-        "price": 752.01,
-        "target": 864.8115,
-        "stop": 699.3693,
-        "tier": "Strong Buy",
-        "score": 76.7,
-        "pool": "global",
-        "expiry": "2026-12-14",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "VOO",
-        "name": "Vanguard S&P 500",
-        "category": "Global ETF",
-        "price": 689.75,
-        "target": 793.2125,
-        "stop": 641.4675,
-        "tier": "Strong Buy",
-        "score": 74.3,
-        "pool": "global",
-        "expiry": "2026-12-14",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-06-18",
     "picks": [
       {
@@ -9020,7 +8895,7 @@
         "expiry": "2027-04-06",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "PNBHOUSING.NS",
@@ -9145,7 +9020,7 @@
         "expiry": "2027-04-07",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "ABDL.NS",
@@ -9270,7 +9145,7 @@
         "expiry": "2026-12-11",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "CARTRADE.NS",
@@ -9335,7 +9210,7 @@
         "expiry": "2026-12-12",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "USO",
@@ -9385,7 +9260,7 @@
         "expiry": "2027-01-12",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "BNO",
@@ -9743,6 +9618,41 @@
         "score": 48.3,
         "pool": "global",
         "expiry": "2027-04-17",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-20",
+    "picks": [
+      {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity",
+        "category": "Metal/Commodity",
+        "price": 37.04,
+        "target": 40.744,
+        "stop": 34.8176,
+        "tier": "Strong Buy",
+        "score": 67.7,
+        "pool": "metal",
+        "expiry": "2027-01-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLV",
+        "name": "Health Care Select SPDR",
+        "category": "Global ETF",
+        "price": 175.65,
+        "target": 201.9975,
+        "stop": 163.3545,
+        "tier": "Strong Buy",
+        "score": 66.7,
+        "pool": "global",
+        "expiry": "2027-04-18",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
