@@ -1,70 +1,5 @@
 [
   {
-    "date": "2026-06-19",
-    "picks": [
-      {
-        "ticker": "EEM",
-        "name": "iShares MSCI Emerging Markets",
-        "category": "Global ETF",
-        "price": 70.79,
-        "target": 81.4085,
-        "stop": 65.8347,
-        "tier": "Strong Buy",
-        "score": 111.5,
-        "pool": "global",
-        "expiry": "2026-12-16",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "UAE",
-        "name": "iShares MSCI UAE",
-        "category": "Global ETF",
-        "price": 20.35,
-        "target": 23.4025,
-        "stop": 18.9255,
-        "tier": "Strong Buy",
-        "score": 103.9,
-        "pool": "global",
-        "expiry": "2026-12-16",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "IWM",
-        "name": "iShares Russell 2000",
-        "category": "Global ETF",
-        "price": 295.59,
-        "target": 339.9285,
-        "stop": 274.8987,
-        "tier": "Strong Buy",
-        "score": 95.9,
-        "pool": "global",
-        "expiry": "2026-12-16",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "GABRIEL.NS",
-        "name": "GABRIEL.NS",
-        "category": "Indian Stock",
-        "price": 1197.4,
-        "target": 1377.01,
-        "stop": 1101.608,
-        "tier": "Strong Buy",
-        "score": 95.4,
-        "pool": "indian",
-        "expiry": "2026-08-18",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-06-22",
     "picks": [
       {
@@ -8990,7 +8925,7 @@
         "expiry": "2026-12-12",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "USO",
@@ -9040,7 +8975,7 @@
         "expiry": "2027-01-12",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "BNO",
@@ -9070,7 +9005,7 @@
         "expiry": "2026-12-13",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "SPY",
@@ -9150,7 +9085,7 @@
         "expiry": "2026-12-14",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "CPPLUS.NS",
@@ -9369,8 +9304,8 @@
         "pool": "indian",
         "expiry": "2026-12-18",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "DJP",
@@ -9484,8 +9419,8 @@
         "pool": "indian",
         "expiry": "2026-12-20",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "PNB.NS",
@@ -9608,6 +9543,101 @@
         "score": 61.4,
         "pool": "global",
         "expiry": "2027-04-20",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-23",
+    "picks": [
+      {
+        "ticker": "COFORGE.NS",
+        "name": "COFORGE.NS",
+        "category": "Indian Stock",
+        "price": 1900.5,
+        "target": 2185.575,
+        "stop": 1748.46,
+        "tier": "Strong Buy",
+        "score": 78.2,
+        "pool": "indian",
+        "expiry": "2026-12-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CYIENT.NS",
+        "name": "CYIENT.NS",
+        "category": "Indian Stock",
+        "price": 1233.0,
+        "target": 1417.95,
+        "stop": 1134.36,
+        "tier": "Strong Buy",
+        "score": 73.5,
+        "pool": "indian",
+        "expiry": "2026-12-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ANANDRATHI.NS",
+        "name": "ANANDRATHI.NS",
+        "category": "Indian Stock",
+        "price": 2235.0,
+        "target": 2570.25,
+        "stop": 2056.2,
+        "tier": "Strong Buy",
+        "score": 73.0,
+        "pool": "indian",
+        "expiry": "2026-12-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DIA",
+        "name": "SPDR Dow Jones",
+        "category": "Global ETF",
+        "price": 527.89,
+        "target": 607.0735,
+        "stop": 490.9377,
+        "tier": "Strong Buy",
+        "score": 64.8,
+        "pool": "global",
+        "expiry": "2027-04-21",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWA",
+        "name": "iShares MSCI Australia",
+        "category": "Global ETF",
+        "price": 28.97,
+        "target": 33.3155,
+        "stop": 26.9421,
+        "tier": "Watch",
+        "score": 58.7,
+        "pool": "global",
+        "expiry": "2027-04-21",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 122.72,
+        "target": 141.128,
+        "stop": 114.1296,
+        "tier": "Watch",
+        "score": 51.7,
+        "pool": "global",
+        "expiry": "2027-04-21",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
