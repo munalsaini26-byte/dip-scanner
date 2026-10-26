@@ -1,130 +1,5 @@
 [
   {
-    "date": "2026-06-22",
-    "picks": [
-      {
-        "ticker": "JETS",
-        "name": "US Global Jets ETF (Airlines)",
-        "category": "Global ETF",
-        "price": 31.0,
-        "target": 35.65,
-        "stop": 28.83,
-        "tier": "Strong Buy",
-        "score": 105.2,
-        "pool": "global",
-        "expiry": "2026-12-19",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "SCI.NS",
-        "name": "SCI.NS",
-        "category": "Indian Stock",
-        "price": 322.8,
-        "target": 371.22,
-        "stop": 296.976,
-        "tier": "Strong Buy",
-        "score": 99.0,
-        "pool": "indian",
-        "expiry": "2026-08-21",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "AUROPHARMA.NS",
-        "name": "AUROPHARMA.NS",
-        "category": "Indian Stock",
-        "price": 1491.9,
-        "target": 1715.685,
-        "stop": 1372.548,
-        "tier": "Strong Buy",
-        "score": 95.0,
-        "pool": "indian",
-        "expiry": "2026-08-21",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "AMBER.NS",
-        "name": "AMBER.NS",
-        "category": "Indian Stock",
-        "price": 7906.5,
-        "target": 9092.475,
-        "stop": 7273.98,
-        "tier": "Strong Buy",
-        "score": 93.5,
-        "pool": "indian",
-        "expiry": "2026-08-21",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "CLEAN.NS",
-        "name": "CLEAN.NS",
-        "category": "Indian Stock",
-        "price": 821.1,
-        "target": 944.265,
-        "stop": 755.412,
-        "tier": "Strong Buy",
-        "score": 92.3,
-        "pool": "indian",
-        "expiry": "2026-08-21",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "CROMPTON.NS",
-        "name": "CROMPTON.NS",
-        "category": "Indian Stock",
-        "price": 276.25,
-        "target": 354.5934,
-        "stop": 254.15,
-        "tier": "Strong Buy",
-        "score": 91.0,
-        "pool": "indian",
-        "expiry": "2026-08-21",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "XLI",
-        "name": "Industrials Select SPDR",
-        "category": "Global ETF",
-        "price": 180.91,
-        "target": 208.0465,
-        "stop": 168.2463,
-        "tier": "Strong Buy",
-        "score": 85.3,
-        "pool": "global",
-        "expiry": "2026-12-19",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "XLF",
-        "name": "Financial Select SPDR",
-        "category": "Global ETF",
-        "price": 53.57,
-        "target": 61.6055,
-        "stop": 49.8201,
-        "tier": "Strong Buy",
-        "score": 82.1,
-        "pool": "global",
-        "expiry": "2026-12-19",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-06-23",
     "picks": [
       {
@@ -9005,7 +8880,7 @@
         "expiry": "2026-12-13",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "SPY",
@@ -9085,7 +8960,7 @@
         "expiry": "2026-12-14",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "CPPLUS.NS",
@@ -9305,7 +9180,7 @@
         "expiry": "2026-12-18",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "DJP",
@@ -9420,7 +9295,7 @@
         "expiry": "2026-12-20",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "PNB.NS",
@@ -9638,6 +9513,71 @@
         "score": 51.7,
         "pool": "global",
         "expiry": "2027-04-21",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "picks": [
+      {
+        "ticker": "MRPL.NS",
+        "name": "MRPL.NS",
+        "category": "Indian Stock",
+        "price": 182.61,
+        "target": 210.0015,
+        "stop": 168.0012,
+        "tier": "Strong Buy",
+        "score": 82.5,
+        "pool": "indian",
+        "expiry": "2026-12-25",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CIBR",
+        "name": "First Trust Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 106.12,
+        "target": 122.038,
+        "stop": 98.6916,
+        "tier": "Strong Buy",
+        "score": 72.0,
+        "pool": "global",
+        "expiry": "2027-04-24",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ZYDUSLIFE.NS",
+        "name": "ZYDUSLIFE.NS",
+        "category": "Indian Stock",
+        "price": 1160.4,
+        "target": 1334.46,
+        "stop": 1067.568,
+        "tier": "Strong Buy",
+        "score": 68.1,
+        "pool": "indian",
+        "expiry": "2026-12-25",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EWU",
+        "name": "iShares MSCI UK",
+        "category": "Global ETF",
+        "price": 47.52,
+        "target": 54.648,
+        "stop": 44.1936,
+        "tier": "Watch",
+        "score": 47.9,
+        "pool": "global",
+        "expiry": "2027-04-24",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
