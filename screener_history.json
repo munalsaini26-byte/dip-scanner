@@ -1,115 +1,5 @@
 [
   {
-    "date": "2026-06-23",
-    "picks": [
-      {
-        "ticker": "ZYDUSWELL.NS",
-        "name": "ZYDUSWELL.NS",
-        "category": "Indian Stock",
-        "price": 528.0,
-        "target": 607.2,
-        "stop": 485.76,
-        "tier": "Strong Buy",
-        "score": 94.7,
-        "pool": "indian",
-        "expiry": "2026-08-22",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "MEESHO.NS",
-        "name": "MEESHO.NS",
-        "category": "Indian Stock",
-        "price": 183.31,
-        "target": 235.57,
-        "stop": 168.6452,
-        "tier": "Strong Buy",
-        "score": 94.5,
-        "pool": "indian",
-        "expiry": "2026-08-22",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "LAURUSLABS.NS",
-        "name": "LAURUSLABS.NS",
-        "category": "Indian Stock",
-        "price": 1474.2,
-        "target": 1695.33,
-        "stop": 1356.264,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-08-22",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "PNBHOUSING.NS",
-        "name": "PNBHOUSING.NS",
-        "category": "Indian Stock",
-        "price": 1026.0,
-        "target": 1179.9,
-        "stop": 943.92,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-08-22",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "DIA",
-        "name": "SPDR Dow Jones",
-        "category": "Global ETF",
-        "price": 517.08,
-        "target": 594.642,
-        "stop": 480.8844,
-        "tier": "Strong Buy",
-        "score": 82.8,
-        "pool": "global",
-        "expiry": "2026-12-20",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "UNG",
-        "name": "US Natural Gas Fund",
-        "category": "Metal/Commodity",
-        "price": 11.77,
-        "target": 12.947,
-        "stop": 11.0638,
-        "tier": "Watch",
-        "score": 55.0,
-        "pool": "metal",
-        "expiry": "2026-09-21",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "DBA",
-        "name": "Invesco DB Agriculture",
-        "category": "Metal/Commodity",
-        "price": 26.65,
-        "target": 29.315,
-        "stop": 25.051,
-        "tier": "Watch",
-        "score": 42.0,
-        "pool": "metal",
-        "expiry": "2026-09-21",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-06-24",
     "picks": [
       {
@@ -8880,7 +8770,7 @@
         "expiry": "2026-12-13",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "SPY",
@@ -8960,7 +8850,7 @@
         "expiry": "2026-12-14",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "CPPLUS.NS",
@@ -9180,7 +9070,7 @@
         "expiry": "2026-12-18",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "DJP",
@@ -9264,8 +9154,8 @@
         "pool": "global",
         "expiry": "2027-04-19",
         "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "USO",
@@ -9295,7 +9185,7 @@
         "expiry": "2026-12-20",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "PNB.NS",
@@ -9579,6 +9469,131 @@
         "pool": "global",
         "expiry": "2027-04-24",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-27",
+    "picks": [
+      {
+        "ticker": "XLE",
+        "name": "Energy Select SPDR",
+        "category": "Global ETF",
+        "price": 69.64,
+        "target": 80.086,
+        "stop": 64.7652,
+        "tier": "Strong Buy",
+        "score": 88.6,
+        "pool": "global",
+        "expiry": "2027-04-25",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SONACOMS.NS",
+        "name": "SONACOMS.NS",
+        "category": "Indian Stock",
+        "price": 851.85,
+        "target": 979.6275,
+        "stop": 783.702,
+        "tier": "Strong Buy",
+        "score": 75.0,
+        "pool": "indian",
+        "expiry": "2026-12-26",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "COHANCE.NS",
+        "name": "COHANCE.NS",
+        "category": "Indian Stock",
+        "price": 479.25,
+        "target": 859.7,
+        "stop": 440.91,
+        "tier": "Strong Buy",
+        "score": 74.1,
+        "pool": "indian",
+        "expiry": "2026-12-26",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ACUTAAS.NS",
+        "name": "ACUTAAS.NS",
+        "category": "Indian Stock",
+        "price": 3793.3,
+        "target": 4362.295,
+        "stop": 3489.836,
+        "tier": "Strong Buy",
+        "score": 73.5,
+        "pool": "indian",
+        "expiry": "2026-12-26",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PERSISTENT.NS",
+        "name": "PERSISTENT.NS",
+        "category": "Indian Stock",
+        "price": 5832.5,
+        "target": 6707.375,
+        "stop": 5365.9,
+        "tier": "Strong Buy",
+        "score": 72.4,
+        "pool": "indian",
+        "expiry": "2026-12-26",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLP",
+        "name": "Consumer Staples SPDR",
+        "category": "Global ETF",
+        "price": 87.96,
+        "target": 101.154,
+        "stop": 81.8028,
+        "tier": "Strong Buy",
+        "score": 65.5,
+        "pool": "global",
+        "expiry": "2027-04-25",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 56.02,
+        "target": 64.423,
+        "stop": 52.0986,
+        "tier": "Strong Buy",
+        "score": 61.8,
+        "pool": "global",
+        "expiry": "2027-04-25",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DJP",
+        "name": "iPath Bloomberg Commodity",
+        "category": "Metal/Commodity",
+        "price": 51.97,
+        "target": 57.167,
+        "stop": 48.8518,
+        "tier": "Watch",
+        "score": 44.6,
+        "pool": "metal",
+        "expiry": "2027-01-25",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
