@@ -1,70 +1,5 @@
 [
   {
-    "date": "2026-06-24",
-    "picks": [
-      {
-        "ticker": "PCBL.NS",
-        "name": "PCBL.NS",
-        "category": "Indian Stock",
-        "price": 314.4,
-        "target": 427.3116,
-        "stop": 289.248,
-        "tier": "Strong Buy",
-        "score": 99.0,
-        "pool": "indian",
-        "expiry": "2026-08-23",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "GMRAIRPORT.NS",
-        "name": "GMRAIRPORT.NS",
-        "category": "Indian Stock",
-        "price": 108.08,
-        "target": 124.292,
-        "stop": 99.4336,
-        "tier": "Strong Buy",
-        "score": 94.5,
-        "pool": "indian",
-        "expiry": "2026-08-23",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "EWJ",
-        "name": "iShares MSCI Japan",
-        "category": "Global ETF",
-        "price": 92.75,
-        "target": 106.6625,
-        "stop": 86.2575,
-        "tier": "Strong Buy",
-        "score": 80.7,
-        "pool": "global",
-        "expiry": "2026-12-21",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "XLV",
-        "name": "Health Care Select SPDR",
-        "category": "Global ETF",
-        "price": 152.18,
-        "target": 175.007,
-        "stop": 141.5274,
-        "tier": "Strong Buy",
-        "score": 66.7,
-        "pool": "global",
-        "expiry": "2026-12-21",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-06-25",
     "picks": [
       {
@@ -9070,7 +9005,7 @@
         "expiry": "2026-12-18",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "DJP",
@@ -9155,7 +9090,7 @@
         "expiry": "2027-04-19",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "USO",
@@ -9185,7 +9120,7 @@
         "expiry": "2026-12-20",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "PNB.NS",
@@ -9593,6 +9528,101 @@
         "score": 44.6,
         "pool": "metal",
         "expiry": "2027-01-25",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-10-28",
+    "picks": [
+      {
+        "ticker": "XLV",
+        "name": "Health Care Select SPDR",
+        "category": "Global ETF",
+        "price": 179.18,
+        "target": 206.057,
+        "stop": 166.6374,
+        "tier": "Strong Buy",
+        "score": 81.4,
+        "pool": "global",
+        "expiry": "2027-04-26",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "LENSKART.NS",
+        "name": "LENSKART.NS",
+        "category": "Indian Stock",
+        "price": 689.7,
+        "target": 793.155,
+        "stop": 634.524,
+        "tier": "Strong Buy",
+        "score": 75.0,
+        "pool": "indian",
+        "expiry": "2026-12-27",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity",
+        "category": "Metal/Commodity",
+        "price": 36.99,
+        "target": 40.689,
+        "stop": 34.7706,
+        "tier": "Strong Buy",
+        "score": 74.4,
+        "pool": "metal",
+        "expiry": "2027-01-26",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PPLPHARMA.NS",
+        "name": "PPLPHARMA.NS",
+        "category": "Indian Stock",
+        "price": 232.8,
+        "target": 267.72,
+        "stop": 214.176,
+        "tier": "Strong Buy",
+        "score": 73.5,
+        "pool": "indian",
+        "expiry": "2026-12-27",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "category": "Global ETF",
+        "price": 51.65,
+        "target": 59.3975,
+        "stop": 48.0345,
+        "tier": "Strong Buy",
+        "score": 61.8,
+        "pool": "global",
+        "expiry": "2027-04-26",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CPER",
+        "name": "US Copper ETF",
+        "category": "Metal/Commodity",
+        "price": 40.05,
+        "target": 44.055,
+        "stop": 37.647,
+        "tier": "Watch",
+        "score": 56.3,
+        "pool": "metal",
+        "expiry": "2027-01-26",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
