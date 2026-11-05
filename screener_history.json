@@ -1,130 +1,5 @@
 [
   {
-    "date": "2026-07-02",
-    "picks": [
-      {
-        "ticker": "GLAND.NS",
-        "name": "GLAND.NS",
-        "category": "Indian Stock",
-        "price": 2449.7,
-        "target": 2817.155,
-        "stop": 2253.724,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-08-31",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "INDUSINDBK.NS",
-        "name": "INDUSINDBK.NS",
-        "category": "Indian Stock",
-        "price": 936.35,
-        "target": 1076.8025,
-        "stop": 861.442,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-08-31",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "USHAMART.NS",
-        "name": "USHAMART.NS",
-        "category": "Indian Stock",
-        "price": 501.85,
-        "target": 577.1275,
-        "stop": 461.702,
-        "tier": "Strong Buy",
-        "score": 86.4,
-        "pool": "indian",
-        "expiry": "2026-08-31",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "KPRMILL.NS",
-        "name": "KPRMILL.NS",
-        "category": "Indian Stock",
-        "price": 1169.4,
-        "target": 1344.81,
-        "stop": 1075.848,
-        "tier": "Strong Buy",
-        "score": 85.5,
-        "pool": "indian",
-        "expiry": "2026-08-31",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "XLV",
-        "name": "Health Care Select SPDR",
-        "category": "Global ETF",
-        "price": 159.54,
-        "target": 183.471,
-        "stop": 148.3722,
-        "tier": "Strong Buy",
-        "score": 84.1,
-        "pool": "global",
-        "expiry": "2026-12-29",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "ARKW",
-        "name": "ARK Next Gen Internet ETF",
-        "category": "Global ETF",
-        "price": 146.45,
-        "target": 168.4175,
-        "stop": 136.1985,
-        "tier": "Strong Buy",
-        "score": 76.5,
-        "pool": "global",
-        "expiry": "2026-12-29",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "QQQ",
-        "name": "Invesco QQQ (Nasdaq 100)",
-        "category": "Global ETF",
-        "price": 725.17,
-        "target": 833.9455,
-        "stop": 674.4081,
-        "tier": "Strong Buy",
-        "score": 72.8,
-        "pool": "global",
-        "expiry": "2026-12-29",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "DBA",
-        "name": "Invesco DB Agriculture",
-        "category": "Metal/Commodity",
-        "price": 26.86,
-        "target": 29.546,
-        "stop": 25.2484,
-        "tier": "Strong Buy",
-        "score": 60.0,
-        "pool": "metal",
-        "expiry": "2026-09-30",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-07-03",
     "picks": [
       {
@@ -8905,7 +8780,7 @@
         "expiry": "2026-12-26",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "ACUTAAS.NS",
@@ -9154,8 +9029,8 @@
         "pool": "metal",
         "expiry": "2027-01-27",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "IWM",
@@ -9220,7 +9095,7 @@
         "expiry": "2027-01-28",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "EWG",
@@ -9563,6 +9438,86 @@
         "score": 49.8,
         "pool": "global",
         "expiry": "2027-05-03",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-11-05",
+    "picks": [
+      {
+        "ticker": "XLV",
+        "name": "Health Care Select SPDR",
+        "category": "Global ETF",
+        "price": 189.66,
+        "target": 218.109,
+        "stop": 176.3838,
+        "tier": "Strong Buy",
+        "score": 97.1,
+        "pool": "global",
+        "expiry": "2027-05-04",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "LGEINDIA.NS",
+        "name": "LGEINDIA.NS",
+        "category": "Indian Stock",
+        "price": 1778.5,
+        "target": 2045.275,
+        "stop": 1636.22,
+        "tier": "Strong Buy",
+        "score": 96.4,
+        "pool": "indian",
+        "expiry": "2027-01-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "AUROPHARMA.NS",
+        "name": "AUROPHARMA.NS",
+        "category": "Indian Stock",
+        "price": 1785.0,
+        "target": 2052.75,
+        "stop": 1642.2,
+        "tier": "Strong Buy",
+        "score": 96.0,
+        "pool": "indian",
+        "expiry": "2027-01-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KOTAKBANK.NS",
+        "name": "KOTAKBANK.NS",
+        "category": "Indian Stock",
+        "price": 467.0,
+        "target": 537.05,
+        "stop": 429.64,
+        "tier": "Strong Buy",
+        "score": 92.4,
+        "pool": "indian",
+        "expiry": "2027-01-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UAE",
+        "name": "iShares MSCI UAE",
+        "category": "Global ETF",
+        "price": 20.19,
+        "target": 23.2185,
+        "stop": 18.7767,
+        "tier": "Strong Buy",
+        "score": 74.9,
+        "pool": "global",
+        "expiry": "2027-05-04",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
