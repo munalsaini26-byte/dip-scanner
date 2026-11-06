@@ -1,100 +1,5 @@
 [
   {
-    "date": "2026-07-03",
-    "picks": [
-      {
-        "ticker": "SUMICHEM.NS",
-        "name": "SUMICHEM.NS",
-        "category": "Indian Stock",
-        "price": 484.5,
-        "target": 652.25,
-        "stop": 445.74,
-        "tier": "Strong Buy",
-        "score": 99.0,
-        "pool": "indian",
-        "expiry": "2026-09-01",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "PPLPHARMA.NS",
-        "name": "PPLPHARMA.NS",
-        "category": "Indian Stock",
-        "price": 175.5,
-        "target": 216.88,
-        "stop": 161.46,
-        "tier": "Strong Buy",
-        "score": 95.4,
-        "pool": "indian",
-        "expiry": "2026-09-01",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "ANANTRAJ.NS",
-        "name": "ANANTRAJ.NS",
-        "category": "Indian Stock",
-        "price": 553.55,
-        "target": 735.6,
-        "stop": 509.266,
-        "tier": "Strong Buy",
-        "score": 94.4,
-        "pool": "indian",
-        "expiry": "2026-09-01",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "EXIDEIND.NS",
-        "name": "EXIDEIND.NS",
-        "category": "Indian Stock",
-        "price": 415.85,
-        "target": 478.2275,
-        "stop": 382.582,
-        "tier": "Strong Buy",
-        "score": 91.4,
-        "pool": "indian",
-        "expiry": "2026-09-01",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "INTELLECT.NS",
-        "name": "INTELLECT.NS",
-        "category": "Indian Stock",
-        "price": 780.8,
-        "target": 897.92,
-        "stop": 718.336,
-        "tier": "Strong Buy",
-        "score": 90.9,
-        "pool": "indian",
-        "expiry": "2026-09-01",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "EWG",
-        "name": "iShares MSCI Germany",
-        "category": "Global ETF",
-        "price": 42.31,
-        "target": 48.6565,
-        "stop": 39.3483,
-        "tier": "Strong Buy",
-        "score": 90.4,
-        "pool": "global",
-        "expiry": "2026-12-30",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-07-06",
     "picks": [
       {
@@ -8780,7 +8685,7 @@
         "expiry": "2026-12-26",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "ACUTAAS.NS",
@@ -9030,7 +8935,7 @@
         "expiry": "2027-01-27",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "IWM",
@@ -9095,7 +9000,7 @@
         "expiry": "2027-01-28",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "EWG",
@@ -9219,8 +9124,8 @@
         "pool": "global",
         "expiry": "2027-05-01",
         "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "DIA",
@@ -9424,8 +9329,8 @@
         "pool": "global",
         "expiry": "2027-05-03",
         "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "XLI",
@@ -9518,6 +9423,146 @@
         "score": 74.9,
         "pool": "global",
         "expiry": "2027-05-04",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-11-06",
+    "picks": [
+      {
+        "ticker": "JYOTICNC.NS",
+        "name": "JYOTICNC.NS",
+        "category": "Indian Stock",
+        "price": 1019.9,
+        "target": 1172.885,
+        "stop": 938.308,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2027-01-05",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "MOTILALOFS.NS",
+        "name": "MOTILALOFS.NS",
+        "category": "Indian Stock",
+        "price": 1102.0,
+        "target": 1267.3,
+        "stop": 1013.84,
+        "tier": "Strong Buy",
+        "score": 90.0,
+        "pool": "indian",
+        "expiry": "2027-01-05",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "FXI",
+        "name": "iShares China Large Cap",
+        "category": "Global ETF",
+        "price": 34.94,
+        "target": 40.181,
+        "stop": 32.4942,
+        "tier": "Watch",
+        "score": 57.0,
+        "pool": "global",
+        "expiry": "2027-05-05",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GLD",
+        "name": "SPDR Gold Shares",
+        "category": "Metal/Commodity",
+        "price": 375.49,
+        "target": 413.039,
+        "stop": 352.9606,
+        "tier": "Watch",
+        "score": 51.4,
+        "pool": "metal",
+        "expiry": "2027-02-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "IAU",
+        "name": "iShares Gold Trust",
+        "category": "Metal/Commodity",
+        "price": 77.0,
+        "target": 84.7,
+        "stop": 72.38,
+        "tier": "Watch",
+        "score": 51.4,
+        "pool": "metal",
+        "expiry": "2027-02-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KWEB",
+        "name": "KraneShares China Internet",
+        "category": "Global ETF",
+        "price": 24.76,
+        "target": 29.12,
+        "stop": 23.0268,
+        "tier": "Watch",
+        "score": 49.7,
+        "pool": "global",
+        "expiry": "2027-05-05",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "MCHI",
+        "name": "iShares MSCI China",
+        "category": "Global ETF",
+        "price": 52.04,
+        "target": 59.846,
+        "stop": 48.3972,
+        "tier": "Watch",
+        "score": 46.0,
+        "pool": "global",
+        "expiry": "2027-05-05",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "USO",
+        "name": "United States Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 148.21,
+        "target": 163.031,
+        "stop": 139.3174,
+        "tier": "Watch",
+        "score": 44.6,
+        "pool": "metal",
+        "expiry": "2027-02-04",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "EFA",
+        "name": "iShares MSCI EAFE",
+        "category": "Global ETF",
+        "price": 102.7,
+        "target": 118.105,
+        "stop": 95.511,
+        "tier": "Watch",
+        "score": 41.4,
+        "pool": "global",
+        "expiry": "2027-05-05",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
