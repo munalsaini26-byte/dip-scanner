@@ -1,130 +1,5 @@
 [
   {
-    "date": "2026-07-09",
-    "picks": [
-      {
-        "ticker": "DIVISLAB.NS",
-        "name": "DIVISLAB.NS",
-        "category": "Indian Stock",
-        "price": 6814.5,
-        "target": 7836.675,
-        "stop": 6269.34,
-        "tier": "Strong Buy",
-        "score": 91.3,
-        "pool": "indian",
-        "expiry": "2026-09-07",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "ARE&M.NS",
-        "name": "ARE&M.NS",
-        "category": "Indian Stock",
-        "price": 874.35,
-        "target": 1005.5025,
-        "stop": 804.402,
-        "tier": "Strong Buy",
-        "score": 90.9,
-        "pool": "indian",
-        "expiry": "2026-09-07",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "JINDALSAW.NS",
-        "name": "JINDALSAW.NS",
-        "category": "Indian Stock",
-        "price": 269.7,
-        "target": 310.155,
-        "stop": 248.124,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-09-07",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "MANKIND.NS",
-        "name": "MANKIND.NS",
-        "category": "Indian Stock",
-        "price": 2536.8999,
-        "target": 2917.4349,
-        "stop": 2333.9479,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-09-07",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "VTI",
-        "name": "Vanguard Total Market",
-        "category": "Global ETF",
-        "price": 368.25,
-        "target": 423.4875,
-        "stop": 342.4725,
-        "tier": "Strong Buy",
-        "score": 67.2,
-        "pool": "global",
-        "expiry": "2027-01-05",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "DIA",
-        "name": "SPDR Dow Jones",
-        "category": "Global ETF",
-        "price": 522.77,
-        "target": 601.1855,
-        "stop": 486.1761,
-        "tier": "Strong Buy",
-        "score": 66.4,
-        "pool": "global",
-        "expiry": "2027-01-05",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "DJP",
-        "name": "iPath Bloomberg Commodity",
-        "category": "Metal/Commodity",
-        "price": 45.55,
-        "target": 50.105,
-        "stop": 42.817,
-        "tier": "Strong Buy",
-        "score": 60.0,
-        "pool": "metal",
-        "expiry": "2026-10-07",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "GSG",
-        "name": "iShares GSCI Commodity",
-        "category": "Metal/Commodity",
-        "price": 29.96,
-        "target": 32.956,
-        "stop": 28.1624,
-        "tier": "Strong Buy",
-        "score": 60.0,
-        "pool": "metal",
-        "expiry": "2026-10-07",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-07-10",
     "picks": [
       {
@@ -8780,7 +8655,7 @@
         "expiry": "2027-01-01",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "EWA",
@@ -8810,7 +8685,7 @@
         "expiry": "2027-05-01",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "DIA",
@@ -9015,7 +8890,7 @@
         "expiry": "2027-05-03",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "XLI",
@@ -9285,7 +9160,7 @@
         "expiry": "2027-02-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       }
     ]
   },
@@ -9489,6 +9364,101 @@
         "pool": "metal",
         "expiry": "2027-02-09",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-11-12",
+    "picks": [
+      {
+        "ticker": "PAYTM.NS",
+        "name": "PAYTM.NS",
+        "category": "Indian Stock",
+        "price": 1925.0,
+        "target": 2213.75,
+        "stop": 1771.0,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2027-01-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ABDL.NS",
+        "name": "ABDL.NS",
+        "category": "Indian Stock",
+        "price": 758.0,
+        "target": 871.7,
+        "stop": 697.36,
+        "tier": "Strong Buy",
+        "score": 86.4,
+        "pool": "indian",
+        "expiry": "2027-01-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "WELSPUNLIV.NS",
+        "name": "WELSPUNLIV.NS",
+        "category": "Indian Stock",
+        "price": 247.62,
+        "target": 284.763,
+        "stop": 227.8104,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2027-01-11",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLF",
+        "name": "Financial Select SPDR",
+        "category": "Global ETF",
+        "price": 58.63,
+        "target": 67.4245,
+        "stop": 54.5259,
+        "tier": "Strong Buy",
+        "score": 64.3,
+        "pool": "global",
+        "expiry": "2027-05-11",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLP",
+        "name": "Consumer Staples SPDR",
+        "category": "Global ETF",
+        "price": 91.45,
+        "target": 105.1675,
+        "stop": 85.0485,
+        "tier": "Watch",
+        "score": 56.4,
+        "pool": "global",
+        "expiry": "2027-05-11",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "DIA",
+        "name": "SPDR Dow Jones",
+        "category": "Global ETF",
+        "price": 524.44,
+        "target": 603.106,
+        "stop": 487.7292,
+        "tier": "Watch",
+        "score": 50.3,
+        "pool": "global",
+        "expiry": "2027-05-11",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
