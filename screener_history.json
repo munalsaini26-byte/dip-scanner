@@ -1,115 +1,5 @@
 [
   {
-    "date": "2026-07-10",
-    "picks": [
-      {
-        "ticker": "GRAVITA.NS",
-        "name": "GRAVITA.NS",
-        "category": "Indian Stock",
-        "price": 1851.2,
-        "target": 2128.88,
-        "stop": 1703.104,
-        "tier": "Strong Buy",
-        "score": 99.0,
-        "pool": "indian",
-        "expiry": "2026-09-08",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "FSL.NS",
-        "name": "FSL.NS",
-        "category": "Indian Stock",
-        "price": 257.65,
-        "target": 296.2975,
-        "stop": 237.038,
-        "tier": "Strong Buy",
-        "score": 94.5,
-        "pool": "indian",
-        "expiry": "2026-09-08",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "CDSL.NS",
-        "name": "CDSL.NS",
-        "category": "Indian Stock",
-        "price": 1434.2,
-        "target": 1733.0696,
-        "stop": 1319.464,
-        "tier": "Strong Buy",
-        "score": 92.7,
-        "pool": "indian",
-        "expiry": "2026-09-08",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "ARKW",
-        "name": "ARK Next Gen Internet ETF",
-        "category": "Global ETF",
-        "price": 149.54,
-        "target": 171.971,
-        "stop": 139.0722,
-        "tier": "Strong Buy",
-        "score": 91.7,
-        "pool": "global",
-        "expiry": "2027-01-06",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "XLV",
-        "name": "Health Care Select SPDR",
-        "category": "Global ETF",
-        "price": 162.17,
-        "target": 186.4955,
-        "stop": 150.8181,
-        "tier": "Strong Buy",
-        "score": 79.9,
-        "pool": "global",
-        "expiry": "2027-01-06",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "IVV",
-        "name": "iShares Core S&P 500",
-        "category": "Global ETF",
-        "price": 755.05,
-        "target": 868.3075,
-        "stop": 702.1965,
-        "tier": "Strong Buy",
-        "score": 77.5,
-        "pool": "global",
-        "expiry": "2027-01-06",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "DBA",
-        "name": "Invesco DB Agriculture",
-        "category": "Metal/Commodity",
-        "price": 27.71,
-        "target": 30.481,
-        "stop": 26.0474,
-        "tier": "Watch",
-        "score": 58.0,
-        "pool": "metal",
-        "expiry": "2026-10-08",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-07-13",
     "picks": [
       {
@@ -8655,7 +8545,7 @@
         "expiry": "2027-01-01",
         "mode": "dip",
         "hit": "target",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "EWA",
@@ -9079,8 +8969,8 @@
         "pool": "global",
         "expiry": "2027-05-05",
         "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "MCHI",
@@ -9160,7 +9050,7 @@
         "expiry": "2027-02-07",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       }
     ]
   },
@@ -9458,6 +9348,116 @@
         "score": 50.3,
         "pool": "global",
         "expiry": "2027-05-11",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-11-13",
+    "picks": [
+      {
+        "ticker": "UAE",
+        "name": "iShares MSCI UAE",
+        "category": "Global ETF",
+        "price": 21.11,
+        "target": 24.2765,
+        "stop": 19.6323,
+        "tier": "Strong Buy",
+        "score": 88.0,
+        "pool": "global",
+        "expiry": "2027-05-12",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "GESHIP.NS",
+        "name": "GESHIP.NS",
+        "category": "Indian Stock",
+        "price": 1518.0,
+        "target": 1745.7,
+        "stop": 1396.56,
+        "tier": "Strong Buy",
+        "score": 81.0,
+        "pool": "indian",
+        "expiry": "2027-01-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "MEESHO.NS",
+        "name": "MEESHO.NS",
+        "category": "Indian Stock",
+        "price": 257.07,
+        "target": 295.6305,
+        "stop": 236.5044,
+        "tier": "Strong Buy",
+        "score": 80.9,
+        "pool": "indian",
+        "expiry": "2027-01-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "LICHSGFIN.NS",
+        "name": "LICHSGFIN.NS",
+        "category": "Indian Stock",
+        "price": 585.1,
+        "target": 672.865,
+        "stop": 538.292,
+        "tier": "Strong Buy",
+        "score": 80.0,
+        "pool": "indian",
+        "expiry": "2027-01-12",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLV",
+        "name": "Health Care Select SPDR",
+        "category": "Global ETF",
+        "price": 187.83,
+        "target": 216.0045,
+        "stop": 174.6819,
+        "tier": "Strong Buy",
+        "score": 72.3,
+        "pool": "global",
+        "expiry": "2027-05-12",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLI",
+        "name": "Industrials Select SPDR",
+        "category": "Global ETF",
+        "price": 169.44,
+        "target": 194.856,
+        "stop": 157.5792,
+        "tier": "Watch",
+        "score": 44.2,
+        "pool": "global",
+        "expiry": "2027-05-12",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "KSA",
+        "name": "iShares MSCI Saudi Arabia",
+        "category": "Global ETF",
+        "price": 36.13,
+        "target": 41.5495,
+        "stop": 33.6009,
+        "tier": "Watch",
+        "score": 43.9,
+        "pool": "global",
+        "expiry": "2027-05-12",
         "mode": "momentum",
         "hit": null,
         "alert_days": 0
