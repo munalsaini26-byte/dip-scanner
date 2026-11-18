@@ -1,85 +1,5 @@
 [
   {
-    "date": "2026-07-15",
-    "picks": [
-      {
-        "ticker": "HACK",
-        "name": "ETFMG Prime Cybersecurity ETF",
-        "category": "Global ETF",
-        "price": 109.28,
-        "target": 125.672,
-        "stop": 101.6304,
-        "tier": "Strong Buy",
-        "score": 99.6,
-        "pool": "global",
-        "expiry": "2027-01-11",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "CIBR",
-        "name": "First Trust Cybersecurity ETF",
-        "category": "Global ETF",
-        "price": 91.84,
-        "target": 105.616,
-        "stop": 85.4112,
-        "tier": "Strong Buy",
-        "score": 91.5,
-        "pool": "global",
-        "expiry": "2027-01-11",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "AARTIIND.NS",
-        "name": "AARTIIND.NS",
-        "category": "Indian Stock",
-        "price": 498.2,
-        "target": 572.93,
-        "stop": 458.344,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-09-13",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "LAURUSLABS.NS",
-        "name": "LAURUSLABS.NS",
-        "category": "Indian Stock",
-        "price": 1556.7,
-        "target": 1790.205,
-        "stop": 1432.164,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-09-13",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "WEAT",
-        "name": "Teucrium Wheat",
-        "category": "Metal/Commodity",
-        "price": 23.66,
-        "target": 26.026,
-        "stop": 22.2404,
-        "tier": "Strong Buy",
-        "score": 69.8,
-        "pool": "metal",
-        "expiry": "2026-10-13",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-07-16",
     "picks": [
       {
@@ -8780,7 +8700,7 @@
         "expiry": "2027-05-05",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       },
       {
         "ticker": "MCHI",
@@ -9289,8 +9209,8 @@
         "pool": "indian",
         "expiry": "2027-01-15",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       }
     ]
   },
@@ -9338,6 +9258,71 @@
         "score": 50.2,
         "pool": "metal",
         "expiry": "2027-02-15",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-11-18",
+    "picks": [
+      {
+        "ticker": "URBANCO.NS",
+        "name": "URBANCO.NS",
+        "category": "Indian Stock",
+        "price": 172.73,
+        "target": 198.6395,
+        "stop": 158.9116,
+        "tier": "Strong Buy",
+        "score": 87.8,
+        "pool": "indian",
+        "expiry": "2027-01-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SUNTV.NS",
+        "name": "SUNTV.NS",
+        "category": "Indian Stock",
+        "price": 696.35,
+        "target": 800.8025,
+        "stop": 640.642,
+        "tier": "Strong Buy",
+        "score": 84.6,
+        "pool": "indian",
+        "expiry": "2027-01-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "INOXINDIA.NS",
+        "name": "INOXINDIA.NS",
+        "category": "Indian Stock",
+        "price": 2123.2,
+        "target": 2441.68,
+        "stop": 1953.344,
+        "tier": "Strong Buy",
+        "score": 80.5,
+        "pool": "indian",
+        "expiry": "2027-01-17",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UNG",
+        "name": "US Natural Gas Fund",
+        "category": "Metal/Commodity",
+        "price": 10.04,
+        "target": 11.044,
+        "stop": 9.4376,
+        "tier": "Watch",
+        "score": 57.5,
+        "pool": "metal",
+        "expiry": "2027-02-16",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
