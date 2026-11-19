@@ -1,145 +1,5 @@
 [
   {
-    "date": "2026-07-16",
-    "picks": [
-      {
-        "ticker": "XLF",
-        "name": "Financial Select SPDR",
-        "category": "Global ETF",
-        "price": 56.56,
-        "target": 65.044,
-        "stop": 52.6008,
-        "tier": "Strong Buy",
-        "score": 97.9,
-        "pool": "global",
-        "expiry": "2027-01-12",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "GABRIEL.NS",
-        "name": "GABRIEL.NS",
-        "category": "Indian Stock",
-        "price": 1328.2,
-        "target": 1527.43,
-        "stop": 1221.944,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-09-14",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "HDBFS.NS",
-        "name": "HDBFS.NS",
-        "category": "Indian Stock",
-        "price": 754.7,
-        "target": 867.905,
-        "stop": 694.324,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-09-14",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "HSCL.NS",
-        "name": "HSCL.NS",
-        "category": "Indian Stock",
-        "price": 729.9,
-        "target": 839.385,
-        "stop": 671.508,
-        "tier": "Strong Buy",
-        "score": 90.0,
-        "pool": "indian",
-        "expiry": "2026-09-14",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "SPY",
-        "name": "SPDR S&P 500 ETF",
-        "category": "Global ETF",
-        "price": 754.81,
-        "target": 868.0315,
-        "stop": 701.9733,
-        "tier": "Strong Buy",
-        "score": 79.5,
-        "pool": "global",
-        "expiry": "2027-01-12",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "VOO",
-        "name": "Vanguard S&P 500",
-        "category": "Global ETF",
-        "price": 693.8,
-        "target": 797.87,
-        "stop": 645.234,
-        "tier": "Strong Buy",
-        "score": 79.5,
-        "pool": "global",
-        "expiry": "2027-01-12",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "EWU",
-        "name": "iShares MSCI UK",
-        "category": "Global ETF",
-        "price": 46.77,
-        "target": 53.7855,
-        "stop": 43.4961,
-        "tier": "Strong Buy",
-        "score": 71.7,
-        "pool": "global",
-        "expiry": "2027-01-12",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "EWA",
-        "name": "iShares MSCI Australia",
-        "category": "Global ETF",
-        "price": 28.8,
-        "target": 33.12,
-        "stop": 26.784,
-        "tier": "Strong Buy",
-        "score": 71.3,
-        "pool": "global",
-        "expiry": "2027-01-12",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "CPER",
-        "name": "US Copper ETF",
-        "category": "Metal/Commodity",
-        "price": 38.63,
-        "target": 42.493,
-        "stop": 36.3122,
-        "tier": "Watch",
-        "score": 59.3,
-        "pool": "metal",
-        "expiry": "2026-10-14",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-07-17",
     "picks": [
       {
@@ -8700,7 +8560,7 @@
         "expiry": "2027-05-05",
         "mode": "momentum",
         "hit": "stop",
-        "alert_days": 4
+        "alert_days": 5
       },
       {
         "ticker": "MCHI",
@@ -9004,8 +8864,8 @@
         "pool": "indian",
         "expiry": "2027-01-11",
         "mode": "dip",
-        "hit": null,
-        "alert_days": 0
+        "hit": "stop",
+        "alert_days": 1
       },
       {
         "ticker": "ABDL.NS",
@@ -9210,7 +9070,7 @@
         "expiry": "2027-01-15",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       }
     ]
   },
@@ -9323,6 +9183,116 @@
         "score": 57.5,
         "pool": "metal",
         "expiry": "2027-02-16",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-11-19",
+    "picks": [
+      {
+        "ticker": "WOCKPHARMA.NS",
+        "name": "WOCKPHARMA.NS",
+        "category": "Indian Stock",
+        "price": 2187.0,
+        "target": 2515.05,
+        "stop": 2012.04,
+        "tier": "Strong Buy",
+        "score": 86.6,
+        "pool": "indian",
+        "expiry": "2027-01-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "PWL.NS",
+        "name": "PWL.NS",
+        "category": "Indian Stock",
+        "price": 136.21,
+        "target": 156.6415,
+        "stop": 125.3132,
+        "tier": "Strong Buy",
+        "score": 86.5,
+        "pool": "indian",
+        "expiry": "2027-01-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BLUESTARCO.NS",
+        "name": "BLUESTARCO.NS",
+        "category": "Indian Stock",
+        "price": 1764.0,
+        "target": 2028.6,
+        "stop": 1622.88,
+        "tier": "Strong Buy",
+        "score": 86.2,
+        "pool": "indian",
+        "expiry": "2027-01-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BBOX.NS",
+        "name": "BBOX.NS",
+        "category": "Indian Stock",
+        "price": 907.4,
+        "target": 1076.741,
+        "stop": 834.808,
+        "tier": "Strong Buy",
+        "score": 84.7,
+        "pool": "indian",
+        "expiry": "2027-01-18",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "HACK",
+        "name": "ETFMG Prime Cybersecurity ETF",
+        "category": "Global ETF",
+        "price": 125.0,
+        "target": 143.75,
+        "stop": 116.25,
+        "tier": "Strong Buy",
+        "score": 62.7,
+        "pool": "global",
+        "expiry": "2027-05-18",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "JETS",
+        "name": "US Global Jets ETF (Airlines)",
+        "category": "Global ETF",
+        "price": 28.55,
+        "target": 32.8325,
+        "stop": 26.5515,
+        "tier": "Watch",
+        "score": 42.5,
+        "pool": "global",
+        "expiry": "2027-05-18",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "BNO",
+        "name": "Brent Oil Fund",
+        "category": "Metal/Commodity",
+        "price": 59.32,
+        "target": 65.252,
+        "stop": 55.7608,
+        "tier": "Watch",
+        "score": 40.5,
+        "pool": "metal",
+        "expiry": "2027-02-17",
         "mode": "dip",
         "hit": null,
         "alert_days": 0
