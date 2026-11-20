@@ -1,85 +1,5 @@
 [
   {
-    "date": "2026-07-17",
-    "picks": [
-      {
-        "ticker": "BHEL.NS",
-        "name": "BHEL.NS",
-        "category": "Indian Stock",
-        "price": 428.8,
-        "target": 493.12,
-        "stop": 394.496,
-        "tier": "Strong Buy",
-        "score": 95.4,
-        "pool": "indian",
-        "expiry": "2026-09-15",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "SAILIFE.NS",
-        "name": "SAILIFE.NS",
-        "category": "Indian Stock",
-        "price": 1270.5,
-        "target": 1461.075,
-        "stop": 1168.86,
-        "tier": "Strong Buy",
-        "score": 86.4,
-        "pool": "indian",
-        "expiry": "2026-09-15",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "TORNTPHARM.NS",
-        "name": "TORNTPHARM.NS",
-        "category": "Indian Stock",
-        "price": 4805.7998,
-        "target": 5526.6698,
-        "stop": 4421.3358,
-        "tier": "Strong Buy",
-        "score": 85.9,
-        "pool": "indian",
-        "expiry": "2026-09-15",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "VTI",
-        "name": "Vanguard Total Market",
-        "category": "Global ETF",
-        "price": 370.58,
-        "target": 426.167,
-        "stop": 344.6394,
-        "tier": "Strong Buy",
-        "score": 70.8,
-        "pool": "global",
-        "expiry": "2027-01-13",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "USO",
-        "name": "United States Oil Fund",
-        "category": "Metal/Commodity",
-        "price": 119.3,
-        "target": 131.23,
-        "stop": 112.142,
-        "tier": "Strong Buy",
-        "score": 60.0,
-        "pool": "metal",
-        "expiry": "2026-10-15",
-        "mode": "dip",
-        "hit": "target",
-        "alert_days": 5
-      }
-    ]
-  },
-  {
     "date": "2026-07-20",
     "picks": [
       {
@@ -8865,7 +8785,7 @@
         "expiry": "2027-01-11",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 1
+        "alert_days": 2
       },
       {
         "ticker": "ABDL.NS",
@@ -9070,7 +8990,7 @@
         "expiry": "2027-01-15",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       }
     ]
   },
@@ -9294,6 +9214,56 @@
         "pool": "metal",
         "expiry": "2027-02-17",
         "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-11-20",
+    "picks": [
+      {
+        "ticker": "WELSPUNLIV.NS",
+        "name": "WELSPUNLIV.NS",
+        "category": "Indian Stock",
+        "price": 268.78,
+        "target": 309.097,
+        "stop": 247.2776,
+        "tier": "Strong Buy",
+        "score": 88.2,
+        "pool": "indian",
+        "expiry": "2027-01-19",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "CYIENT.NS",
+        "name": "CYIENT.NS",
+        "category": "Indian Stock",
+        "price": 1155.5,
+        "target": 1328.825,
+        "stop": 1063.06,
+        "tier": "Strong Buy",
+        "score": 82.3,
+        "pool": "indian",
+        "expiry": "2027-01-19",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "XLP",
+        "name": "Consumer Staples SPDR",
+        "category": "Global ETF",
+        "price": 89.86,
+        "target": 103.339,
+        "stop": 83.5698,
+        "tier": "Watch",
+        "score": 42.4,
+        "pool": "global",
+        "expiry": "2027-05-19",
+        "mode": "momentum",
         "hit": null,
         "alert_days": 0
       }
