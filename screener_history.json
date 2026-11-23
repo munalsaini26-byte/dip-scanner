@@ -1,130 +1,5 @@
 [
   {
-    "date": "2026-07-20",
-    "picks": [
-      {
-        "ticker": "PHARMABEES.NS",
-        "name": "Nippon Pharma BeES",
-        "category": "Indian ETF",
-        "price": 26.85,
-        "target": 30.8775,
-        "stop": 24.702,
-        "tier": "Strong Buy",
-        "score": 81.0,
-        "pool": "indian",
-        "expiry": "2026-09-18",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "BAJFINANCE.NS",
-        "name": "BAJFINANCE.NS",
-        "category": "Indian Stock",
-        "price": 1061.0,
-        "target": 1220.15,
-        "stop": 976.12,
-        "tier": "Strong Buy",
-        "score": 79.7,
-        "pool": "indian",
-        "expiry": "2026-09-18",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "NESTLEIND.NS",
-        "name": "NESTLEIND.NS",
-        "category": "Indian Stock",
-        "price": 1443.5,
-        "target": 1660.025,
-        "stop": 1328.02,
-        "tier": "Strong Buy",
-        "score": 78.6,
-        "pool": "indian",
-        "expiry": "2026-09-18",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "ICICIBANK.NS",
-        "name": "ICICIBANK.NS",
-        "category": "Indian Stock",
-        "price": 1462.5,
-        "target": 1681.875,
-        "stop": 1345.5,
-        "tier": "Strong Buy",
-        "score": 76.0,
-        "pool": "indian",
-        "expiry": "2026-09-18",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "SUNPHARMA.NS",
-        "name": "SUNPHARMA.NS",
-        "category": "Indian Stock",
-        "price": 1955.4,
-        "target": 2248.71,
-        "stop": 1798.968,
-        "tier": "Strong Buy",
-        "score": 74.7,
-        "pool": "indian",
-        "expiry": "2026-09-18",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "CORN",
-        "name": "Teucrium Corn",
-        "category": "Metal/Commodity",
-        "price": 17.78,
-        "target": 19.558,
-        "stop": 16.7132,
-        "tier": "Watch",
-        "score": 54.0,
-        "pool": "metal",
-        "expiry": "2026-10-18",
-        "mode": "dip",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "KWEB",
-        "name": "KraneShares China Internet",
-        "category": "Global ETF",
-        "price": 26.81,
-        "target": 30.8315,
-        "stop": 24.9333,
-        "tier": "Watch",
-        "score": 53.7,
-        "pool": "global",
-        "expiry": "2027-01-16",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      },
-      {
-        "ticker": "DIA",
-        "name": "SPDR Dow Jones",
-        "category": "Global ETF",
-        "price": 520.81,
-        "target": 598.9315,
-        "stop": 484.3533,
-        "tier": "Watch",
-        "score": 48.4,
-        "pool": "global",
-        "expiry": "2027-01-16",
-        "mode": "momentum",
-        "hit": null,
-        "alert_days": 0
-      }
-    ]
-  },
-  {
     "date": "2026-07-21",
     "picks": [
       {
@@ -8785,7 +8660,7 @@
         "expiry": "2027-01-11",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 2
+        "alert_days": 3
       },
       {
         "ticker": "ABDL.NS",
@@ -8990,7 +8865,7 @@
         "expiry": "2027-01-15",
         "mode": "dip",
         "hit": "stop",
-        "alert_days": 3
+        "alert_days": 4
       }
     ]
   },
@@ -9264,6 +9139,86 @@
         "pool": "global",
         "expiry": "2027-05-19",
         "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      }
+    ]
+  },
+  {
+    "date": "2026-11-23",
+    "picks": [
+      {
+        "ticker": "CUPID.NS",
+        "name": "CUPID.NS",
+        "category": "Indian Stock",
+        "price": 362.15,
+        "target": 416.4725,
+        "stop": 333.178,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2027-01-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "ENGINERSIN.NS",
+        "name": "ENGINERSIN.NS",
+        "category": "Indian Stock",
+        "price": 298.4,
+        "target": 343.16,
+        "stop": 274.528,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2027-01-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "LGEINDIA.NS",
+        "name": "LGEINDIA.NS",
+        "category": "Indian Stock",
+        "price": 1777.5,
+        "target": 2044.125,
+        "stop": 1635.3,
+        "tier": "Strong Buy",
+        "score": 85.5,
+        "pool": "indian",
+        "expiry": "2027-01-22",
+        "mode": "dip",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "UAE",
+        "name": "iShares MSCI UAE",
+        "category": "Global ETF",
+        "price": 21.36,
+        "target": 24.564,
+        "stop": 19.8648,
+        "tier": "Strong Buy",
+        "score": 78.4,
+        "pool": "global",
+        "expiry": "2027-05-22",
+        "mode": "momentum",
+        "hit": null,
+        "alert_days": 0
+      },
+      {
+        "ticker": "SOYB",
+        "name": "Teucrium Soybean",
+        "category": "Metal/Commodity",
+        "price": 25.75,
+        "target": 28.325,
+        "stop": 24.205,
+        "tier": "Strong Buy",
+        "score": 63.2,
+        "pool": "metal",
+        "expiry": "2027-02-21",
+        "mode": "dip",
         "hit": null,
         "alert_days": 0
       }
